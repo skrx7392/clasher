@@ -1,0 +1,37 @@
+# Egress for the Cloudflare DDNS CronJob (#9). The clasher-frontend default-deny blocks egress;
+# this re-opens ONLY 443 to public addresses (Cloudflare API + the cdn-cgi/trace IP lookup) for
+# the DDNS pod, excluding the private/cluster ranges (incl. the k3s 10.42/10.43 pod & service
+# CIDRs) so it cannot reach any in-cluster/other-tenant service. DNS is covered by the
+# namespace-wide allow-dns-egress (#6). Scoped to the DDNS pod label — web pods are unaffected.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-ddns-to-cloudflare
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: cloudflare-ddns
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+              - 169.254.0.0/16
+              - 100.64.0.0/10
+        - ipBlock:
+            cidr: ::/0
+            except:
+              - ::1/128
+              - fe80::/10
+              - fc00::/7
+      ports:
+        - protocol: TCP
+          port: 443

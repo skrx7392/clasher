@@ -1,0 +1,241 @@
+# Clasher-scoped Cloudflare DDNS updater (DESIGN §0/§9, NFR-8/NFR-4). A CronJob that maintains
+# ONLY the clasher.skpodduturi.dev A record using Clasher's OWN token Secret. It never reads or
+# writes the shared `cloudflare-ddns` configmap or any other shared/co-tenant DNS resource —
+# the only Cloudflare zone/record it touches is the one configured below.
+#
+# The updater is a dependency-free Node script (Node's global fetch + node:https; no npm install,
+# in-repo per NFR-2) run on the same node image the apps use. "Scoped RBAC" = a dedicated
+# ServiceAccount with NO API permissions and token automount disabled (it calls Cloudflare,
+# never the k8s API).
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clasher-ddns
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: cloudflare-ddns
+automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflare-ddns-script
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: cloudflare-ddns
+data:
+  ddns.mjs: |
+    // Clasher-scoped Cloudflare DDNS updater — maintains ONLY the configured A record.
+    // No third-party deps (Node global fetch + node:https). Fail-loud: any error exits non-zero
+    // so the Job is marked failed and visible. Idempotent: no-ops when the record already matches.
+    import https from "node:https";
+
+    const API = "https://api.cloudflare.com/client/v4";
+
+    function need(name) {
+      const v = process.env[name];
+      if (!v) {
+        console.error(`[ddns] FATAL: missing required env ${name}`);
+        process.exit(1);
+      }
+      return v;
+    }
+
+    const token = need("CF_API_TOKEN");
+    const zoneName = need("CF_ZONE_NAME");
+    const recordName = need("CF_RECORD_NAME");
+    const ttl = Number(process.env.CF_RECORD_TTL ?? "300");
+    // ttl: 1 means "automatic"; otherwise Cloudflare accepts 60..86400.
+    if (!Number.isInteger(ttl) || (ttl !== 1 && (ttl < 60 || ttl > 86400))) {
+      console.error(
+        `[ddns] FATAL: CF_RECORD_TTL must be 1 (auto) or 60..86400, got ${process.env.CF_RECORD_TTL}`,
+      );
+      process.exit(1);
+    }
+    const proxied = (process.env.CF_RECORD_PROXIED ?? "false") === "true";
+
+    const authHeaders = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    async function cf(path, init) {
+      const res = await fetch(`${API}${path}`, {
+        ...init,
+        headers: { ...authHeaders, ...(init?.headers) },
+      });
+      let body = null;
+      try {
+        body = await res.json();
+      } catch {
+        body = null;
+      }
+      if (!res.ok || !body || body.success !== true) {
+        const errs = body && body.errors ? JSON.stringify(body.errors) : `HTTP ${res.status}`;
+        throw new Error(`Cloudflare API ${path} failed: ${errs}`);
+      }
+      return body.result;
+    }
+
+    function isIPv4(s) {
+      return /^(\d{1,3}\.){3}\d{1,3}$/.test(s) && s.split(".").every((o) => Number(o) <= 255);
+    }
+
+    // Force IPv4 (family: 4): we manage an A record, so we need the node's IPv4 egress address
+    // regardless of whether the cluster is single- or dual-stack.
+    function publicIP() {
+      return new Promise((resolve, reject) => {
+        const req = https.get(
+          "https://cloudflare.com/cdn-cgi/trace",
+          { family: 4, timeout: 10000 },
+          (res) => {
+            if (res.statusCode !== 200) {
+              res.resume();
+              reject(new Error(`public-IP lookup failed: HTTP ${res.statusCode}`));
+              return;
+            }
+            let data = "";
+            res.setEncoding("utf8");
+            res.on("data", (c) => (data += c));
+            res.on("end", () => {
+              const m = data.match(/^ip=(.+)$/m);
+              if (!m) return reject(new Error("public-IP lookup: no ip= line in trace"));
+              const ip = m[1].trim();
+              if (!isIPv4(ip)) return reject(new Error(`public-IP lookup: not IPv4: ${ip}`));
+              resolve(ip);
+            });
+          },
+        );
+        req.on("timeout", () => req.destroy(new Error("public-IP lookup timed out")));
+        req.on("error", reject);
+      });
+    }
+
+    async function main() {
+      const ip = await publicIP();
+      const zones = await cf(`/zones?name=${encodeURIComponent(zoneName)}`);
+      if (!zones.length) throw new Error(`zone not found: ${zoneName}`);
+      const zoneId = zones[0].id;
+      const found = await cf(
+        `/zones/${zoneId}/dns_records?type=A&name=${encodeURIComponent(recordName)}`,
+      );
+      // Defense-in-depth: act only on an exact A-record name match, never on whatever the
+      // server filter returned loosely — so we can never rename/clobber an unrelated record.
+      const records = found.filter((r) => r.type === "A" && r.name === recordName);
+      if (records.length > 1) {
+        throw new Error(
+          `refusing to act: ${records.length} A records for ${recordName} (expected 0 or 1)`,
+        );
+      }
+      const payload = { type: "A", name: recordName, content: ip, ttl, proxied };
+      if (records.length === 0) {
+        await cf(`/zones/${zoneId}/dns_records`, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+        console.log(`[ddns] created A ${recordName} -> ${ip} (ttl=${ttl}, proxied=${proxied})`);
+        return;
+      }
+      const rec = records[0];
+      if (rec.content === ip && rec.proxied === proxied && rec.ttl === ttl) {
+        console.log(`[ddns] no change: ${recordName} already -> ${ip}`);
+        return;
+      }
+      await cf(`/zones/${zoneId}/dns_records/${rec.id}`, {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
+      console.log(`[ddns] updated A ${recordName}: ${rec.content} -> ${ip} (ttl=${ttl})`);
+    }
+
+    main().catch((err) => {
+      console.error(`[ddns] FATAL: ${err.message}`);
+      process.exit(1);
+    });
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cloudflare-ddns
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: cloudflare-ddns
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 120
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 120
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/part-of: clasher
+            app.kubernetes.io/name: cloudflare-ddns
+        spec:
+          serviceAccountName: clasher-ddns
+          automountServiceAccountToken: false
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: ddns
+              image: node:24-alpine
+              imagePullPolicy: IfNotPresent
+              command: ["node", "/scripts/ddns.mjs"]
+              env:
+                # Public, non-secret config (the actual domain + record). Only the token is a Secret.
+                - name: CF_ZONE_NAME
+                  value: skpodduturi.dev
+                - name: CF_RECORD_NAME
+                  value: clasher.skpodduturi.dev
+                - name: CF_RECORD_TTL
+                  value: "300"
+                - name: CF_RECORD_PROXIED
+                  value: "false"
+                - name: TMPDIR
+                  value: /tmp
+                - name: CF_API_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflare-ddns-token
+                      key: api-token
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+                  readOnly: true
+                - name: tmp
+                  mountPath: /tmp
+              resources:
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+                  ephemeral-storage: 64Mi
+                limits:
+                  cpu: 200m
+                  memory: 128Mi
+                  ephemeral-storage: 128Mi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL
+          volumes:
+            - name: script
+              configMap:
+                name: cloudflare-ddns-script
+            - name: tmp
+              emptyDir:
+                sizeLimit: 16Mi

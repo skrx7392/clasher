@@ -12,6 +12,7 @@ resources:
   - networkpolicies/backend.yaml
   - networkpolicies/database.yaml
   - networkpolicies/traefik.yaml
+  - networkpolicies/ddns.yaml
   - rbac/serviceaccounts.yaml
   - rbac/deployer-rbac.yaml
   - resource-management/limitranges.yaml
@@ -22,3 +23,4 @@ resources:
   - ingress/issuer.yaml
   - ingress/certificate.yaml
   - ingress/routes.yaml
+  - dns/ddns-cronjob.yaml

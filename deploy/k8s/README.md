@@ -12,6 +12,7 @@ deploy/k8s/
       backend.yaml
       database.yaml
       traefik.yaml              # ingress-controller -> web/api (#8)
+      ddns.yaml                 # DDNS CronJob -> Cloudflare 443 (#9)
     rbac/
       serviceaccounts.yaml      # per-workload SAs, token automount disabled
       deployer-rbac.yaml        # scoped deploy SA + namespaced Roles/RoleBindings
@@ -26,6 +27,8 @@ deploy/k8s/
       issuer.yaml               # cert-manager namespaced Issuer (DNS-01 Cloudflare)
       certificate.yaml          # Certificate -> clasher-skpodduturi-dev-tls
       routes.yaml               # Traefik IngressRoutes (/ -> web, /api -> api) + redirect
+    dns/                        # DDNS (#9)
+      ddns-cronjob.yaml         # Cloudflare DDNS CronJob (own token, only clasher record)
   overlays/
     quasar/                     # production overlay (workloads land here in #9–#10, #13)
 ```
@@ -51,6 +54,7 @@ flows are:
 | `clasher-backend` (coc-gateway)             | public internet (excl. private/cluster CIDRs) | 443/tcp    | RoyaleAPI proxy **only**  |
 | Traefik (`kube-system`)                     | `clasher-frontend` (web)                      | 3000/tcp   | ingress `/` → web (#8)    |
 | Traefik (`kube-system`)                     | `clasher-backend` (api)                       | 3000/tcp   | ingress `/api` → api (#8) |
+| `clasher-frontend` (cloudflare-ddns)        | public internet (excl. private/cluster CIDRs) | 443/tcp    | Cloudflare DDNS (#9)      |
 | `clasher-frontend` + `clasher-backend` pods | `kube-system` CoreDNS                         | 53/udp+tcp | DNS                       |
 
 - The **coc-gateway** is the _only_ pod with any external egress, restricted to 443
@@ -182,6 +186,34 @@ admin-installed shared components on quasar. The manifests assume **Traefik v3**
 in `kube-system` labeled `app.kubernetes.io/name: traefik`. If quasar differs (Traefik v2 →
 `traefik.containo.us/v1alpha1`; different ingress namespace/labels), adjust `routes.yaml` and
 `networkpolicies/traefik.yaml` accordingly. The Cloudflare A record for the host is #9.
+
+## DDNS (#9)
+
+The quasar host has a dynamic public IP (NFR-8), and the design removed Clasher's edits to the
+shared `cloudflare-ddns` configmap in favour of a Clasher-scoped updater (DESIGN §0/§9, NFR-4).
+A `*/5` **CronJob** (`cloudflare-ddns`, clasher-frontend) runs a dependency-free Node script
+(in-repo, in a ConfigMap; Node's global `fetch`, no npm install) that:
+
+1. reads the host's public IP from `https://cloudflare.com/cdn-cgi/trace`,
+2. resolves the zone and the **single** `clasher.skpodduturi.dev` A record, and
+3. idempotently upserts it (no-op when unchanged; **refuses** to act if >1 A record exists).
+
+It touches **only** that record via Clasher's **own** token — never the shared `cloudflare-ddns`
+object or any other zone/record. Fail-loud: any API error exits non-zero so the Job shows
+failed. Scoped RBAC = a dedicated ServiceAccount with no API permissions, token automount off;
+non-root, PSA-restricted-clean; egress limited to public 443 (Cloudflare) by `ddns.yaml`.
+
+**Required Secret** (out-of-band, #11): `cloudflare-ddns-token` (clasher-frontend), key
+`api-token` — its **own** Cloudflare token (separate from the cert-manager one) with
+`Zone:Zone:Read` + `Zone:DNS:Edit`, scoped to the `skpodduturi.dev` zone. The zone/record names
+and TTL are non-secret env in the CronJob (`skpodduturi.dev`, `clasher.skpodduturi.dev`, 300,
+proxied=false / DNS-only so the node is reachable directly).
+
+Operator assumptions: the node has a routable **IPv4** public IP and its **outbound** NAT
+address equals the **inbound** (port-forwarded) address — the updater publishes the node's
+egress IPv4 (from `cdn-cgi/trace`, forced to IPv4) as the A record, so DNS-only reachability
+breaks behind CGNAT or asymmetric NAT. The operator (or a one-time run) seeds the initial record;
+the script then upserts it and refuses to act if more than one A record exists for the name.
 
 ## Validation
 
