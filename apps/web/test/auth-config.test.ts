@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, vi } from "vitest";
 import type { NextAuthConfig } from "next-auth";
 
 // Auth.js reads these at import time (auth.config.ts computes cookie security from
@@ -30,5 +30,21 @@ describe("auth.config (#15)", () => {
     // Lax (not Strict) so the cross-site OAuth callback still carries the cookie.
     expect(opts?.sameSite).toBe("lax");
     expect(authConfig.cookies?.sessionToken?.name).toBe("__Secure-authjs.session-token");
+  });
+
+  it("signIn fails closed on a production API misconfiguration (does not swallow it)", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("API_BASE_URL", undefined);
+    try {
+      const signIn = authConfig.callbacks?.signIn;
+      if (!signIn) throw new Error("signIn callback is not configured");
+      const call = signIn as unknown as (p: unknown) => Promise<unknown>;
+      // A prod config error (apiBaseUrl throws) must reject sign-in, not return true.
+      await expect(call({ user: { id: "u1" }, profile: { sub: "u1" } })).rejects.toThrow(
+        /API_BASE_URL/,
+      );
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 });

@@ -49,12 +49,19 @@ export const authConfig: NextAuthConfig = {
     async signIn({ user, profile }) {
       const googleSub = profile?.sub ?? user.id;
       if (!googleSub) return false;
+      // Resolve config OUTSIDE the best-effort catch: a missing/invalid API_BASE_URL
+      // in production is a misconfiguration that must fail the sign-in (fail-closed),
+      // not be masked as a transient upsert failure.
+      const baseUrl = apiBaseUrl();
       try {
         await upsertUserViaApi(
           { googleSub, email: user.email ?? null, name: user.name ?? null },
-          apiBaseUrl(),
+          baseUrl,
         );
       } catch (err) {
+        // M0 best-effort: a transient upsert failure (API unreachable, no real creds
+        // yet) is logged but does not block the sign-in scaffold. M1 makes it
+        // authoritative.
         console.warn(`[auth] user upsert failed (M0 best-effort): ${String(err)}`);
       }
       return true;
