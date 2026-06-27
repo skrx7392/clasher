@@ -2,6 +2,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import type { Pool } from "pg";
 import { UserRole } from "@clasher/shared";
 import { DATABASE_POOL } from "../database/database.module";
+import { UPSERT_FROM_SIGNIN_SQL, USER_COLUMNS } from "./users.sql";
 
 /** A Clasher user identity (DESIGN §3 `users`). */
 export interface User {
@@ -21,8 +22,6 @@ interface UserRow {
   role: string;
   created_at: Date;
 }
-
-const SELECT_COLUMNS = "id, google_sub, email, name, role, created_at";
 
 function toUser(row: UserRow): User {
   return {
@@ -59,14 +58,11 @@ export class UsersRepository {
     email?: string | null | undefined;
     name?: string | null | undefined;
   }): Promise<User> {
-    const { rows } = await this.pool.query<UserRow>(
-      `INSERT INTO users (google_sub, email, name)
-       VALUES ($1, $2, $3)
-       ON CONFLICT (google_sub)
-       DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name
-       RETURNING ${SELECT_COLUMNS}`,
-      [input.googleSub, input.email ?? null, input.name ?? null],
-    );
+    const { rows } = await this.pool.query<UserRow>(UPSERT_FROM_SIGNIN_SQL, [
+      input.googleSub,
+      input.email ?? null,
+      input.name ?? null,
+    ]);
     const row = rows[0];
     // RETURNING on a guaranteed insert-or-update always yields exactly one row.
     if (!row) throw new Error("upsert returned no row");
@@ -76,7 +72,7 @@ export class UsersRepository {
   /** Resolve a user by their Google subject claim (role authoritative from DB). */
   async findByGoogleSub(googleSub: string): Promise<User | null> {
     const { rows } = await this.pool.query<UserRow>(
-      `SELECT ${SELECT_COLUMNS} FROM users WHERE google_sub = $1`,
+      `SELECT ${USER_COLUMNS} FROM users WHERE google_sub = $1`,
       [googleSub],
     );
     return rows[0] ? toUser(rows[0]) : null;

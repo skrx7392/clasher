@@ -20,6 +20,17 @@ const DB = "clasher_test";
 const dataDir = mkdtempSync(join(tmpdir(), "clasher-identity-"));
 const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migrations");
 
+// Mirror of apps/api/src/identity/users.sql.ts UPSERT_FROM_SIGNIN_SQL — KEEP IN SYNC.
+// (A cross-package import isn't possible here: the api uses classic CJS module
+// resolution while this package uses NodeNext.) The invariant under test: `role` is
+// absent from both the INSERT columns and the DO UPDATE SET, so the upsert can
+// neither create an elevated user nor change an existing user's role.
+const UPSERT_FROM_SIGNIN_SQL = `INSERT INTO users (google_sub, email, name)
+   VALUES ($1, $2, $3)
+   ON CONFLICT (google_sub)
+   DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name
+   RETURNING id, google_sub, email, name, role, created_at`;
+
 function freePort(): Promise<number> {
   return new Promise((resolve, reject) => {
     const srv = createServer();
@@ -34,14 +45,6 @@ function freePort(): Promise<number> {
 
 let pg: EmbeddedPostgres;
 let client: Client;
-
-// The sign-in upsert SQL MUST mirror apps/api UsersRepository.upsertFromSignIn:
-// role is absent from both the INSERT columns and the DO UPDATE SET.
-const UPSERT_SQL = `INSERT INTO users (google_sub, email, name)
-   VALUES ($1, $2, $3)
-   ON CONFLICT (google_sub)
-   DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name
-   RETURNING role`;
 
 beforeAll(async () => {
   const port = await freePort();
@@ -95,8 +98,12 @@ it("the CHECK constraint rejects any role outside {none,manager,admin}", async (
 
 it("the sign-in upsert never elevates or demotes an existing role", async () => {
   await seedAdmin(client, { googleSub: "sub-admin" }); // role=admin
-  const { rows } = await client.query(UPSERT_SQL, ["sub-admin", "new@example.com", "Renamed"]);
-  expect(rows[0].role).toBe("admin"); // preserved
+  const { rows } = await client.query<{ role: string }>(UPSERT_FROM_SIGNIN_SQL, [
+    "sub-admin",
+    "new@example.com",
+    "Renamed",
+  ]);
+  expect(rows[0]?.role).toBe("admin"); // preserved
   // ...and the email/name WERE refreshed:
   const after = await client.query("SELECT email, name FROM users WHERE google_sub = $1", [
     "sub-admin",
@@ -105,8 +112,12 @@ it("the sign-in upsert never elevates or demotes an existing role", async () => 
 });
 
 it("the upsert creates new users at 'none', not elevated", async () => {
-  const { rows } = await client.query(UPSERT_SQL, ["sub-fresh", null, null]);
-  expect(rows[0].role).toBe("none");
+  const { rows } = await client.query<{ role: string }>(UPSERT_FROM_SIGNIN_SQL, [
+    "sub-fresh",
+    null,
+    null,
+  ]);
+  expect(rows[0]?.role).toBe("none");
 });
 
 describe("out-of-band seed", () => {
@@ -136,6 +147,22 @@ describe("out-of-band seed", () => {
 
   it("refuses to seed by email when no such user exists", async () => {
     await expect(seedAdmin(client, { email: "ghost@example.com" })).rejects.toThrow(/no user/);
+  });
+
+  it("refuses (and rolls back) when an email matches more than one user", async () => {
+    await client.query(
+      "INSERT INTO users (google_sub, email) VALUES ($1, $3), ($2, $3)",
+      ["sub-dup-a", "sub-dup-b", "dup@example.com"],
+    );
+    await expect(seedAdmin(client, { email: "dup@example.com" })).rejects.toThrow(
+      /refusing to promote 2/,
+    );
+    // Rolled back: neither row was promoted.
+    const { rows } = await client.query(
+      "SELECT role FROM users WHERE email = $1 ORDER BY google_sub",
+      ["dup@example.com"],
+    );
+    expect(rows.map((r) => r.role)).toEqual(["none", "none"]);
   });
 
   it("requires exactly one of google_sub / email", async () => {

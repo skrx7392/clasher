@@ -13,7 +13,9 @@
  * (reached over the existing web→api NetworkPolicy); locally it's the dev API.
  */
 export function apiBaseUrl(): string {
-  return process.env.API_BASE_URL ?? "http://localhost:3000";
+  // Dev fallback uses :3001 because the API and `next dev` both default to :3000
+  // (run the API on another port locally). Prod always sets API_BASE_URL.
+  return process.env.API_BASE_URL ?? "http://localhost:3001";
 }
 
 /** True when Auth.js is serving over HTTPS (prod) — drives Secure/__Secure- cookies. */

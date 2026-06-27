@@ -35,17 +35,32 @@ export async function seedAdmin(client, { googleSub, email } = {}) {
     return rows[0];
   }
 
-  const { rows } = await client.query(
-    `UPDATE users SET role = 'admin' WHERE email = $1
-     RETURNING id, google_sub, email, role`,
-    [email],
-  );
-  if (rows.length === 0) {
-    throw new Error(
-      `no user with email '${email}'. Seed by --google-sub, or have them sign in first.`,
+  // `email` is NOT unique (only google_sub is), so an email can match >1 row.
+  // Run in a transaction and REFUSE to commit on an ambiguous match, so the seed
+  // never silently over-promotes. --google-sub (unique) is the safe primary path.
+  await client.query("BEGIN");
+  try {
+    const { rows } = await client.query(
+      `UPDATE users SET role = 'admin' WHERE email = $1
+       RETURNING id, google_sub, email, role`,
+      [email],
     );
+    if (rows.length === 0) {
+      throw new Error(
+        `no user with email '${email}'. Seed by --google-sub, or have them sign in first.`,
+      );
+    }
+    if (rows.length > 1) {
+      throw new Error(
+        `refusing to promote ${rows.length} users sharing email '${email}'; seed by --google-sub`,
+      );
+    }
+    await client.query("COMMIT");
+    return rows[0];
+  } catch (err) {
+    await client.query("ROLLBACK");
+    throw err;
   }
-  return rows[0];
 }
 
 function parseArgs(argv) {
