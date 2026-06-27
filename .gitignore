@@ -19,6 +19,14 @@ next-env.d.ts
 *.key
 *.kubeconfig
 kubeconfig
+# Out-of-band secret material for make-secrets.sh (deploy/k8s/SECRETS.md, #11) — NEVER commit.
+# Primary guard is the secrets/ dir; the extension patterns are a belt-and-suspenders net
+# for the highest-value materials (SSH private key, GHCR PAT, dockerconfig) wherever they land.
+deploy/k8s/secrets/
+*.secret.env
+*_ed25519
+ghcr_pat*.txt
+*dockerconfig*.json
 
 # Logs, coverage, caches
 *.log
