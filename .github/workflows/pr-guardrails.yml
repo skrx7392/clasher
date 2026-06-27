@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: pr-guardrails-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   conventional-commit-title:
     name: conventional-commit-title

@@ -10,8 +10,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Only cancel superseded PR runs — never cancel a main run (keeps its `ci` status).
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # Job id/name is exactly `ci` so the branch ruleset can require the `ci` check.
@@ -31,8 +32,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm build
-      - run: pnpm typecheck
-      - run: pnpm lint
+      # Cheap/fast checks first for faster failure feedback (single `ci` check).
       - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm build
       - run: pnpm test
