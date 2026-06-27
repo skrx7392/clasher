@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // NestJS uses CommonJS + decorator metadata; override the ESM-oriented base.
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "verbatimModuleSyntax": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node", "jest"],
+    "outDir": "dist",
+    // No explicit rootDir here: this config is --noEmit (type-check only) and
+    // pulls in @clasher/shared SOURCE via `paths`, which lives outside apps/api.
+    // Resolving the shared package from source means the api can be type-checked
+    // without the shared package being pre-built. (The build config below clears
+    // this mapping so emitted code resolves the built package via node_modules.)
+    "baseUrl": ".",
+    "paths": {
+      "@clasher/shared": ["../../packages/shared/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"]
+}
