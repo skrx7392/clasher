@@ -49,13 +49,18 @@ describe("redactSecrets — string values (the realistic leak paths)", () => {
     expect(redactString(`Authorization header: ${jwt}`)).not.toContain(jwt);
   });
 
-  it("scrubs inline token=/bearer patterns (secret-length values) in URLs and headers", () => {
-    const tok = "abcDEF1234567890wxyz"; // 20 chars, secret-length
+  it("scrubs inline token=/bearer patterns in URLs and headers", () => {
+    const tok = "abcDEF1234567890wxyz"; // long
     expect(redactString(`GET /v1?token=${tok}`)).not.toContain(tok);
     expect(redactString(`authorization: Bearer ${tok}`)).not.toContain(tok);
   });
 
-  it("does NOT mangle a benign short label:value (e.g. config hints)", () => {
+  it("scrubs SHORT inline tokens that contain a digit (token=ABC12345)", () => {
+    expect(redactString("token=ABC12345")).not.toContain("ABC12345");
+    expect(redactString("Bearer ABC12345")).not.toContain("ABC12345");
+  });
+
+  it("does NOT mangle a benign all-letter label:value (e.g. config hints)", () => {
     expect(redactString("COC_API_KEY: Required")).toBe("COC_API_KEY: Required");
   });
 });
@@ -77,6 +82,23 @@ describe("redactSecrets — non-plain objects (keep logs useful, block bypasses)
     expect(redactSecrets(new Map([["a", 1]]))).toEqual({ a: 1 });
     expect(redactSecrets(new Set([1, 2]))).toEqual([1, 2]);
     expect(typeof redactSecrets(new Date(0))).toBe("string");
+  });
+
+  it("redacts sensitive Map keys (not just plain-object keys)", () => {
+    const out = redactSecrets(new Map([["token", "secret"]])) as Record<string, string>;
+    expect(out.token).toBe("[REDACTED]");
+  });
+
+  it("redacts Buffer / typed arrays (could hold a key) to a binary marker", () => {
+    expect(redactSecrets(Buffer.from("OFFICIAL-KEY"))).toBe("[REDACTED_BINARY]");
+    expect(redactSecrets(new Uint8Array([1, 2, 3]))).toBe("[REDACTED_BINARY]");
+  });
+
+  it("scrubs a known key carried in Error.cause", () => {
+    const KEY = "OFFICIAL-KEY-CAUSE99";
+    const err = new Error("wrapper", { cause: new Error(`inner uses ${KEY}`) });
+    const out = redactSecrets(err, { secrets: [KEY] });
+    expect(JSON.stringify(out)).not.toContain(KEY);
   });
 
   it("drops toJSON so JSON.stringify cannot re-materialize raw secrets", () => {

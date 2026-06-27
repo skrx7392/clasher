@@ -8,7 +8,7 @@ import { z } from "zod";
 export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().max(65535).default(3100),
-  COC_API_KEY: z.string().min(1, "the official Clash of Clans API key is required"),
+  COC_API_KEY: z.string().trim().min(1, "the official Clash of Clans API key is required"),
   // All outbound CoC traffic goes through the RoyaleAPI proxy (whitelist
   // 45.79.218.79), never api.clashofclans.com directly in the pilot (ANALYSIS §1.1).
   COC_PROXY_BASE_URL: z
