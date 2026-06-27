@@ -9,7 +9,10 @@ What M0 ships (DESIGN §2/§5/§10, FR-1/FR-2, NFR-3, D-1) and the boundary with
 2. **Upsert** — the `signIn` callback (`auth.config.ts`) POSTs `{ googleSub, email,
    name }` to the API (`POST /api/identity/users/upsert`). It NEVER sends a role; the
    DB assigns the default `role='none'` (least privilege). The API rejects any
-   `role`/unknown field with a 400.
+   `role`/unknown field with a 400. M0 hardening on this still-unauthenticated
+   internal endpoint: it is **write-once** on identity (cannot overwrite an existing
+   user's email/name) and returns only `{ id, role }`. Trusted-caller
+   (server-to-server) authentication + per-caller rate limiting land in **M1**.
 3. **Roles** — role is **never self-settable** via any request path. The only way to
    create an admin is the out-of-band seed:
 

@@ -51,7 +51,8 @@ export class UsersRepository {
 
   /**
    * Idempotent sign-in upsert keyed on `google_sub`. Creates the user with the
-   * default role `'none'` or refreshes `email`/`name`; never touches `role`.
+   * default role `'none'`, or fills `email`/`name` only if absent (write-once — see
+   * {@link UPSERT_FROM_SIGNIN_SQL}); never touches `role`.
    */
   async upsertFromSignIn(input: {
     googleSub: string;

@@ -29,17 +29,21 @@ export class IdentityController {
 
   /**
    * Internal sign-in upsert, called by the web's Auth.js callback. Creates the
-   * user with role `'none'` (DB default) or refreshes email/name; NEVER sets role
-   * — the strict schema rejects any `role` field with a 400 (FR-2; DESIGN §5/§10).
+   * user with role `'none'` (DB default); NEVER sets role — the strict schema
+   * rejects any `role` field with a 400 (FR-2; DESIGN §5/§10).
    *
-   * M0 NOTE: not yet restricted to the web origin; M1 adds caller authentication
-   * + CSRF. It is safe by construction today because no field here can elevate a
-   * role.
+   * M0 hardening: the upsert is WRITE-ONCE for identity fields (it can't overwrite
+   * an existing user's email/name — see UsersRepository), and the response carries
+   * only `{ id, role }` so a caller can't harvest another user's stored
+   * email/name. Trusted-caller authentication (server-to-server) + per-caller rate
+   * limiting land in M1 with the verified session; until then no field here can
+   * elevate a role or tamper with an existing identity.
    */
   @Post("users/upsert")
   @UsePipes(new ZodValidationPipe(signInUpsertSchema))
-  async upsert(@Body() body: SignInUpsertDto): Promise<UserView> {
-    return toView(await this.users.upsertFromSignIn(body));
+  async upsert(@Body() body: SignInUpsertDto): Promise<{ id: string; role: UserRole }> {
+    const user = await this.users.upsertFromSignIn(body);
+    return { id: user.id, role: user.role };
   }
 
   /** Current-user resolver — returns the caller's record, role read from the DB. */

@@ -22,13 +22,14 @@ const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migra
 
 // Mirror of apps/api/src/identity/users.sql.ts UPSERT_FROM_SIGNIN_SQL — KEEP IN SYNC.
 // (A cross-package import isn't possible here: the api uses classic CJS module
-// resolution while this package uses NodeNext.) The invariant under test: `role` is
-// absent from both the INSERT columns and the DO UPDATE SET, so the upsert can
-// neither create an elevated user nor change an existing user's role.
+// resolution while this package uses NodeNext.) Invariants under test: `role` is
+// absent from both the INSERT columns and the DO UPDATE SET (no elevation), and the
+// identity fields are write-once via COALESCE (no overwrite of an existing row).
 const UPSERT_FROM_SIGNIN_SQL = `INSERT INTO users (google_sub, email, name)
    VALUES ($1, $2, $3)
    ON CONFLICT (google_sub)
-   DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name
+   DO UPDATE SET email = COALESCE(users.email, EXCLUDED.email),
+                 name  = COALESCE(users.name,  EXCLUDED.name)
    RETURNING id, google_sub, email, name, role, created_at`;
 
 function freePort(): Promise<number> {
@@ -96,19 +97,33 @@ it("the CHECK constraint rejects any role outside {none,manager,admin}", async (
   ).rejects.toThrow();
 });
 
-it("the sign-in upsert never elevates or demotes an existing role", async () => {
+it("the sign-in upsert preserves role and is write-once on identity", async () => {
+  await client.query("INSERT INTO users (google_sub, email, name) VALUES ($1, $2, $3)", [
+    "sub-admin",
+    "real@example.com",
+    "Real",
+  ]);
   await seedAdmin(client, { googleSub: "sub-admin" }); // role=admin
   const { rows } = await client.query<{ role: string }>(UPSERT_FROM_SIGNIN_SQL, [
     "sub-admin",
-    "new@example.com",
-    "Renamed",
+    "evil@example.com",
+    "Evil",
   ]);
-  expect(rows[0]?.role).toBe("admin"); // preserved
-  // ...and the email/name WERE refreshed:
+  expect(rows[0]?.role).toBe("admin"); // role preserved
   const after = await client.query("SELECT email, name FROM users WHERE google_sub = $1", [
     "sub-admin",
   ]);
-  expect(after.rows[0]).toEqual({ email: "new@example.com", name: "Renamed" });
+  expect(after.rows[0]).toEqual({ email: "real@example.com", name: "Real" }); // NOT overwritten
+});
+
+it("the upsert fills identity only when absent, then leaves it write-once", async () => {
+  await client.query("INSERT INTO users (google_sub) VALUES ($1)", ["sub-null"]); // email/name NULL
+  await client.query(UPSERT_FROM_SIGNIN_SQL, ["sub-null", "first@example.com", "First"]);
+  await client.query(UPSERT_FROM_SIGNIN_SQL, ["sub-null", "second@example.com", "Second"]);
+  const after = await client.query("SELECT email, name FROM users WHERE google_sub = $1", [
+    "sub-null",
+  ]);
+  expect(after.rows[0]).toEqual({ email: "first@example.com", name: "First" });
 });
 
 it("the upsert creates new users at 'none', not elevated", async () => {

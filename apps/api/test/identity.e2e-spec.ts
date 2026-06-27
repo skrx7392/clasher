@@ -17,12 +17,16 @@ class FakeUsersRepository {
   private readonly bySub = new Map<string, User>();
 
   /** Test helper: place a user at a specific role (stands in for the out-of-band seed). */
-  seed(googleSub: string, role: UserRole): User {
+  seed(
+    googleSub: string,
+    role: UserRole,
+    identity?: { email?: string | null; name?: string | null },
+  ): User {
     const user: User = {
       id: randomUUID(),
       googleSub,
-      email: null,
-      name: null,
+      email: identity?.email ?? null,
+      name: identity?.name ?? null,
       role,
       createdAt: new Date(),
     };
@@ -37,7 +41,11 @@ class FakeUsersRepository {
   }): Promise<User> {
     const existing = this.bySub.get(input.googleSub);
     const user: User = existing
-      ? { ...existing, email: input.email ?? null, name: input.name ?? null } // role preserved
+      ? {
+          ...existing, // role preserved; identity fields write-once (COALESCE)
+          email: existing.email ?? input.email ?? null,
+          name: existing.name ?? input.name ?? null,
+        }
       : {
           id: randomUUID(),
           googleSub: input.googleSub,
@@ -81,7 +89,21 @@ describe("Identity + roles (e2e, #15)", () => {
       .send({ googleSub: "sub-new", email: "a@example.com", name: "Ada" });
     expect(res.status).toBe(201);
     expect(res.body.role).toBe("none");
-    expect(res.body.googleSub).toBe("sub-new");
+    expect(res.body.id).toEqual(expect.any(String));
+    // Minimal response: no email/name/googleSub harvested back to the caller.
+    expect(res.body).not.toHaveProperty("email");
+    expect(res.body).not.toHaveProperty("googleSub");
+    expect((await repo.findByGoogleSub("sub-new"))?.role).toBe("none");
+  });
+
+  it("upsert is write-once on identity — cannot overwrite an existing email/name", async () => {
+    repo.seed("sub-wo", UserRole.None, { email: "real@example.com", name: "Real" });
+    await http()
+      .post("/api/identity/users/upsert")
+      .send({ googleSub: "sub-wo", email: "evil@example.com", name: "Evil" });
+    const after = await repo.findByGoogleSub("sub-wo");
+    expect(after?.email).toBe("real@example.com");
+    expect(after?.name).toBe("Real");
   });
 
   it("rejects a `role` field in the upsert body (no request path sets role)", async () => {
