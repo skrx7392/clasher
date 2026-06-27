@@ -3,15 +3,30 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createServer } from "node:net";
 import EmbeddedPostgres from "embedded-postgres";
 import { Client } from "pg";
 import { runner as migrationRunner } from "node-pg-migrate";
 
-const PORT = 54329;
 const DB = "clasher_test";
 const dataDir = mkdtempSync(join(tmpdir(), "clasher-db-"));
 const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migrations");
-const databaseUrl = `postgres://postgres:postgres@localhost:${PORT}/${DB}`;
+
+/** Reserve an ephemeral free port so parallel test files / leaked PGs don't collide. */
+function freePort(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const srv = createServer();
+    srv.on("error", reject);
+    srv.listen(0, () => {
+      const addr = srv.address();
+      const port = typeof addr === "object" && addr ? addr.port : 0;
+      srv.close(() => resolve(port));
+    });
+  });
+}
+
+let port: number;
+let databaseUrl: string;
 
 const ALL_TABLES = [
   "users",
@@ -46,11 +61,13 @@ async function tableNames(): Promise<string[]> {
 }
 
 beforeAll(async () => {
+  port = await freePort();
+  databaseUrl = `postgres://postgres:postgres@localhost:${port}/${DB}`;
   pg = new EmbeddedPostgres({
     databaseDir: dataDir,
     user: "postgres",
     password: "postgres",
-    port: PORT,
+    port,
     persistent: false,
   });
   await pg.initialise();
@@ -99,6 +116,36 @@ describe("migrations (DESIGN §3)", () => {
       "select column_name from information_schema.columns where table_name = 'account_ownership'",
     );
     expect(rows.map((r) => r.column_name)).not.toContain("token");
+  });
+
+  it("person_accounts UNIQUE(player_tag) — an account belongs to <=1 person", async () => {
+    const { rows } = await client.query<{ id: string }>(
+      "insert into persons (label) values ('p-a'), ('p-b') returning id",
+    );
+    const [a, b] = rows;
+    await client.query("insert into person_accounts (person_id, player_tag) values ($1, '#X')", [
+      a?.id,
+    ]);
+    await expect(
+      client.query("insert into person_accounts (person_id, player_tag) values ($1, '#X')", [
+        b?.id,
+      ]),
+    ).rejects.toThrow();
+  });
+
+  it("created the four §3 indexes (typo-proofing)", async () => {
+    const { rows } = await client.query<{ indexname: string }>(
+      "select indexname from pg_indexes where schemaname = 'public'",
+    );
+    const idx = rows.map((r) => r.indexname);
+    for (const name of [
+      "member_war_stats_clan_type_end_idx",
+      "member_war_stats_clan_season_idx",
+      "member_war_stats_player_idx",
+      "war_snapshots_clan_type_end_idx",
+    ]) {
+      expect(idx, `missing index ${name}`).toContain(name);
+    }
   });
 
   it("war_snapshots UNIQUE(war_identity, source) — both sources kept, dup rejected", async () => {
