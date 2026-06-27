@@ -1,0 +1,167 @@
+# Redis (queue role) — DURABLE (DESIGN §2). maxmemory-policy noeviction + AOF + a PVC so
+# capture/ingest jobs are NEVER silently dropped: when full it errors loudly (fail-loud,
+# NFR-6) rather than evicting. Split from the cache role so cache pressure can never affect
+# the queue. Reachable only from backend (#6 allow-ingress-redis-from-backend selects
+# name in {redis-queue, redis-cache}). AUTH password from the out-of-band Secret
+# `redis-credentials` (key: password) — defense-in-depth atop the NetworkPolicy.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-queue-config
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: redis-queue
+    app.kubernetes.io/component: queue
+data:
+  redis.conf: |
+    # Durable queue: never evict; persist via AOF.
+    # maxmemory is kept at ~50% of the container memory limit (1Gi) so the AOF-rewrite fork's
+    # copy-on-write + allocator fragmentation cannot push RSS past the cgroup limit and trip an
+    # OOMKill — that would crash-loop the queue instead of the intended fail-loud (write errors
+    # at maxmemory). The non-forking cache role uses the same 512mb cap.
+    maxmemory 512mb
+    maxmemory-policy noeviction
+    appendonly yes
+    appendfsync everysec
+    dir /data
+    # AOF is authoritative for durability; disable RDB snapshots.
+    save ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-queue
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: redis-queue
+    app.kubernetes.io/component: queue
+spec:
+  clusterIP: None
+  selector:
+    app.kubernetes.io/name: redis-queue
+  ports:
+    - name: redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-queue
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: redis-queue
+    app.kubernetes.io/component: queue
+spec:
+  serviceName: redis-queue
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: redis-queue
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: clasher
+        app.kubernetes.io/name: redis-queue
+        app.kubernetes.io/component: queue
+    spec:
+      serviceAccountName: clasher-redis
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          imagePullPolicy: IfNotPresent
+          command:
+            - redis-server
+            - /etc/redis/redis.conf
+            - --requirepass
+            - $(REDIS_PASSWORD)
+          ports:
+            - name: redis
+              containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-credentials
+                  key: password
+          volumeMounts:
+            - name: config
+              mountPath: /etc/redis
+              readOnly: true
+            - name: data
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+              ephemeral-storage: 128Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+              ephemeral-storage: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          # On restart Redis replays the AOF before answering PING (returns -LOADING), which
+          # can exceed the liveness grace under a backed-up queue. The startupProbe gives
+          # generous time for that load before liveness takes over, preventing a crash-loop.
+          startupProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli --no-auth-warning -a "$REDIS_PASSWORD" ping | grep -q PONG
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 60
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli --no-auth-warning -a "$REDIS_PASSWORD" ping | grep -q PONG
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - redis-cli --no-auth-warning -a "$REDIS_PASSWORD" ping | grep -q PONG
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: config
+          configMap:
+            name: redis-queue-config
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app.kubernetes.io/part-of: clasher
+          app.kubernetes.io/name: redis-queue
+          app.kubernetes.io/component: queue
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 5Gi

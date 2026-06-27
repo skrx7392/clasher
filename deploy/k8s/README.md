@@ -17,8 +17,12 @@ deploy/k8s/
     resource-management/
       limitranges.yaml          # default requests/limits per namespace
       resourcequotas.yaml       # namespace total caps (co-tenant blast-radius guard)
+    data/                       # data tier (#7)
+      postgres.yaml             # StatefulSet + headless Service + durable PVC
+      redis-queue.yaml          # durable: noeviction + AOF + PVC (StatefulSet)
+      redis-cache.yaml          # ephemeral: allkeys-lru, no PVC (Deployment)
   overlays/
-    quasar/                     # production overlay (workloads land here in #7–#10, #13)
+    quasar/                     # production overlay (workloads land here in #8–#10, #13)
 ```
 
 Build (renders without a cluster):
@@ -90,6 +94,59 @@ Security/foundation objects are applied **once, out-of-band, by an admin** durin
 bootstrap (runbook in #11): Namespaces (cluster-scoped), NetworkPolicies, RBAC, Secrets,
 LimitRanges/ResourceQuotas, and later Ingress/TLS. CD (`clasher-deployer`) only rolls the
 per-release workloads. This is why the deploy Role excludes those foundation resources.
+
+## Data tier (#7)
+
+Three workloads in `clasher-database`, reachable only from backend (the #6 policies):
+
+| Workload      | Kind        | Persistence                        | Eviction                 | Service (DNS)                 |
+| ------------- | ----------- | ---------------------------------- | ------------------------ | ----------------------------- |
+| `postgres`    | StatefulSet | 10Gi `local-path` PVC              | n/a (system of record)   | `postgres` (headless) :5432   |
+| `redis-queue` | StatefulSet | 5Gi `local-path` PVC, AOF everysec | `noeviction` (fail-loud) | `redis-queue` (headless):6379 |
+| `redis-cache` | Deployment  | none (emptyDir scratch)            | `allkeys-lru`, 512mb cap | `redis-cache` :6379           |
+
+The two Redis roles are **split** so cache LRU eviction can never drop capture/ingest jobs
+on the durable queue (DESIGN §2). All three run non-root (Postgres as uid/gid 70, the alpine
+image's postgres user; both Redis roles as uid 999, the redis image's user), drop all
+capabilities, RuntimeDefault seccomp (PSA-restricted-clean). PVC totals (15Gi / 2 claims) fit the
+`clasher-database` ResourceQuota (30Gi / 5). `gateway → cache` is intentionally NOT allowed
+(the gateway stays maximally isolated); add an allow only if a gateway caching need emerges.
+
+**Required Secrets** (bootstrapped out-of-band per #11 — never in-repo):
+
+- `postgres-credentials` (clasher-database) — keys `username`, `password`, `dbname`.
+- `redis-credentials` (clasher-database) — key `password` (both Redis roles AUTH with it).
+
+Images (`postgres:18-alpine`, `redis:7-alpine`) are tag-pinned here; CD (#13) should pin by
+digest.
+
+### Postgres restart / durability drill (AC)
+
+Run on quasar after apply (operator step) to prove data survives a restart. The
+credentials live in the container env (from the Secret), so each command resolves them
+inside the pod (`sh -c`), not in the operator's local shell:
+
+```sh
+kubectl -n clasher-database exec postgres-0 -- sh -ceu \
+  'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "create table drill(t text); insert into drill values('"'"'ok'"'"');"'
+kubectl -n clasher-database delete pod postgres-0          # StatefulSet recreates it
+kubectl -n clasher-database rollout status statefulset/postgres
+kubectl -n clasher-database exec postgres-0 -- sh -ceu \
+  'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "select t from drill;"'   # expect: ok (PVC rebound)
+```
+
+Redis-queue durability (AUTH via container env):
+
+```sh
+kubectl -n clasher-database exec redis-queue-0 -- sh -ceu \
+  'redis-cli --no-auth-warning -a "$REDIS_PASSWORD" set drill ok'
+kubectl -n clasher-database delete pod redis-queue-0
+kubectl -n clasher-database rollout status statefulset/redis-queue
+kubectl -n clasher-database exec redis-queue-0 -- sh -ceu \
+  'redis-cli --no-auth-warning -a "$REDIS_PASSWORD" get drill'   # expect: ok (AOF replay)
+```
+
+Redis-cache has no such guarantee by design (ephemeral).
 
 ## Validation
 
