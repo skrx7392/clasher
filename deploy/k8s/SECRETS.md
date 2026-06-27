@@ -159,11 +159,12 @@ In CI/CD these same values come from the GitHub Environment secret store, never 
 shell. Then run the recipes:
 
 ```sh
-# 1) Postgres creds (clasher-database). Generate a strong password offline:
+# 1) Postgres creds (clasher-database). Use a URL-safe (hex) password so it composes
+#    cleanly into DATABASE_URL in step 8 with no percent-encoding.
 mkdir -p deploy/k8s/secrets && chmod 700 deploy/k8s/secrets
 cat > deploy/k8s/secrets/postgres-credentials.secret.env <<EOF
 username=clasher
-password=$(openssl rand -base64 24)
+password=$(openssl rand -hex 24)
 dbname=clasher
 EOF
 chmod 600 deploy/k8s/secrets/postgres-credentials.secret.env
@@ -172,8 +173,8 @@ deploy/k8s/scripts/make-secrets.sh \
   --name postgres-credentials --namespace clasher-database \
   --env-file deploy/k8s/secrets/postgres-credentials.secret.env --context quasar
 
-# 2) Redis password (clasher-database)
-printf 'password=%s\n' "$(openssl rand -base64 24)" \
+# 2) Redis password (clasher-database). URL-safe (hex) for REDIS_*_URL in step 8.
+printf 'password=%s\n' "$(openssl rand -hex 24)" \
   > deploy/k8s/secrets/redis-credentials.secret.env && chmod 600 deploy/k8s/secrets/redis-credentials.secret.env
 deploy/k8s/scripts/make-secrets.sh --name redis-credentials --namespace clasher-database \
   --env-file deploy/k8s/secrets/redis-credentials.secret.env --context quasar
@@ -182,34 +183,65 @@ deploy/k8s/scripts/make-secrets.sh --name redis-credentials --namespace clasher-
 deploy/k8s/scripts/make-secrets.sh --name backup-postgres-credentials --namespace clasher-backend \
   --env-file deploy/k8s/secrets/postgres-credentials.secret.env --context quasar
 
-# 4) Backup SSH (key-file material, not env)
+# 4) Backup SSH (key-file material, not env). Ensure the operator's copies are 0600 first
+#    (make-secrets.sh refuses group/world-readable material).
+chmod 600 deploy/k8s/secrets/backup_id_ed25519 deploy/k8s/secrets/backup_known_hosts
 deploy/k8s/scripts/make-secrets.sh --name backup-ssh --namespace clasher-backend \
   --from-file id=deploy/k8s/secrets/backup_id_ed25519 \
   --from-file known_hosts=deploy/k8s/secrets/backup_known_hosts --context quasar
 
-# 5) Cloudflare tokens (clasher-frontend) — TWO separate tokens, key 'api-token'
+# 5) Cloudflare tokens (clasher-frontend) — TWO separate tokens, key 'api-token'.
+#    read -rs each (do not export); chmod 600 the env-files.
+read -rs CF_CERT_TOKEN
 printf 'api-token=%s\n' "$CF_CERT_TOKEN" > deploy/k8s/secrets/cloudflare-api-token.secret.env
+chmod 600 deploy/k8s/secrets/cloudflare-api-token.secret.env && unset CF_CERT_TOKEN
 deploy/k8s/scripts/make-secrets.sh --name cloudflare-api-token --namespace clasher-frontend \
   --env-file deploy/k8s/secrets/cloudflare-api-token.secret.env --context quasar
+read -rs CF_DDNS_TOKEN
 printf 'api-token=%s\n' "$CF_DDNS_TOKEN" > deploy/k8s/secrets/cloudflare-ddns-token.secret.env
+chmod 600 deploy/k8s/secrets/cloudflare-ddns-token.secret.env && unset CF_DDNS_TOKEN
 deploy/k8s/scripts/make-secrets.sh --name cloudflare-ddns-token --namespace clasher-frontend \
   --env-file deploy/k8s/secrets/cloudflare-ddns-token.secret.env --context quasar
 
-# 6) CoC official key (clasher-backend ONLY)
+# 6) CoC official key (clasher-backend ONLY) — same read -rs pattern as the §6 example.
+read -rs COC_API_KEY
 printf 'COC_API_KEY=%s\n' "$COC_API_KEY" > deploy/k8s/secrets/coc-gateway-secret.secret.env
+chmod 600 deploy/k8s/secrets/coc-gateway-secret.secret.env && unset COC_API_KEY
 deploy/k8s/scripts/make-secrets.sh --name coc-gateway-secret --namespace clasher-backend \
   --env-file deploy/k8s/secrets/coc-gateway-secret.secret.env --context quasar
 
-# 7) Web auth (clasher-frontend) — AUTH_SECRET + Google OAuth client (M1/#15)
+# 7) Web auth (clasher-frontend) — AUTH_SECRET + Google OAuth client (M1/#15).
+#    Client ID is non-secret; the client secret is read -rs.
+read -r GOOGLE_CLIENT_ID
+read -rs GOOGLE_CLIENT_SECRET
 cat > deploy/k8s/secrets/web-auth.secret.env <<EOF
 AUTH_SECRET=$(openssl rand -base64 32)
 GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
 EOF
+chmod 600 deploy/k8s/secrets/web-auth.secret.env && unset GOOGLE_CLIENT_ID GOOGLE_CLIENT_SECRET
 deploy/k8s/scripts/make-secrets.sh --name web-auth --namespace clasher-frontend \
   --env-file deploy/k8s/secrets/web-auth.secret.env --context quasar
 
-# 8) GHCR image pull — type=dockerconfigjson, in BOTH namespaces.
+# 8) api-credentials (clasher-backend) — connection URLs composed from the data-tier creds
+#    (steps 1-2) + in-cluster service DNS. Consumed by api/worker in M2. The hex passwords
+#    are URL-safe, so no percent-encoding is needed. Postgres and Redis passwords differ,
+#    so read each from its own env-file (do not source both — the shared 'password' key
+#    would collide).
+pg_user="$(sed -n 's/^username=//p' deploy/k8s/secrets/postgres-credentials.secret.env)"
+pg_pass="$(sed -n 's/^password=//p' deploy/k8s/secrets/postgres-credentials.secret.env)"
+pg_db="$(sed -n 's/^dbname=//p' deploy/k8s/secrets/postgres-credentials.secret.env)"
+redis_pass="$(sed -n 's/^password=//p' deploy/k8s/secrets/redis-credentials.secret.env)"
+cat > deploy/k8s/secrets/api-credentials.secret.env <<EOF
+DATABASE_URL=postgresql://$pg_user:$pg_pass@postgres.clasher-database.svc.cluster.local:5432/$pg_db
+REDIS_QUEUE_URL=redis://:$redis_pass@redis-queue.clasher-database.svc.cluster.local:6379
+REDIS_CACHE_URL=redis://:$redis_pass@redis-cache.clasher-database.svc.cluster.local:6379
+EOF
+chmod 600 deploy/k8s/secrets/api-credentials.secret.env && unset pg_user pg_pass pg_db redis_pass
+deploy/k8s/scripts/make-secrets.sh --name api-credentials --namespace clasher-backend \
+  --env-file deploy/k8s/secrets/api-credentials.secret.env --context quasar
+
+# 9) GHCR image pull — type=dockerconfigjson, in BOTH namespaces.
 #    Put the read:packages PAT in a gitignored file, then fold it into the dockerconfig.
 #    The PAT only ever travels through a pipe (stdin) — it never reaches an external
 #    process' argv. `tr -d '\n'` keeps the base64 single-line on both macOS and GNU.
@@ -225,13 +257,13 @@ for ns in clasher-frontend clasher-backend; do
     --from-file .dockerconfigjson=deploy/k8s/secrets/ghcr-dockerconfig.json --context quasar
 done
 
-# 9) backup-recipient-cert is a ConfigMap (public cert), not a Secret:
+# 10) backup-recipient-cert is a ConfigMap (public cert), not a Secret:
 kubectl --context quasar -n clasher-backend create configmap backup-recipient-cert \
   --from-file=recipient.crt=deploy/k8s/secrets/recipient.crt \
   --dry-run=client -o yaml | kubectl --context quasar apply -f -
 ```
 
-> The only secret in step 8 is the PAT: it is written to `ghcr_pat.txt` (mode 600), folded
+> The only secret in step 9 is the PAT: it is written to `ghcr_pat.txt` (mode 600), folded
 > into `ghcr-dockerconfig.json` (mode 600), and loaded into the Secret via `--from-file` — it
 > never appears on any command line. Both files are gitignored. (`skrx7392` and `ghcr.io` in
 > the dockerconfig are non-secret.)

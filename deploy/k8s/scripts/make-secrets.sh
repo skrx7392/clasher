@@ -29,7 +29,7 @@
 #   --type TYPE           Secret type (default Opaque). e.g. kubernetes.io/dockerconfigjson
 #   --context CTX         kube context to target (default: current-context)
 #   --dry-run             render & validate only; print the keys, apply NOTHING
-#   --yes                 skip the "apply to <context>?" confirmation
+#   --yes, -y             skip the "apply to <context>?" confirmation
 #   -h, --help            this help
 #
 # Examples (see deploy/k8s/SECRETS.md for the full runbook + per-secret recipes):
@@ -63,13 +63,19 @@ ASSUME_YES=0
 FROM_FILE_ARGS=()   # accumulates: --from-file KEY=PATH
 
 while [ $# -gt 0 ]; do
+  # Value-taking flags must have an argument; fail with a clear message rather than a
+  # cryptic `shift count out of range` when one is passed last with no value.
   case "$1" in
-    --name)       NAME="${2:-}"; shift 2 ;;
-    --namespace)  NAMESPACE="${2:-}"; shift 2 ;;
-    --env-file)   ENV_FILE="${2:-}"; shift 2 ;;
-    --from-file)  FROM_FILE_ARGS+=("${2:-}"); shift 2 ;;
-    --type)       SECRET_TYPE="${2:-}"; shift 2 ;;
-    --context)    CONTEXT="${2:-}"; shift 2 ;;
+    --name|--namespace|--env-file|--from-file|--type|--context)
+      [ $# -ge 2 ] || die "option '$1' requires a value" ;;
+  esac
+  case "$1" in
+    --name)       NAME="$2"; shift 2 ;;
+    --namespace)  NAMESPACE="$2"; shift 2 ;;
+    --env-file)   ENV_FILE="$2"; shift 2 ;;
+    --from-file)  FROM_FILE_ARGS+=("$2"); shift 2 ;;
+    --type)       SECRET_TYPE="$2"; shift 2 ;;
+    --context)    CONTEXT="$2"; shift 2 ;;
     --dry-run)    DRY_RUN=1; shift ;;
     --yes|-y)     ASSUME_YES=1; shift ;;
     -h|--help)    usage; exit 0 ;;
@@ -110,8 +116,13 @@ assert_secret_file() {
     die "secret material '$f' is group- or world-readable; chmod 600 it first"
   fi
   # If it sits inside a git work tree and is tracked, refuse — values must never be committed.
-  if git -C "$(cd "$(dirname "$f")" && pwd)" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    if git -C "$(cd "$(dirname "$f")" && pwd)" ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+  # Run git from the file's own directory and match by basename: a repo-relative pathspec
+  # would be re-resolved against that cwd and never match, silently disabling the guard.
+  local dir base
+  dir="$(cd "$(dirname "$f")" && pwd)"
+  base="$(basename "$f")"
+  if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    if git -C "$dir" ls-files --error-unmatch -- "$base" >/dev/null 2>&1; then
       die "refusing: '$f' is tracked by git (secret material must never be committed)"
     fi
   fi
