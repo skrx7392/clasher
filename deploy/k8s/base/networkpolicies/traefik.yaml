@@ -1,0 +1,59 @@
+# Traefik ingress-controller -> Clasher (the #6-deferred ingress allows, added with #8).
+# The default-deny in each namespace blocks ingress; these re-open exactly the two paths the
+# IngressRoutes need: Traefik -> web:3000 and Traefik -> api:3000. Browser /api calls reach
+# the API via Traefik, so the API now accepts ingress from BOTH web (SSR, from #6) and Traefik.
+#
+# Assumes the k3s-default Traefik: pods in kube-system labeled app.kubernetes.io/name=traefik,
+# running with normal pod networking. If quasar runs Traefik elsewhere, with different labels,
+# or with hostNetwork (then its traffic appears as the node IP and a podSelector won't match —
+# use an ipBlock of the node IP instead), adjust the selectors before apply.
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-web-from-traefik
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+      ports:
+        - protocol: TCP
+          port: 3000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-api-from-traefik
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: traefik
+      ports:
+        - protocol: TCP
+          port: 3000

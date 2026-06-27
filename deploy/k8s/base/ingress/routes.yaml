@@ -1,0 +1,90 @@
+# Traefik routing for clasher.skpodduturi.dev (DESIGN §8/§9): `/` -> frontend web,
+# `/api` -> backend api, with an HTTPS-redirect on the HTTP entrypoint.
+#
+# Two IngressRoutes (one per namespace) because Traefik routes only to same-namespace
+# Services by default (enabling cross-namespace would be a shared Traefik config change,
+# off-limits per NFR-4). The frontend IngressRoute carries the TLS secret; the backend
+# `/api` IngressRoute is served over the same host's cert via Traefik's SNI certificate
+# store, so the cert Secret need not be copied into clasher-backend.
+#
+# Assumes the k3s-default Traefik v3 (apiVersion traefik.io/v1alpha1) with the standard
+# `web` (:80) and `websecure` (:443) entryPoints. If quasar runs Traefik v2, the group is
+# traefik.containo.us/v1alpha1 — adjust before apply.
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-https
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+---
+# HTTP entrypoint: redirect the whole host (all paths, incl. /api) to HTTPS.
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: clasher-web-redirect
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`clasher.skpodduturi.dev`)
+      kind: Rule
+      middlewares:
+        - name: redirect-https
+      services:
+        - name: web
+          port: 3000
+---
+# HTTPS entrypoint: serve the web app at `/`, terminating TLS with the issued cert.
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: clasher-web
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`clasher.skpodduturi.dev`)
+      kind: Rule
+      services:
+        - name: web
+          port: 3000
+  tls:
+    secretName: clasher-skpodduturi-dev-tls
+---
+# HTTPS entrypoint: route `/api` to the backend API. Higher priority than the `/` rule so it
+# wins for /api. The empty `tls: {}` makes this an explicit TLS router (so it serves HTTPS
+# regardless of whether the websecure entrypoint has entrypoint-level TLS defaulted on) WITHOUT
+# a secretName — the host's cert is selected from Traefik's SNI store, populated by the
+# frontend IngressRoute, so the TLS Secret is not duplicated into clasher-backend.
+# Match is `/api` exactly or under `/api/` (not `/apiary`), and the prefix is NOT stripped — the
+# api app has a global `/api` route prefix and must receive the path intact.
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: clasher-api
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`clasher.skpodduturi.dev`) && (Path(`/api`) || PathPrefix(`/api/`))
+      kind: Rule
+      priority: 100
+      services:
+        - name: api
+          port: 3000
+  tls: {}
