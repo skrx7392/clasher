@@ -1,0 +1,75 @@
+# LimitRange per namespace (DESIGN §9: "requests + limits on every pod").
+# These supply DEFAULT requests/limits (CPU, memory, ephemeral-storage) to any container
+# that omits them, so no pod can run unbounded even if a workload manifest forgets to set
+# resources. Workload manifests SHOULD still declare explicit resources; this is the safety
+# net. The defaults also satisfy the per-namespace ResourceQuota (which requires every pod to
+# declare all request/limit dimensions it constrains, including ephemeral-storage). `max`
+# caps any single container as a blast-radius guard.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: clasher-defaults
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+        ephemeral-storage: 512Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi
+        ephemeral-storage: 64Mi
+      max:
+        cpu: "1"
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: clasher-defaults
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+        ephemeral-storage: 512Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi
+        ephemeral-storage: 64Mi
+      max:
+        cpu: "2"
+        memory: 2Gi
+        ephemeral-storage: 1Gi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: clasher-defaults
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: "1"
+        memory: 1Gi
+        ephemeral-storage: 1Gi
+      defaultRequest:
+        cpu: 250m
+        memory: 256Mi
+        ephemeral-storage: 256Mi
+      max:
+        cpu: "2"
+        memory: 4Gi
+        ephemeral-storage: 4Gi

@@ -1,0 +1,187 @@
+# clasher-backend NetworkPolicies (DESIGN §9 default-deny + §10 key isolation).
+# The official CoC key lives only in the coc-gateway pod; the gateway is the ONLY pod with
+# any external egress, and that egress is restricted to 443. The API (component=backend)
+# may reach the data tier; the gateway (component=gateway) may NOT — it can only reach the
+# external proxy on 443 (and DNS).
+#
+# Deferred to their own issues (intentionally absent so the base stays reviewable):
+#   - intra-namespace api -> coc-gateway -> added when the API calls the gateway (M2)
+#   - api egress to api.clashk.ing (ClashKing direct) -> M2 (data plane)
+#   - ingress from the Traefik ingress controller for /api -> #8 (ingress + TLS)
+---
+# Deny ALL ingress and egress for every pod in clasher-backend.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Allow DNS resolution for every pod (CoreDNS in kube-system, 53/udp+tcp).
+# The gateway needs this to resolve the proxy hostname (cocproxy.royaleapi.dev) before
+# connecting to whichever address it resolves to.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+# frontend -> backend: the API pods accept ingress from the web pods on :3000 only.
+# Scoped to name=api (not component=backend) so future workers in this namespace are NOT
+# reachable from the frontend — the only allowed frontend->backend path is web -> api.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-api-from-frontend
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-frontend
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: web
+      ports:
+        - protocol: TCP
+          port: 3000
+---
+# backend -> database (Postgres): backend pods may egress to Postgres on :5432.
+# component=backend covers the api and any future worker (both legitimately need the DB);
+# the gateway (component=gateway) is excluded.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-backend-to-postgres
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: backend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-database
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+# backend -> redis (queue + cache): backend pods may egress to either Redis on :6379.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-backend-to-redis
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: backend
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-database
+          podSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - redis-queue
+                  - redis-cache
+      ports:
+        - protocol: TCP
+          port: 6379
+---
+# coc-gateway -> RoyaleAPI proxy (DESIGN §9/§10). The coc-gateway is the SOLE pod with any
+# external egress, and only on 443. It reaches the proxy at the Cloudflare-fronted hostname
+# cocproxy.royaleapi.dev, whose IPs are not static, so we cannot pin a single address.
+#
+# IMPORTANT: 45.79.218.79 is RoyaleAPI's OUTBOUND IP — the address you register in the Clash
+# of Clans developer portal as the allowlisted source for the official key (a portal/runbook
+# step in #11, NOT a NetworkPolicy peer). It is NOT the address the gateway connects to.
+#
+# This policy admits egress to any PUBLIC address on 443 while excluding RFC1918, CGNAT, and
+# link-local ranges (which cover the k3s pod/service CIDRs 10.42/10.43.0.0/16). That enforces
+# the property NetworkPolicy can enforce at L3/L4 — the gateway cannot pivot to any in-cluster
+# or other-tenant service — and keeps it the only pod able to egress externally. NetworkPolicy
+# cannot match a hostname/SNI, so "key only ever sent to the proxy" is guaranteed by the
+# gateway application layer (it sends the key solely to COC_PROXY_BASE_URL), not by this rule.
+# If the cluster uses pod/service CIDRs outside the excluded ranges, add them to `except`.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-coc-gateway-to-proxy
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: gateway
+      app.kubernetes.io/name: coc-gateway
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+              - 169.254.0.0/16
+              - 100.64.0.0/10
+        - ipBlock:
+            cidr: ::/0
+            except:
+              - ::1/128
+              - fe80::/10
+              - fc00::/7
+      ports:
+        - protocol: TCP
+          port: 443

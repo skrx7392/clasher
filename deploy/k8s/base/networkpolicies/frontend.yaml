@@ -1,0 +1,77 @@
+# clasher-frontend NetworkPolicies (DESIGN §9 default-deny).
+# NetworkPolicies are additive allow-lists: the default-deny below drops all traffic,
+# then each allow re-opens exactly one path. Nothing here grants cross-namespace
+# access beyond the listed allows.
+#
+# Deferred to their own issues (kept out so the base stays minimal and reviewable):
+#   - ingress from the Traefik ingress controller -> #8 (ingress + TLS)
+#   - egress to Google OAuth endpoints for Auth.js -> #15 (identity)
+---
+# Deny ALL ingress and egress for every pod in the namespace. An empty podSelector
+# selects all pods; listing both policyTypes with no rules denies both directions.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Allow DNS resolution: every pod may egress to CoreDNS (kube-system) on 53/udp+tcp.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns-egress
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+---
+# frontend -> backend: the web pods may egress to the API pods on :3000 only.
+# Scoped to name=web -> name=api so the path is exactly web -> api (no other backend pod,
+# e.g. a future worker, is reachable from the frontend).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-web-to-api
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-backend
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: api
+      ports:
+        - protocol: TCP
+          port: 3000

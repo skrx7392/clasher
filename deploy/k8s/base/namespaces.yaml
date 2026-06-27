@@ -1,0 +1,53 @@
+# Three scoped Clasher namespaces (DESIGN §9). Every Clasher resource lives in a
+# `clasher-*` namespace so blast radius is contained on the shared quasar cluster
+# and co-tenants (Aarogya — do-not-touch) are unaffected (NFR-4).
+#
+# Pod Security Admission (PSA) labels enforce the pod-hardening baseline at admission
+# time, independent of the per-pod securityContext that workload issues must still set:
+#   - frontend/backend run our own non-root images  -> enforce: restricted.
+#   - database hosts upstream Postgres/Redis images  -> enforce: baseline now, with
+#     warn/audit at restricted; #7 hardens those StatefulSets to pass restricted.
+# Kubernetes auto-applies `kubernetes.io/metadata.name: <ns>` to every namespace, so
+# NetworkPolicy namespaceSelectors key off that built-in label (no custom ns label).
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/component: frontend
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/audit-version: latest
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/component: backend
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/audit-version: latest
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/component: database
+    # baseline now (upstream Postgres/Redis images); #7 hardens to restricted.
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/audit-version: latest
