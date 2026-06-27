@@ -38,8 +38,14 @@ export class CurrentUserMiddleware implements NestMiddleware {
     const raw = req.headers["x-clasher-google-sub"];
     const sub = Array.isArray(raw) ? raw[0] : raw;
     if (sub) {
-      const user = await this.users.findByGoogleSub(sub);
-      if (user) req.user = user;
+      try {
+        const user = await this.users.findByGoogleSub(sub);
+        if (user) req.user = user;
+      } catch {
+        // Dev seam: a lookup failure (e.g. DB down) resolves to no user (default-deny).
+        // Nest ignores a rejected middleware promise, so we must always reach next()
+        // ourselves — otherwise the request would hang instead of returning.
+      }
     }
     next();
   }

@@ -61,4 +61,6 @@ Google's OAuth endpoints is opened by
 - **M1:** real Google credentials + full sign-in, `verifytoken` ownership proof,
   role-gated clan registration, re-validation, roster; the API current-user resolver
   switches from the M0 `x-clasher-google-sub` header seam to the verified Auth.js
-  session.
+  session; trusted server-to-server authentication + rate limiting on the upsert
+  endpoint; confirm Auth.js `trustHost` works behind Traefik (set `AUTH_TRUST_HOST`
+  if it raises `UntrustedHost`).

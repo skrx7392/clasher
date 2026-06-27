@@ -167,6 +167,14 @@ describe("Identity + roles (e2e, #15)", () => {
       .set("x-clasher-role", "admin");
     expect(res.status).toBe(403);
   });
+
+  it("does not hang the request if the current-user lookup fails (returns default-deny)", async () => {
+    const spy = jest.spyOn(repo, "findByGoogleSub").mockRejectedValueOnce(new Error("db down"));
+    // The middleware must still reach next(); the request returns 403 rather than hanging.
+    const res = await http().get("/api/identity/me").set("x-clasher-google-sub", "whoever");
+    expect(res.status).toBe(403);
+    spy.mockRestore();
+  });
 });
 
 describe("Production: the M0 header seam is disabled (#15)", () => {
