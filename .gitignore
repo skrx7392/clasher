@@ -9,6 +9,7 @@ build/
 .next/
 out/
 *.tsbuildinfo
+next-env.d.ts
 
 # Env & secrets — never commit credentials
 .env

@@ -1,0 +1,88 @@
+/*
+ * DESIGN TOKENS — the single source of truth for all theming.
+ *
+ * Every component styles itself with `var(--clr-…)` / `var(--space-…)` etc., so
+ * changing a value here — or adding a new `[data-theme="…"]` block — restyles the
+ * ENTIRE UI from one place. To add a theme: add a block below AND an entry in
+ * app/themes.ts (which drives the switcher). Theme is selected by the
+ * `data-theme` attribute on <html> (set by next-themes).
+ */
+
+:root {
+  /* Non-color tokens (shared across themes) */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --shadow: 0 18px 50px -20px rgb(0 0 0 / 45%);
+  --maxw: 880px;
+
+  /* Default palette == "dark" (matches DEFAULT_THEME in themes.ts); used for SSR
+     and no-JS before the data-theme attribute is applied, so there is one
+     canonical default. */
+  --clr-bg: #0c0f17;
+  --clr-surface: #141925;
+  --clr-fg: #e7ebf2;
+  --clr-fg-muted: #97a0b3;
+  --clr-accent: #3fae6b;
+  --clr-accent-fg: #06210f;
+  --clr-border: #232a39;
+  --clr-link: #6cd29a;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --clr-bg: #f6f7f4;
+  --clr-surface: #ffffff;
+  --clr-fg: #1a1d24;
+  --clr-fg-muted: #5b6270;
+  --clr-accent: #2f7d4f;
+  --clr-accent-fg: #ffffff;
+  --clr-border: #e4e5e0;
+  --clr-link: #1f6f43;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --clr-bg: #0c0f17;
+  --clr-surface: #141925;
+  --clr-fg: #e7ebf2;
+  --clr-fg-muted: #97a0b3;
+  --clr-accent: #3fae6b;
+  --clr-accent-fg: #06210f;
+  --clr-border: #232a39;
+  --clr-link: #6cd29a;
+}
+
+[data-theme="aurora"] {
+  color-scheme: light;
+  --clr-bg: #eef4fb;
+  --clr-surface: #ffffffcc;
+  --clr-fg: #1d2433;
+  --clr-fg-muted: #54627a;
+  /* Darkened so white-on-accent (switcher/buttons) clears WCAG AA 4.5:1. */
+  --clr-accent: #2f5fc0;
+  --clr-accent-fg: #ffffff;
+  --clr-border: #d6e2f2;
+  --clr-link: #2f5fc0;
+}
+
+[data-theme="clash"] {
+  color-scheme: dark;
+  --clr-bg: #16130e;
+  --clr-surface: #211c14;
+  --clr-fg: #f4ead4;
+  --clr-fg-muted: #b6a888;
+  --clr-accent: #e8b23a;
+  --clr-accent-fg: #2a1e06;
+  --clr-border: #3a3122;
+  --clr-link: #f0c45a;
+}

@@ -1,0 +1,69 @@
+/* Base styles — all values come from tokens.css so themes drive everything. */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-fg);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  /* Smooth the cross-theme transition (disabled on switch by next-themes). */
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-4);
+}
+
+p {
+  color: var(--clr-fg-muted);
+  max-width: 60ch;
+}
+
+a {
+  color: var(--clr-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  border-top: 1px solid var(--clr-border);
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  font-size: 0.8rem;
+}
+
+footer p {
+  margin: var(--space-2) 0;
+  color: var(--clr-fg-muted);
+}

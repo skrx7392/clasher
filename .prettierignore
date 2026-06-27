@@ -6,6 +6,7 @@ node_modules/
 **/coverage/
 pnpm-lock.yaml
 api-response-sample.json
+**/next-env.d.ts
 
 # Large narrative planning docs — Prettier's markdown-table padding produces huge,
 # noisy diffs (and mis-renders cells containing literal `|`). Keep them as authored.
