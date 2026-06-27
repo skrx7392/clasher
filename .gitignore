@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnp.*
+.yarn/
+
+# Build output
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Env & secrets — never commit credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.kubeconfig
+kubeconfig
+
+# Logs, coverage, caches
+*.log
+coverage/
+.cache/
+.turbo/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,4023 @@
+{
+  "items": [
+    {
+      "result": "win",
+      "endTime": "20260626T003346.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 103,
+        "stars": 354,
+        "destructionPercentage": 676.26666,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 241,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260617T200731.000Z",
+      "teamSize": 35,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 58,
+        "stars": 102,
+        "destructionPercentage": 98.8,
+        "expEarned": 509
+      },
+      "opponent": {
+        "tag": "#2L09GVUC9",
+        "name": "The Roadies",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "stars": 105,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260615T191447.000Z",
+      "teamSize": 35,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 47,
+        "stars": 99,
+        "destructionPercentage": 98.62857,
+        "expEarned": 483
+      },
+      "opponent": {
+        "tag": "#2ULP8PVR",
+        "name": "ottoman`s™",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/j_6mMsu6XB79Cy7qPenmWq66A3F5TVd_oolHz7haL3g.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/j_6mMsu6XB79Cy7qPenmWq66A3F5TVd_oolHz7haL3g.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/j_6mMsu6XB79Cy7qPenmWq66A3F5TVd_oolHz7haL3g.png"
+        },
+        "clanLevel": 28,
+        "stars": 45,
+        "destructionPercentage": 48.6
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260613T185455.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 40,
+        "stars": 66,
+        "destructionPercentage": 85.7,
+        "expEarned": 422
+      },
+      "opponent": {
+        "tag": "#2RU9QULR",
+        "name": "Dutch Challenge",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/FuEd2HXQGlkvaTBW5_K7pkhkjGEUawl3gSj1o3Fslyc.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/FuEd2HXQGlkvaTBW5_K7pkhkjGEUawl3gSj1o3Fslyc.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/FuEd2HXQGlkvaTBW5_K7pkhkjGEUawl3gSj1o3Fslyc.png"
+        },
+        "clanLevel": 31,
+        "stars": 90,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20260610T165437.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 96,
+        "stars": 322,
+        "destructionPercentage": 629.5333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 234,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260531T202010.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 20,
+        "stars": 48,
+        "destructionPercentage": 89.3,
+        "expEarned": 307
+      },
+      "opponent": {
+        "tag": "#LY8Q2J0",
+        "name": "✨PAUSE CAFÉ✨",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/o1rDeJBzFW4lWcj5s_xZDgkg8iuCqUX0beLeB_Mm7Qw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/o1rDeJBzFW4lWcj5s_xZDgkg8iuCqUX0beLeB_Mm7Qw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/o1rDeJBzFW4lWcj5s_xZDgkg8iuCqUX0beLeB_Mm7Qw.png"
+        },
+        "clanLevel": 23,
+        "stars": 60,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260529T204204.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 46,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 418
+      },
+      "opponent": {
+        "tag": "#PVCU0YJG",
+        "name": "balista",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/gYta9MN4c9ZaZGqG7P1dNJ_IHdgCB4kU_Ss4yD3O7QM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/gYta9MN4c9ZaZGqG7P1dNJ_IHdgCB4kU_Ss4yD3O7QM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/gYta9MN4c9ZaZGqG7P1dNJ_IHdgCB4kU_Ss4yD3O7QM.png"
+        },
+        "clanLevel": 31,
+        "stars": 74,
+        "destructionPercentage": 99.68
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260527T205246.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 34,
+        "stars": 68,
+        "destructionPercentage": 96.72,
+        "expEarned": 450
+      },
+      "opponent": {
+        "tag": "#29GR08UPC",
+        "name": "welsh warriors",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/9m2KZW4HabdH_sI1pUCyKyhh_BzWu9i0hOeaCN1ev2A.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/9m2KZW4HabdH_sI1pUCyKyhh_BzWu9i0hOeaCN1ev2A.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/9m2KZW4HabdH_sI1pUCyKyhh_BzWu9i0hOeaCN1ev2A.png"
+        },
+        "clanLevel": 30,
+        "stars": 62,
+        "destructionPercentage": 87.8
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260523T212025.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 23,
+        "stars": 49,
+        "destructionPercentage": 72.24,
+        "expEarned": 306
+      },
+      "opponent": {
+        "tag": "#2PQLJ2CG8",
+        "name": "Bulldogs",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/0MWTaPUlPNaaA2CNgTzuxDNx6pVvujgdwRvlZ_Izjf0.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/0MWTaPUlPNaaA2CNgTzuxDNx6pVvujgdwRvlZ_Izjf0.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/0MWTaPUlPNaaA2CNgTzuxDNx6pVvujgdwRvlZ_Izjf0.png"
+        },
+        "clanLevel": 30,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260521T212119.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 32,
+        "stars": 61,
+        "destructionPercentage": 92.48,
+        "expEarned": 399
+      },
+      "opponent": {
+        "tag": "#2L80PP89C",
+        "name": "Великое Царство",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/MpTRmbH3Er06M_dou8q3-Ul-y-sluu0HJFfGDbKSNlI.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/MpTRmbH3Er06M_dou8q3-Ul-y-sluu0HJFfGDbKSNlI.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/MpTRmbH3Er06M_dou8q3-Ul-y-sluu0HJFfGDbKSNlI.png"
+        },
+        "clanLevel": 24,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260519T194735.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 27,
+        "stars": 62,
+        "destructionPercentage": 89.44,
+        "expEarned": 378
+      },
+      "opponent": {
+        "tag": "#2L99VUYUQ",
+        "name": "White Rabbit 67",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/YKrvqqcyPnNezf-Pe7fnJNWC1RtEt2G5lDb5zXitzqM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/YKrvqqcyPnNezf-Pe7fnJNWC1RtEt2G5lDb5zXitzqM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/YKrvqqcyPnNezf-Pe7fnJNWC1RtEt2G5lDb5zXitzqM.png"
+        },
+        "clanLevel": 27,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260517T190610.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 33,
+        "stars": 68,
+        "destructionPercentage": 94.68,
+        "expEarned": 390
+      },
+      "opponent": {
+        "tag": "#2J92CV82Y",
+        "name": "Smaug Slayers",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/yNcSm1IvYEUDHRkGZRTG740v4z50UuScLtk-EjsxzqI.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/yNcSm1IvYEUDHRkGZRTG740v4z50UuScLtk-EjsxzqI.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/yNcSm1IvYEUDHRkGZRTG740v4z50UuScLtk-EjsxzqI.png"
+        },
+        "clanLevel": 13,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260515T185615.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 34,
+        "stars": 73,
+        "destructionPercentage": 98.68,
+        "expEarned": 441
+      },
+      "opponent": {
+        "tag": "#LY89080",
+        "name": "!!!жигули!!!",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/lXNQOVsOCk0WPC_uaF46aWYaDcI1TiVYEwpkNJkU3KU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/lXNQOVsOCk0WPC_uaF46aWYaDcI1TiVYEwpkNJkU3KU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/lXNQOVsOCk0WPC_uaF46aWYaDcI1TiVYEwpkNJkU3KU.png"
+        },
+        "clanLevel": 32,
+        "stars": 70,
+        "destructionPercentage": 96.68
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260513T175657.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 44,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 436
+      },
+      "opponent": {
+        "tag": "#2GU8G8UGR",
+        "name": "Swe-Aces Mini",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Sfx4JcJU2gh2HGsU2GRnj29KDu0TN0ilGpP328cuuIg.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Sfx4JcJU2gh2HGsU2GRnj29KDu0TN0ilGpP328cuuIg.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Sfx4JcJU2gh2HGsU2GRnj29KDu0TN0ilGpP328cuuIg.png"
+        },
+        "clanLevel": 15,
+        "stars": 73,
+        "destructionPercentage": 99.48
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20260510T193728.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 178,
+        "stars": 423,
+        "destructionPercentage": 531.5333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 546,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20260501T233032.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 36,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 394
+      },
+      "opponent": {
+        "tag": "#2QUYYQJPV",
+        "name": "Hogrider Inn",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Cyh5YIZhc-KbrC9TcW7kkawp_4NbLSE8kjhmCoigDEA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Cyh5YIZhc-KbrC9TcW7kkawp_4NbLSE8kjhmCoigDEA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Cyh5YIZhc-KbrC9TcW7kkawp_4NbLSE8kjhmCoigDEA.png"
+        },
+        "clanLevel": 25,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260429T225316.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 40,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 442
+      },
+      "opponent": {
+        "tag": "#YGRU9R0R",
+        "name": "VIP",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/3s3jhn6e8jGG4mUB4xOBzuZGKoOJVLrnopdOxM6trnw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/3s3jhn6e8jGG4mUB4xOBzuZGKoOJVLrnopdOxM6trnw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/3s3jhn6e8jGG4mUB4xOBzuZGKoOJVLrnopdOxM6trnw.png"
+        },
+        "clanLevel": 19,
+        "stars": 63,
+        "destructionPercentage": 90.12
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260427T224709.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 27,
+        "stars": 57,
+        "destructionPercentage": 98.2,
+        "expEarned": 373
+      },
+      "opponent": {
+        "tag": "#CPG0QYVC",
+        "name": "ARAB CHAMPIONS™",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/6_uLWS1tcIaj0gUStq6vqD9IY4rTXLbq83TlSllZDS4.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/6_uLWS1tcIaj0gUStq6vqD9IY4rTXLbq83TlSllZDS4.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/6_uLWS1tcIaj0gUStq6vqD9IY4rTXLbq83TlSllZDS4.png"
+        },
+        "clanLevel": 21,
+        "stars": 36,
+        "destructionPercentage": 63.95
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260425T184916.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 26,
+        "stars": 57,
+        "destructionPercentage": 99.1,
+        "expEarned": 377
+      },
+      "opponent": {
+        "tag": "#2G9Y8QY8R",
+        "name": "Majestic Royals",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/xFpkJCxQCVC45AFn7dfAf3qkm_7JOJamI7-d_omJgXA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/xFpkJCxQCVC45AFn7dfAf3qkm_7JOJamI7-d_omJgXA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/xFpkJCxQCVC45AFn7dfAf3qkm_7JOJamI7-d_omJgXA.png"
+        },
+        "clanLevel": 21,
+        "stars": 56,
+        "destructionPercentage": 96.95
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260423T191122.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 28,
+        "stars": 48,
+        "destructionPercentage": 91.75,
+        "expEarned": 325
+      },
+      "opponent": {
+        "tag": "#CRLV2CPP",
+        "name": "Cro Army",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/hAa-s_o0FCTWMR2YQ8R_fHKNJDvx5g8T7R8xP9MP5JE.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/hAa-s_o0FCTWMR2YQ8R_fHKNJDvx5g8T7R8xP9MP5JE.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/hAa-s_o0FCTWMR2YQ8R_fHKNJDvx5g8T7R8xP9MP5JE.png"
+        },
+        "clanLevel": 30,
+        "stars": 60,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260421T192906.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 30,
+        "stars": 71,
+        "destructionPercentage": 98.2,
+        "expEarned": 430
+      },
+      "opponent": {
+        "tag": "#2JLULQJ0L",
+        "name": "H R B",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ndN4kbnDZQmjAnh0HIWyNZkUXeW56RFYigf-28h39Co.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ndN4kbnDZQmjAnh0HIWyNZkUXeW56RFYigf-28h39Co.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ndN4kbnDZQmjAnh0HIWyNZkUXeW56RFYigf-28h39Co.png"
+        },
+        "clanLevel": 11,
+        "stars": 68,
+        "destructionPercentage": 96.08
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260419T194739.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 36,
+        "stars": 57,
+        "destructionPercentage": 98.55,
+        "expEarned": 322
+      },
+      "opponent": {
+        "tag": "#2GCP0GG8R",
+        "name": "Respublic shark",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/zNRhkSZr3Wb2b_vDCkce3OuYIIyUhfdyKO_nz0TWMzk.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/zNRhkSZr3Wb2b_vDCkce3OuYIIyUhfdyKO_nz0TWMzk.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/zNRhkSZr3Wb2b_vDCkce3OuYIIyUhfdyKO_nz0TWMzk.png"
+        },
+        "clanLevel": 21,
+        "stars": 59,
+        "destructionPercentage": 99.8
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260417T204517.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 33,
+        "stars": 72,
+        "destructionPercentage": 98.68,
+        "expEarned": 385
+      },
+      "opponent": {
+        "tag": "#2YUGPPL2L",
+        "name": "CocWorld",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/QDBBb0AdLGFdzf1EKFOt9aVhQOruRVlYnvzXc2dprOA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/QDBBb0AdLGFdzf1EKFOt9aVhQOruRVlYnvzXc2dprOA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/QDBBb0AdLGFdzf1EKFOt9aVhQOruRVlYnvzXc2dprOA.png"
+        },
+        "clanLevel": 23,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260415T212947.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 34,
+        "stars": 60,
+        "destructionPercentage": 100,
+        "expEarned": 367
+      },
+      "opponent": {
+        "tag": "#9J89GQ9U",
+        "name": "KLEWANG.squad",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/n5O7zqbTZxxPB4cUw887zsDVjy2leiUMaNiIcjhoF08.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/n5O7zqbTZxxPB4cUw887zsDVjy2leiUMaNiIcjhoF08.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/n5O7zqbTZxxPB4cUw887zsDVjy2leiUMaNiIcjhoF08.png"
+        },
+        "clanLevel": 28,
+        "stars": 53,
+        "destructionPercentage": 92.9
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260413T202308.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 30,
+        "stars": 59,
+        "destructionPercentage": 99.65,
+        "expEarned": 371
+      },
+      "opponent": {
+        "tag": "#9LY8C898",
+        "name": "AREA/ROSSA",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png"
+        },
+        "clanLevel": 30,
+        "stars": 49,
+        "destructionPercentage": 88.65
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260411T033602.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5TuBZjMO479ySwCTYdYFBKGxrGH1gJESY6gWLl0MYDs.png"
+        },
+        "clanLevel": 32,
+        "attacks": 100,
+        "stars": 345,
+        "destructionPercentage": 651.86664,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 172,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260401T215000.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 45,
+        "stars": 74,
+        "destructionPercentage": 99.96,
+        "expEarned": 425
+      },
+      "opponent": {
+        "tag": "#C2PVJGCC",
+        "name": "KURDISTAN KINGS",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/b1xYtEnvT3rxgUIsF48TvtVPWJfwy0qRFTa24lnfdyY.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/b1xYtEnvT3rxgUIsF48TvtVPWJfwy0qRFTa24lnfdyY.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/b1xYtEnvT3rxgUIsF48TvtVPWJfwy0qRFTa24lnfdyY.png"
+        },
+        "clanLevel": 33,
+        "stars": 69,
+        "destructionPercentage": 97.04
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260329T210807.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 36,
+        "stars": 68,
+        "destructionPercentage": 95.48,
+        "expEarned": 394
+      },
+      "opponent": {
+        "tag": "#YUC80LL",
+        "name": "DraKKar Gaulois",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/04BqMklV8TVRg8_bSwMazkxCCz1Aph3mlCzGwd_d5EA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/04BqMklV8TVRg8_bSwMazkxCCz1Aph3mlCzGwd_d5EA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/04BqMklV8TVRg8_bSwMazkxCCz1Aph3mlCzGwd_d5EA.png"
+        },
+        "clanLevel": 28,
+        "stars": 71,
+        "destructionPercentage": 98.6
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260327T215737.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 39,
+        "stars": 67,
+        "destructionPercentage": 95.08,
+        "expEarned": 390
+      },
+      "opponent": {
+        "tag": "#9G9LJ9Y2",
+        "name": "LOS FURIOSOS",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/6KE8gb-X3jrpJMiqjf9cTR_PECr36aSwyIXO-rbvv7I.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/6KE8gb-X3jrpJMiqjf9cTR_PECr36aSwyIXO-rbvv7I.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/6KE8gb-X3jrpJMiqjf9cTR_PECr36aSwyIXO-rbvv7I.png"
+        },
+        "clanLevel": 21,
+        "stars": 71,
+        "destructionPercentage": 98.92
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260325T225317.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 31,
+        "stars": 71,
+        "destructionPercentage": 97.76,
+        "expEarned": 387
+      },
+      "opponent": {
+        "tag": "#2Q0UCPYCL",
+        "name": "المخططين",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/tCLOEZJ_CI799N2yYQZ8zRNRw0fz4YCo8BNJmrc_qv8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/tCLOEZJ_CI799N2yYQZ8zRNRw0fz4YCo8BNJmrc_qv8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/tCLOEZJ_CI799N2yYQZ8zRNRw0fz4YCo8BNJmrc_qv8.png"
+        },
+        "clanLevel": 23,
+        "stars": 74,
+        "destructionPercentage": 99.92
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260323T233557.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 45,
+        "stars": 86,
+        "destructionPercentage": 97.8,
+        "expEarned": 496
+      },
+      "opponent": {
+        "tag": "#RV2LVQJQ",
+        "name": "Fire Pupz!",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/1SHgkm0hNV7V3RZTIydaptFRFFS9oGpmu3nz0fkJdDk.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/1SHgkm0hNV7V3RZTIydaptFRFFS9oGpmu3nz0fkJdDk.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/1SHgkm0hNV7V3RZTIydaptFRFFS9oGpmu3nz0fkJdDk.png"
+        },
+        "clanLevel": 22,
+        "stars": 82,
+        "destructionPercentage": 96.73333
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260321T231542.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 47,
+        "stars": 85,
+        "destructionPercentage": 97.333336,
+        "expEarned": 510
+      },
+      "opponent": {
+        "tag": "#2Q82GRJJV",
+        "name": "Regenwurmretter",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/4vlpQWdltDL5Fdg00qi_YXNr-NToBM3nuTuaKng_o9s.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/4vlpQWdltDL5Fdg00qi_YXNr-NToBM3nuTuaKng_o9s.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/4vlpQWdltDL5Fdg00qi_YXNr-NToBM3nuTuaKng_o9s.png"
+        },
+        "clanLevel": 26,
+        "stars": 78,
+        "destructionPercentage": 93.666664
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260320T001202.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 42,
+        "stars": 83,
+        "destructionPercentage": 97.433334,
+        "expEarned": 438
+      },
+      "opponent": {
+        "tag": "#9PCLCJ0Q",
+        "name": "Elites Rising",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/nWEGdV7HdjAwdjSrhedAkCGxbvDjg2fwmqxgVEYqEhw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/nWEGdV7HdjAwdjSrhedAkCGxbvDjg2fwmqxgVEYqEhw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/nWEGdV7HdjAwdjSrhedAkCGxbvDjg2fwmqxgVEYqEhw.png"
+        },
+        "clanLevel": 32,
+        "stars": 90,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260317T213849.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 40,
+        "stars": 70,
+        "destructionPercentage": 97.92,
+        "expEarned": 447
+      },
+      "opponent": {
+        "tag": "#8VYG2Q2G",
+        "name": "FORZA-CORAGGIO",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/P_lk_SpNZxlvvtmMqYWpzaBviCASwsbR3DCbuY5KvJQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/P_lk_SpNZxlvvtmMqYWpzaBviCASwsbR3DCbuY5KvJQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/P_lk_SpNZxlvvtmMqYWpzaBviCASwsbR3DCbuY5KvJQ.png"
+        },
+        "clanLevel": 28,
+        "stars": 65,
+        "destructionPercentage": 92.96
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260315T211152.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 36,
+        "stars": 73,
+        "destructionPercentage": 99.12,
+        "expEarned": 437
+      },
+      "opponent": {
+        "tag": "#2RGY0QUR",
+        "name": "#TrueNorth",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/NpERkQvVL1tPzWLFafXMa3k8NaXJ-u1fWleukOUoKoI.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/NpERkQvVL1tPzWLFafXMa3k8NaXJ-u1fWleukOUoKoI.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/NpERkQvVL1tPzWLFafXMa3k8NaXJ-u1fWleukOUoKoI.png"
+        },
+        "clanLevel": 27,
+        "stars": 68,
+        "destructionPercentage": 94
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260313T201257.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 33,
+        "stars": 70,
+        "destructionPercentage": 94.16,
+        "expEarned": 386
+      },
+      "opponent": {
+        "tag": "#28YC9CG8L",
+        "name": "اسيادالشرق",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/V-KR60tQUvYX7Z1dJJ9YiPyFvAorfPhar5Pso6JDP_4.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/V-KR60tQUvYX7Z1dJJ9YiPyFvAorfPhar5Pso6JDP_4.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/V-KR60tQUvYX7Z1dJJ9YiPyFvAorfPhar5Pso6JDP_4.png"
+        },
+        "clanLevel": 22,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20260310T231410.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 103,
+        "stars": 336,
+        "destructionPercentage": 659.6667,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 208,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260228T214940.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 37,
+        "stars": 83,
+        "destructionPercentage": 93.333336,
+        "expEarned": 460
+      },
+      "opponent": {
+        "tag": "#92PVY80U",
+        "name": "BakungComunity",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5YQy7mBTVxKfdSKSjVwRnb-Jry-frZO05Wije-CdkjU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5YQy7mBTVxKfdSKSjVwRnb-Jry-frZO05Wije-CdkjU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5YQy7mBTVxKfdSKSjVwRnb-Jry-frZO05Wije-CdkjU.png"
+        },
+        "clanLevel": 24,
+        "stars": 69,
+        "destructionPercentage": 80.933334
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260225T215500.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 36,
+        "stars": 64,
+        "destructionPercentage": 92.6,
+        "expEarned": 385
+      },
+      "opponent": {
+        "tag": "#2QUYLL89P",
+        "name": "Specvienība VV2",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/41oTGx3u9Mru69WGE-57IqxaUmEC7-tVxT8Gh9YLrzk.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/41oTGx3u9Mru69WGE-57IqxaUmEC7-tVxT8Gh9YLrzk.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/41oTGx3u9Mru69WGE-57IqxaUmEC7-tVxT8Gh9YLrzk.png"
+        },
+        "clanLevel": 21,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260223T221312.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 43,
+        "stars": 72,
+        "destructionPercentage": 97.88,
+        "expEarned": 417
+      },
+      "opponent": {
+        "tag": "#UUGLYJCY",
+        "name": "KARA ŞÏMŞEKLER",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/pn2MmCkg752PtwxFCdI1jzBmNwDN3gtHmKeQdMWKi8c.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/pn2MmCkg752PtwxFCdI1jzBmNwDN3gtHmKeQdMWKi8c.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/pn2MmCkg752PtwxFCdI1jzBmNwDN3gtHmKeQdMWKi8c.png"
+        },
+        "clanLevel": 26,
+        "stars": 64,
+        "destructionPercentage": 91.48
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260221T214753.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 36,
+        "stars": 74,
+        "destructionPercentage": 99.8,
+        "expEarned": 419
+      },
+      "opponent": {
+        "tag": "#LYYCUP8G",
+        "name": "frere du 42",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/qhnAJT7ERSSDFVPkUdgbgaPKEa0ON3uFperutiNyDcE.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/qhnAJT7ERSSDFVPkUdgbgaPKEa0ON3uFperutiNyDcE.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/qhnAJT7ERSSDFVPkUdgbgaPKEa0ON3uFperutiNyDcE.png"
+        },
+        "clanLevel": 28,
+        "stars": 66,
+        "destructionPercentage": 93.2
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20260219T211839.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 38,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 389
+      },
+      "opponent": {
+        "tag": "#LQ8GRCL8",
+        "name": "黑豹国",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/4TU-9DJESOmO0nPGZkmWUJDNiy2nEphalBlGN1KijIA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/4TU-9DJESOmO0nPGZkmWUJDNiy2nEphalBlGN1KijIA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/4TU-9DJESOmO0nPGZkmWUJDNiy2nEphalBlGN1KijIA.png"
+        },
+        "clanLevel": 23,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260217T211647.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 34,
+        "stars": 73,
+        "destructionPercentage": 98.52,
+        "expEarned": 430
+      },
+      "opponent": {
+        "tag": "#L8JQ8YQ0",
+        "name": "KRAL",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/a_02AuXUIKJTsQB-NF3DhhEZqdPXSyLE43cQOHi0JkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/a_02AuXUIKJTsQB-NF3DhhEZqdPXSyLE43cQOHi0JkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/a_02AuXUIKJTsQB-NF3DhhEZqdPXSyLE43cQOHi0JkA.png"
+        },
+        "clanLevel": 29,
+        "stars": 67,
+        "destructionPercentage": 92.32
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260215T201453.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 39,
+        "stars": 74,
+        "destructionPercentage": 98.76,
+        "expEarned": 383
+      },
+      "opponent": {
+        "tag": "#2QQ909VPL",
+        "name": "الفرس الجموح",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/fImGH6k9gVes1jX7Z6-vigXY2UdMnuU0N34IIeKYe4M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/fImGH6k9gVes1jX7Z6-vigXY2UdMnuU0N34IIeKYe4M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/fImGH6k9gVes1jX7Z6-vigXY2UdMnuU0N34IIeKYe4M.png"
+        },
+        "clanLevel": 17,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260213T200021.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 37,
+        "stars": 58,
+        "destructionPercentage": 99.9,
+        "expEarned": 315
+      },
+      "opponent": {
+        "tag": "#2PVQP0C0L",
+        "name": "Minty Warriors",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ZxLVS_F3OeJDFQpTedPOyuQp9nW3GH2ha8PZsTVbdC8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ZxLVS_F3OeJDFQpTedPOyuQp9nW3GH2ha8PZsTVbdC8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ZxLVS_F3OeJDFQpTedPOyuQp9nW3GH2ha8PZsTVbdC8.png"
+        },
+        "clanLevel": 26,
+        "stars": 59,
+        "destructionPercentage": 99.7
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20260210T223154.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 92,
+        "stars": 224,
+        "destructionPercentage": 568.86664,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 269,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260131T213755.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 33,
+        "stars": 56,
+        "destructionPercentage": 99,
+        "expEarned": 355
+      },
+      "opponent": {
+        "tag": "#9RPRYJ8C",
+        "name": "BÜYÜK PAŞA",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/lysg_-KY8EYMJJZv3BpkvZUEdifLmneLo4Owc2K8rbs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/lysg_-KY8EYMJJZv3BpkvZUEdifLmneLo4Owc2K8rbs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/lysg_-KY8EYMJJZv3BpkvZUEdifLmneLo4Owc2K8rbs.png"
+        },
+        "clanLevel": 29,
+        "stars": 53,
+        "destructionPercentage": 93.15
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260129T222206.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 41,
+        "stars": 72,
+        "destructionPercentage": 98.52,
+        "expEarned": 363
+      },
+      "opponent": {
+        "tag": "#PL0PJP8",
+        "name": "Gods of War",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5pS1YWuhU-KysDgcXNxeEPO66VjzQ1BuXomAOIPHG5w.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5pS1YWuhU-KysDgcXNxeEPO66VjzQ1BuXomAOIPHG5w.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5pS1YWuhU-KysDgcXNxeEPO66VjzQ1BuXomAOIPHG5w.png"
+        },
+        "clanLevel": 33,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260127T213247.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 42,
+        "stars": 74,
+        "destructionPercentage": 99.56,
+        "expEarned": 432
+      },
+      "opponent": {
+        "tag": "#2LLP0PRLJ",
+        "name": "كلان الاقوياء",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/8igLsY7rfmiXhdf5WtIc90P4xRhZebiIM7x-pdWG0WU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/8igLsY7rfmiXhdf5WtIc90P4xRhZebiIM7x-pdWG0WU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/8igLsY7rfmiXhdf5WtIc90P4xRhZebiIM7x-pdWG0WU.png"
+        },
+        "clanLevel": 19,
+        "stars": 73,
+        "destructionPercentage": 99.44
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260125T211610.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 41,
+        "stars": 73,
+        "destructionPercentage": 99.68,
+        "expEarned": 435
+      },
+      "opponent": {
+        "tag": "#9LY8C898",
+        "name": "AREA/ROSSA",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/7da5--UkchPDPT73Lbkke2kkObwGi4lgFuChteFH7tA.png"
+        },
+        "clanLevel": 30,
+        "stars": 65,
+        "destructionPercentage": 93.92
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260123T211540.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 43,
+        "stars": 69,
+        "destructionPercentage": 99.12,
+        "expEarned": 433
+      },
+      "opponent": {
+        "tag": "#PL8CQYYP",
+        "name": "youpi",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/tLjJxgM-zy6Nbzpwtq_tulbYfUibsaS7Wb-60cHXLS0.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/tLjJxgM-zy6Nbzpwtq_tulbYfUibsaS7Wb-60cHXLS0.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/tLjJxgM-zy6Nbzpwtq_tulbYfUibsaS7Wb-60cHXLS0.png"
+        },
+        "clanLevel": 30,
+        "stars": 64,
+        "destructionPercentage": 89.48
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260121T201508.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 34,
+        "stars": 71,
+        "destructionPercentage": 99.68,
+        "expEarned": 426
+      },
+      "opponent": {
+        "tag": "#PCJJLL8J",
+        "name": "kurd clan",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/jO3CEZEha6SywJ9gY0wDOgmT8YUg94x2epd0EbMr1rE.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/jO3CEZEha6SywJ9gY0wDOgmT8YUg94x2epd0EbMr1rE.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/jO3CEZEha6SywJ9gY0wDOgmT8YUg94x2epd0EbMr1rE.png"
+        },
+        "clanLevel": 31,
+        "stars": 65,
+        "destructionPercentage": 92.72
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20260119T202212.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 46,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 379
+      },
+      "opponent": {
+        "tag": "#PYVQR20R",
+        "name": "ŞANLI AL BAYRAK",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/LtNgs9vD1T-g9ul2l5i4bNXVNdF2z-321YNsJF9vTA4.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/LtNgs9vD1T-g9ul2l5i4bNXVNdF2z-321YNsJF9vTA4.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/LtNgs9vD1T-g9ul2l5i4bNXVNdF2z-321YNsJF9vTA4.png"
+        },
+        "clanLevel": 21,
+        "stars": 75,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20260117T190459.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 30,
+        "stars": 67,
+        "destructionPercentage": 97.16,
+        "expEarned": 385
+      },
+      "opponent": {
+        "tag": "#2J2V0ULLY",
+        "name": "Frozen Mirage",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/wAtJ2PbZRJmNG9CB9XOnZEO5TRUiUjbTfEthtrM4ZLw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/wAtJ2PbZRJmNG9CB9XOnZEO5TRUiUjbTfEthtrM4ZLw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/wAtJ2PbZRJmNG9CB9XOnZEO5TRUiUjbTfEthtrM4ZLw.png"
+        },
+        "clanLevel": 13,
+        "stars": 71,
+        "destructionPercentage": 98.64
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260115T200044.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 39,
+        "stars": 75,
+        "destructionPercentage": 100,
+        "expEarned": 421
+      },
+      "opponent": {
+        "tag": "#VPYP09P",
+        "name": "Les Incassables",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/SUItxuEM4eC1oR8X7icYbtWxnBmEjo0eZmOtEWZ7B2g.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/SUItxuEM4eC1oR8X7icYbtWxnBmEjo0eZmOtEWZ7B2g.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/SUItxuEM4eC1oR8X7icYbtWxnBmEjo0eZmOtEWZ7B2g.png"
+        },
+        "clanLevel": 22,
+        "stars": 68,
+        "destructionPercentage": 93.52
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20260113T181509.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 33,
+        "stars": 72,
+        "destructionPercentage": 98.04,
+        "expEarned": 428
+      },
+      "opponent": {
+        "tag": "#2P2VGJR8R",
+        "name": "kashmir",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Mcw0kdOOEC36VJr8Hjs7N3odX96QqyRuCefeSz0ZKtQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Mcw0kdOOEC36VJr8Hjs7N3odX96QqyRuCefeSz0ZKtQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Mcw0kdOOEC36VJr8Hjs7N3odX96QqyRuCefeSz0ZKtQ.png"
+        },
+        "clanLevel": 25,
+        "stars": 66,
+        "destructionPercentage": 91.2
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20260110T213423.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 90,
+        "stars": 256,
+        "destructionPercentage": 556.6667,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 195,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20251211T091700.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 103,
+        "stars": 299,
+        "destructionPercentage": 648.06665,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 223,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20251110T195951.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5LC7Izhh9ZGKNplYFGDi9lSkcoA4PE_PnSFOzzb9FwQ.png"
+        },
+        "clanLevel": 31,
+        "attacks": 102,
+        "stars": 317,
+        "destructionPercentage": 643.3333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 215,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20251011T042947.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/zAqCujNkyz9R9jgjq-G3Vaq2-X4GxRD0rPPyVbeh7z8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/zAqCujNkyz9R9jgjq-G3Vaq2-X4GxRD0rPPyVbeh7z8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/zAqCujNkyz9R9jgjq-G3Vaq2-X4GxRD0rPPyVbeh7z8.png"
+        },
+        "clanLevel": 30,
+        "attacks": 98,
+        "stars": 307,
+        "destructionPercentage": 611.06665,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 216,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210925T213154.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 57,
+        "destructionPercentage": 96.8,
+        "expEarned": 269
+      },
+      "opponent": {
+        "tag": "#YGYU00QP",
+        "name": "BD 1971",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/-DV_24h02qTUx_QgY_qQ6cUAe551pY4WJbSP-dczzYU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/-DV_24h02qTUx_QgY_qQ6cUAe551pY4WJbSP-dczzYU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/-DV_24h02qTUx_QgY_qQ6cUAe551pY4WJbSP-dczzYU.png"
+        },
+        "clanLevel": 22,
+        "stars": 55,
+        "destructionPercentage": 94.35
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210923T180946.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 29,
+        "stars": 53,
+        "destructionPercentage": 90.5,
+        "expEarned": 270
+      },
+      "opponent": {
+        "tag": "#Q9PCP8P9",
+        "name": "IRAN ZAMIN.M",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/UoFQgNa_QoKZfOYGn1Eu3P5SWb8XvTCY0nw-3P0ms1Y.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/UoFQgNa_QoKZfOYGn1Eu3P5SWb8XvTCY0nw-3P0ms1Y.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/UoFQgNa_QoKZfOYGn1Eu3P5SWb8XvTCY0nw-3P0ms1Y.png"
+        },
+        "clanLevel": 16,
+        "stars": 50,
+        "destructionPercentage": 92.35
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210921T185318.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 68,
+        "destructionPercentage": 91.24,
+        "expEarned": 260
+      },
+      "opponent": {
+        "tag": "#9RY2PUVU",
+        "name": "KELANTAN EMPIRE",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/csfjcIw4c1yDQLPGFuwqHzoQ1O9CT24BMRERkE3Uh-g.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/csfjcIw4c1yDQLPGFuwqHzoQ1O9CT24BMRERkE3Uh-g.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/csfjcIw4c1yDQLPGFuwqHzoQ1O9CT24BMRERkE3Uh-g.png"
+        },
+        "clanLevel": 22,
+        "stars": 69,
+        "destructionPercentage": 93.52
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210919T190808.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 39,
+        "stars": 69,
+        "destructionPercentage": 95.56,
+        "expEarned": 294
+      },
+      "opponent": {
+        "tag": "#QGLJQGVP",
+        "name": "3Barbaros",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/gUb3atSqVP0FnuglAX4fLQxQf432LHrsPa89EU7Ixeo.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/gUb3atSqVP0FnuglAX4fLQxQf432LHrsPa89EU7Ixeo.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/gUb3atSqVP0FnuglAX4fLQxQf432LHrsPa89EU7Ixeo.png"
+        },
+        "clanLevel": 21,
+        "stars": 67,
+        "destructionPercentage": 91.72
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210917T194059.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 41,
+        "stars": 66,
+        "destructionPercentage": 95.84,
+        "expEarned": 300
+      },
+      "opponent": {
+        "tag": "#2YLVJUPGC",
+        "name": "DraCuLa ForCe71",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/BSOMaPrabCKmfZVjYzia038b7Vke9MtuU8CUGXihTkM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/BSOMaPrabCKmfZVjYzia038b7Vke9MtuU8CUGXihTkM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/BSOMaPrabCKmfZVjYzia038b7Vke9MtuU8CUGXihTkM.png"
+        },
+        "clanLevel": 12,
+        "stars": 66,
+        "destructionPercentage": 90.28
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210915T193127.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 48,
+        "stars": 87,
+        "destructionPercentage": 97,
+        "expEarned": 341
+      },
+      "opponent": {
+        "tag": "#8PY89C9P",
+        "name": "عشقي جازان",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ab8x1iA0oWYORnat9oF6ocqO6f3XYQyRtueXsNmSatY.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ab8x1iA0oWYORnat9oF6ocqO6f3XYQyRtueXsNmSatY.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ab8x1iA0oWYORnat9oF6ocqO6f3XYQyRtueXsNmSatY.png"
+        },
+        "clanLevel": 20,
+        "stars": 82,
+        "destructionPercentage": 96.23333
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210913T192033.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 47,
+        "stars": 70,
+        "destructionPercentage": 89.86667,
+        "expEarned": 304
+      },
+      "opponent": {
+        "tag": "#29290R2GJ",
+        "name": "MeanMachine 2",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Wkh9FvihgpSs2HsvY_YMt7LNT0YMI9IdrVSHkZMbBc8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Wkh9FvihgpSs2HsvY_YMt7LNT0YMI9IdrVSHkZMbBc8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Wkh9FvihgpSs2HsvY_YMt7LNT0YMI9IdrVSHkZMbBc8.png"
+        },
+        "clanLevel": 15,
+        "stars": 84,
+        "destructionPercentage": 96.36667
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20210911T034049.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 184,
+        "stars": 351,
+        "destructionPercentage": 443.7,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 406,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210901T214611.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 37,
+        "stars": 66,
+        "destructionPercentage": 94,
+        "expEarned": 230
+      },
+      "opponent": {
+        "tag": "#RJ9RRL0J",
+        "name": "ارض الحروب",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/IL7yuP7_wwWsIOV_Ckqv1zBTnwjV7JVrVE0ngfPf1lw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/IL7yuP7_wwWsIOV_Ckqv1zBTnwjV7JVrVE0ngfPf1lw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/IL7yuP7_wwWsIOV_Ckqv1zBTnwjV7JVrVE0ngfPf1lw.png"
+        },
+        "clanLevel": 17,
+        "stars": 68,
+        "destructionPercentage": 94.88
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210830T220217.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 70,
+        "destructionPercentage": 97.24,
+        "expEarned": 308
+      },
+      "opponent": {
+        "tag": "#9RCJCG29",
+        "name": "КОНТИНЕНТ",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/-FxP_L9YW3CWMeGQap83Kmc83kQmfTWwomR6dOTaJMw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/-FxP_L9YW3CWMeGQap83Kmc83kQmfTWwomR6dOTaJMw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/-FxP_L9YW3CWMeGQap83Kmc83kQmfTWwomR6dOTaJMw.png"
+        },
+        "clanLevel": 21,
+        "stars": 65,
+        "destructionPercentage": 91.16
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210828T221304.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 37,
+        "stars": 80,
+        "destructionPercentage": 95.36667,
+        "expEarned": 356
+      },
+      "opponent": {
+        "tag": "#28L9YVRLG",
+        "name": "blacklist☠",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/nA8BvMEHrceBb7EG1dSJ43tsVJOfjVQKpgxYGRdJ0ec.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/nA8BvMEHrceBb7EG1dSJ43tsVJOfjVQKpgxYGRdJ0ec.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/nA8BvMEHrceBb7EG1dSJ43tsVJOfjVQKpgxYGRdJ0ec.png"
+        },
+        "clanLevel": 14,
+        "stars": 71,
+        "destructionPercentage": 81.2
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210826T211510.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 47,
+        "stars": 85,
+        "destructionPercentage": 95.96667,
+        "expEarned": 329
+      },
+      "opponent": {
+        "tag": "#LQQJVVYC",
+        "name": "SO HIGH!",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/CA8ZWoWZJHELBBqCiwgITL7uJreCcSB_HZvyZkkN0Go.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/CA8ZWoWZJHELBBqCiwgITL7uJreCcSB_HZvyZkkN0Go.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/CA8ZWoWZJHELBBqCiwgITL7uJreCcSB_HZvyZkkN0Go.png"
+        },
+        "clanLevel": 21,
+        "stars": 81,
+        "destructionPercentage": 92.3
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210824T212345.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 47,
+        "stars": 85,
+        "destructionPercentage": 96.46667,
+        "expEarned": 321
+      },
+      "opponent": {
+        "tag": "#L9JCQJP2",
+        "name": "شباب وبنات",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/gq8cYqYzjPXbBzDjXQFmhNGsxYDe4RvjGuGTQfuwGkI.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/gq8cYqYzjPXbBzDjXQFmhNGsxYDe4RvjGuGTQfuwGkI.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/gq8cYqYzjPXbBzDjXQFmhNGsxYDe4RvjGuGTQfuwGkI.png"
+        },
+        "clanLevel": 18,
+        "stars": 76,
+        "destructionPercentage": 89.8
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210822T214632.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 48,
+        "stars": 81,
+        "destructionPercentage": 95.26667,
+        "expEarned": 262
+      },
+      "opponent": {
+        "tag": "#2P8GJG90G",
+        "name": "ایرانیان",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/aRYhfiXBDZqfIP2fwCtEbnYbgl9mYvd00PsN1P9qkVc.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/aRYhfiXBDZqfIP2fwCtEbnYbgl9mYvd00PsN1P9qkVc.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/aRYhfiXBDZqfIP2fwCtEbnYbgl9mYvd00PsN1P9qkVc.png"
+        },
+        "clanLevel": 13,
+        "stars": 85,
+        "destructionPercentage": 95.9
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210820T215209.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 65,
+        "destructionPercentage": 92.24,
+        "expEarned": 273
+      },
+      "opponent": {
+        "tag": "#28PPV8UC",
+        "name": "FATİH 1453",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/fdcV2xKgjvkOklsoesMkvC5WMBQG-7yx0P_-puhTmGM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/fdcV2xKgjvkOklsoesMkvC5WMBQG-7yx0P_-puhTmGM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/fdcV2xKgjvkOklsoesMkvC5WMBQG-7yx0P_-puhTmGM.png"
+        },
+        "clanLevel": 15,
+        "stars": 34,
+        "destructionPercentage": 52.84
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210818T212906.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 40,
+        "stars": 79,
+        "destructionPercentage": 92.333336,
+        "expEarned": 259
+      },
+      "opponent": {
+        "tag": "#2R9020PJ",
+        "name": "ZDFOOXزدهكر",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ZTWCqihAsAEtmyertYtLkykt8qq6AxUrneyLivKPOJw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ZTWCqihAsAEtmyertYtLkykt8qq6AxUrneyLivKPOJw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ZTWCqihAsAEtmyertYtLkykt8qq6AxUrneyLivKPOJw.png"
+        },
+        "clanLevel": 15,
+        "stars": 89,
+        "destructionPercentage": 99.166664
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210816T205523.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 71,
+        "destructionPercentage": 96.96,
+        "expEarned": 270
+      },
+      "opponent": {
+        "tag": "#92RYGQY9",
+        "name": "silver",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/aK6C1nOwsWW9TzRot4BUoPdvZLsFS8sK7qfnU4Ehv9w.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/aK6C1nOwsWW9TzRot4BUoPdvZLsFS8sK7qfnU4Ehv9w.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/aK6C1nOwsWW9TzRot4BUoPdvZLsFS8sK7qfnU4Ehv9w.png"
+        },
+        "clanLevel": 16,
+        "stars": 69,
+        "destructionPercentage": 93.2
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210814T205252.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 49,
+        "stars": 83,
+        "destructionPercentage": 94.8,
+        "expEarned": 310
+      },
+      "opponent": {
+        "tag": "#YV0YP8CY",
+        "name": "عشق سرحد",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/w0EUFpmgvOdq0SeuSYGgwagImhQzR_kc0DR1MxbgJM8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/w0EUFpmgvOdq0SeuSYGgwagImhQzR_kc0DR1MxbgJM8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/w0EUFpmgvOdq0SeuSYGgwagImhQzR_kc0DR1MxbgJM8.png"
+        },
+        "clanLevel": 18,
+        "stars": 81,
+        "destructionPercentage": 94.433334
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20210811T024405.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 203,
+        "stars": 461,
+        "destructionPercentage": 537.43335,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 390,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210802T223108.000Z",
+      "teamSize": 50,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 82,
+        "stars": 146,
+        "destructionPercentage": 99.08,
+        "expEarned": 495
+      },
+      "opponent": {
+        "tag": "#LVCURLLJ",
+        "name": "BNTNG BENGKULU",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/MM7u6IQxLyninyEFl25fcS2gEywLMitjK4jLqj2x9Ug.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/MM7u6IQxLyninyEFl25fcS2gEywLMitjK4jLqj2x9Ug.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/MM7u6IQxLyninyEFl25fcS2gEywLMitjK4jLqj2x9Ug.png"
+        },
+        "clanLevel": 20,
+        "stars": 138,
+        "destructionPercentage": 93.46
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210731T204759.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 39,
+        "stars": 70,
+        "destructionPercentage": 96.2,
+        "expEarned": 290
+      },
+      "opponent": {
+        "tag": "#2YG0CYRQY",
+        "name": "NEMBAR WAN",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/l_03w_5xbYbeycqAeXPNtAsAs1QcG_8nqI2t46vP4E0.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/l_03w_5xbYbeycqAeXPNtAsAs1QcG_8nqI2t46vP4E0.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/l_03w_5xbYbeycqAeXPNtAsAs1QcG_8nqI2t46vP4E0.png"
+        },
+        "clanLevel": 8,
+        "stars": 69,
+        "destructionPercentage": 92.84
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210729T211534.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 33,
+        "stars": 58,
+        "destructionPercentage": 98.2,
+        "expEarned": 247
+      },
+      "opponent": {
+        "tag": "#22PRCY9P9",
+        "name": "Adult Sessions",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/wdvQGOVVCYMXMt0Zk3yzfwLbbMo4my3v4WVxG1x-Prs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/wdvQGOVVCYMXMt0Zk3yzfwLbbMo4my3v4WVxG1x-Prs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/wdvQGOVVCYMXMt0Zk3yzfwLbbMo4my3v4WVxG1x-Prs.png"
+        },
+        "clanLevel": 13,
+        "stars": 50,
+        "destructionPercentage": 91.5
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210727T214227.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 38,
+        "stars": 66,
+        "destructionPercentage": 92.88,
+        "expEarned": 235
+      },
+      "opponent": {
+        "tag": "#9QGPGCGC",
+        "name": "Рождены в СССР",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/5j0369eMknGOZ2_NKt7FHtYgiOUEFRbLjJd3jR1ou5o.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/5j0369eMknGOZ2_NKt7FHtYgiOUEFRbLjJd3jR1ou5o.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/5j0369eMknGOZ2_NKt7FHtYgiOUEFRbLjJd3jR1ou5o.png"
+        },
+        "clanLevel": 20,
+        "stars": 70,
+        "destructionPercentage": 96.44
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210724T231647.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 33,
+        "stars": 65,
+        "destructionPercentage": 92.08,
+        "expEarned": 207
+      },
+      "opponent": {
+        "tag": "#2PQLPPGVU",
+        "name": "UnitedFamily☢️",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/dCYB3bdhaEJ2vxjBURtxoFj4jshWC5baeKBSQytthxU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/dCYB3bdhaEJ2vxjBURtxoFj4jshWC5baeKBSQytthxU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/dCYB3bdhaEJ2vxjBURtxoFj4jshWC5baeKBSQytthxU.png"
+        },
+        "clanLevel": 9,
+        "stars": 72,
+        "destructionPercentage": 95.44
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210722T221308.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 40,
+        "stars": 70,
+        "destructionPercentage": 96.44,
+        "expEarned": 286
+      },
+      "opponent": {
+        "tag": "#2PYJGJVCY",
+        "name": "KUSH.PH",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/2J8GPSc1pgRNNeF0BHj9SZtJ911oMCloEBqXN-4TLXw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/2J8GPSc1pgRNNeF0BHj9SZtJ911oMCloEBqXN-4TLXw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/2J8GPSc1pgRNNeF0BHj9SZtJ911oMCloEBqXN-4TLXw.png"
+        },
+        "clanLevel": 13,
+        "stars": 60,
+        "destructionPercentage": 86.48
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210720T173646.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 36,
+        "stars": 56,
+        "destructionPercentage": 86,
+        "expEarned": 224
+      },
+      "opponent": {
+        "tag": "#RQ0JQ8C9",
+        "name": "Our Clan",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/6RhNCzAal8J2gEPoDXryQboHV4BmQPw7X_xGCeClFt4.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/6RhNCzAal8J2gEPoDXryQboHV4BmQPw7X_xGCeClFt4.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/6RhNCzAal8J2gEPoDXryQboHV4BmQPw7X_xGCeClFt4.png"
+        },
+        "clanLevel": 18,
+        "stars": 73,
+        "destructionPercentage": 97.68
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210716T235631.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 47,
+        "stars": 69,
+        "destructionPercentage": 93.68,
+        "expEarned": 288
+      },
+      "opponent": {
+        "tag": "#PQY8P9JG",
+        "name": "mega man x2",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/IoOeoGcShQ0L5l6DqIESZ8pv9ahod3SC99_4xlKfaoQ.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/IoOeoGcShQ0L5l6DqIESZ8pv9ahod3SC99_4xlKfaoQ.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/IoOeoGcShQ0L5l6DqIESZ8pv9ahod3SC99_4xlKfaoQ.png"
+        },
+        "clanLevel": 22,
+        "stars": 68,
+        "destructionPercentage": 94.76
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210714T214629.000Z",
+      "teamSize": 25,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 44,
+        "stars": 72,
+        "destructionPercentage": 99.4,
+        "expEarned": 292
+      },
+      "opponent": {
+        "tag": "#292008UCG",
+        "name": "915 SUN CITY",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/NY2YJUqnxbsjaRiUxRV8DKehOa46574KtqE1YeMEhJM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/NY2YJUqnxbsjaRiUxRV8DKehOa46574KtqE1YeMEhJM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/NY2YJUqnxbsjaRiUxRV8DKehOa46574KtqE1YeMEhJM.png"
+        },
+        "clanLevel": 10,
+        "stars": 68,
+        "destructionPercentage": 90.4
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210711T015210.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 205,
+        "stars": 552,
+        "destructionPercentage": 599.5,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 331,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210702T213837.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 52,
+        "stars": 86,
+        "destructionPercentage": 97.8,
+        "expEarned": 335
+      },
+      "opponent": {
+        "tag": "#V2C9JQ2L",
+        "name": "Nepali clans on",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/RKMl6jZyg4ZXpeaCDMHdEiPadeceRszIlzzLWgWvBWk.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/RKMl6jZyg4ZXpeaCDMHdEiPadeceRszIlzzLWgWvBWk.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/RKMl6jZyg4ZXpeaCDMHdEiPadeceRszIlzzLWgWvBWk.png"
+        },
+        "clanLevel": 16,
+        "stars": 77,
+        "destructionPercentage": 90.86667
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210630T201714.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 32,
+        "stars": 59,
+        "destructionPercentage": 99.4,
+        "expEarned": 265
+      },
+      "opponent": {
+        "tag": "#GVV9G9GC",
+        "name": "Blue",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Gmstfeu5LY4oAam-yWALSV5khWtdbyJqiT0aJbVaJ04.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Gmstfeu5LY4oAam-yWALSV5khWtdbyJqiT0aJbVaJ04.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Gmstfeu5LY4oAam-yWALSV5khWtdbyJqiT0aJbVaJ04.png"
+        },
+        "clanLevel": 17,
+        "stars": 41,
+        "destructionPercentage": 71.9
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210628T203007.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 29,
+        "stars": 51,
+        "destructionPercentage": 92.65,
+        "expEarned": 256
+      },
+      "opponent": {
+        "tag": "#PGU9VJJQ",
+        "name": "6 P's",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/zw06ANgEkg00FtiTGLArCxr89K5otH76MRCZp_KJ1OU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/zw06ANgEkg00FtiTGLArCxr89K5otH76MRCZp_KJ1OU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/zw06ANgEkg00FtiTGLArCxr89K5otH76MRCZp_KJ1OU.png"
+        },
+        "clanLevel": 18,
+        "stars": 48,
+        "destructionPercentage": 91.15
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210625T202521.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 24,
+        "stars": 44,
+        "destructionPercentage": 99.4,
+        "expEarned": 208
+      },
+      "opponent": {
+        "tag": "#2PQQY0G9",
+        "name": "Spyrium",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/uOrWUXd4s6WVo0hJ2hXWD32N6qzrJvUbQwwzVWX009M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/uOrWUXd4s6WVo0hJ2hXWD32N6qzrJvUbQwwzVWX009M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/uOrWUXd4s6WVo0hJ2hXWD32N6qzrJvUbQwwzVWX009M.png"
+        },
+        "clanLevel": 20,
+        "stars": 42,
+        "destructionPercentage": 94.53333
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210621T200759.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 18,
+        "stars": 32,
+        "destructionPercentage": 80.86667,
+        "expEarned": 158
+      },
+      "opponent": {
+        "tag": "#2VQVPYU0",
+        "name": "Дьяволы!!!!!!",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/TTQHkimTh4SgpKkEu1R3VSHoDoquUSqCH5xS5q_aqqo.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/TTQHkimTh4SgpKkEu1R3VSHoDoquUSqCH5xS5q_aqqo.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/TTQHkimTh4SgpKkEu1R3VSHoDoquUSqCH5xS5q_aqqo.png"
+        },
+        "clanLevel": 20,
+        "stars": 42,
+        "destructionPercentage": 93.26667
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210618T212437.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 26,
+        "stars": 52,
+        "destructionPercentage": 91,
+        "expEarned": 189
+      },
+      "opponent": {
+        "tag": "#R2GJLGL2",
+        "name": "DÜŞ GEZGİNLERİ",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/LbNmsy3ZZzXaFUSiVW66DftGyQRBeG1vF2EiwSGUg2g.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/LbNmsy3ZZzXaFUSiVW66DftGyQRBeG1vF2EiwSGUg2g.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/LbNmsy3ZZzXaFUSiVW66DftGyQRBeG1vF2EiwSGUg2g.png"
+        },
+        "clanLevel": 18,
+        "stars": 59,
+        "destructionPercentage": 97.75
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210615T214450.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 25,
+        "stars": 38,
+        "destructionPercentage": 92,
+        "expEarned": 220
+      },
+      "opponent": {
+        "tag": "#YJUPY200",
+        "name": "مشاهير بغداد",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ud4kFRp5UD1V93UlUB0aN6o43DCBBHmgVjORjeU_dsw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ud4kFRp5UD1V93UlUB0aN6o43DCBBHmgVjORjeU_dsw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ud4kFRp5UD1V93UlUB0aN6o43DCBBHmgVjORjeU_dsw.png"
+        },
+        "clanLevel": 17,
+        "stars": 37,
+        "destructionPercentage": 87.26667
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210613T204039.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 31,
+        "stars": 56,
+        "destructionPercentage": 97.95,
+        "expEarned": 235
+      },
+      "opponent": {
+        "tag": "#Q8YV9CL",
+        "name": "coqlakour 974",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/oaygM0AU0VupNHITpoIcnWW9a6YMG-houO7GUmuYGlg.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/oaygM0AU0VupNHITpoIcnWW9a6YMG-houO7GUmuYGlg.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/oaygM0AU0VupNHITpoIcnWW9a6YMG-houO7GUmuYGlg.png"
+        },
+        "clanLevel": 17,
+        "stars": 52,
+        "destructionPercentage": 93.8
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20210610T201419.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 187,
+        "stars": 340,
+        "destructionPercentage": 436.16666,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 483,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210601T184623.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 24,
+        "stars": 50,
+        "destructionPercentage": 86.15,
+        "expEarned": 179
+      },
+      "opponent": {
+        "tag": "#2PGCP2Q2C",
+        "name": "DarknessPL",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/OajuWHRAWEe2jWCEMsaCtlkxIs7NmiWpENRMO2dzBV0.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/OajuWHRAWEe2jWCEMsaCtlkxIs7NmiWpENRMO2dzBV0.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/OajuWHRAWEe2jWCEMsaCtlkxIs7NmiWpENRMO2dzBV0.png"
+        },
+        "clanLevel": 10,
+        "stars": 56,
+        "destructionPercentage": 93.2
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210526T205156.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 32,
+        "stars": 49,
+        "destructionPercentage": 87,
+        "expEarned": 185
+      },
+      "opponent": {
+        "tag": "#20Q80GQRQ",
+        "name": "---MorpeX---",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/E4NOHFaHLFJgjF_CtT-3I2tp_V7nhZOyqAo1t-T-HAM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/E4NOHFaHLFJgjF_CtT-3I2tp_V7nhZOyqAo1t-T-HAM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/E4NOHFaHLFJgjF_CtT-3I2tp_V7nhZOyqAo1t-T-HAM.png"
+        },
+        "clanLevel": 16,
+        "stars": 50,
+        "destructionPercentage": 86.1
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210524T183432.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 31,
+        "stars": 54,
+        "destructionPercentage": 93.9,
+        "expEarned": 250
+      },
+      "opponent": {
+        "tag": "#208G8LGC",
+        "name": "Golden Army",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/f3_bHYBG94WUsAPvckAbF_FPvoqVF6GjzB1cBJthc_U.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/f3_bHYBG94WUsAPvckAbF_FPvoqVF6GjzB1cBJthc_U.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/f3_bHYBG94WUsAPvckAbF_FPvoqVF6GjzB1cBJthc_U.png"
+        },
+        "clanLevel": 14,
+        "stars": 49,
+        "destructionPercentage": 85.8
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210519T154130.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 30,
+        "stars": 57,
+        "destructionPercentage": 96.05,
+        "expEarned": 241
+      },
+      "opponent": {
+        "tag": "#Q28JGRPY",
+        "name": "WAR CLAN",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "stars": 57,
+        "destructionPercentage": 94.4
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210516T133105.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 23,
+        "stars": 40,
+        "destructionPercentage": 94.933334,
+        "expEarned": 210
+      },
+      "opponent": {
+        "tag": "#QU098RY2",
+        "name": "OS INCRIVEIS",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png"
+        },
+        "clanLevel": 14,
+        "stars": 34,
+        "destructionPercentage": 83.26667
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210513T205214.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 25,
+        "stars": 43,
+        "destructionPercentage": 80.5,
+        "expEarned": 182
+      },
+      "opponent": {
+        "tag": "#9VPYU9CJ",
+        "name": "Ireland",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/0hm3GHgFDUQq5BF95TqvZC9-YwGIg8p9JOfVutApvy4.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/0hm3GHgFDUQq5BF95TqvZC9-YwGIg8p9JOfVutApvy4.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/0hm3GHgFDUQq5BF95TqvZC9-YwGIg8p9JOfVutApvy4.png"
+        },
+        "clanLevel": 18,
+        "stars": 50,
+        "destructionPercentage": 90.1
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210510T192125.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/WnhVwfMZuY6siCdrBYzN4xbWHdxdKHkjMIZVwNchW_8.png"
+        },
+        "clanLevel": 19,
+        "attacks": 198,
+        "stars": 533,
+        "destructionPercentage": 575.0333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 349,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210501T184915.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 25,
+        "stars": 50,
+        "destructionPercentage": 88.85,
+        "expEarned": 239
+      },
+      "opponent": {
+        "tag": "#PP08QR9Q",
+        "name": "Funkadelic",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/zvSxNAI3ejPt0Uu5X8Cu_d-qmCQfZRkv1DQamf7BQHE.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/zvSxNAI3ejPt0Uu5X8Cu_d-qmCQfZRkv1DQamf7BQHE.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/zvSxNAI3ejPt0Uu5X8Cu_d-qmCQfZRkv1DQamf7BQHE.png"
+        },
+        "clanLevel": 14,
+        "stars": 49,
+        "destructionPercentage": 84.35
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210428T183427.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 17,
+        "stars": 38,
+        "destructionPercentage": 84.933334,
+        "expEarned": 136
+      },
+      "opponent": {
+        "tag": "#20UGR222C",
+        "name": "ИГРА НА НЕРВАХ",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/EvY2dLwK756i7AgauKBtH3laA7990WbfryAaz9MqDGA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/EvY2dLwK756i7AgauKBtH3laA7990WbfryAaz9MqDGA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/EvY2dLwK756i7AgauKBtH3laA7990WbfryAaz9MqDGA.png"
+        },
+        "clanLevel": 15,
+        "stars": 41,
+        "destructionPercentage": 92.53333
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210424T183934.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 17,
+        "stars": 37,
+        "destructionPercentage": 71.8,
+        "expEarned": 167
+      },
+      "opponent": {
+        "tag": "#22RRJRLUC",
+        "name": "Vengeful Noobs",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/LPvIbn1H9V6THrbqtaUeNxeGG8uB7toxoX5b6Mf0HNs.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/LPvIbn1H9V6THrbqtaUeNxeGG8uB7toxoX5b6Mf0HNs.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/LPvIbn1H9V6THrbqtaUeNxeGG8uB7toxoX5b6Mf0HNs.png"
+        },
+        "clanLevel": 6,
+        "stars": 55,
+        "destructionPercentage": 96.45
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210422T185712.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 22,
+        "stars": 42,
+        "destructionPercentage": 97.066666,
+        "expEarned": 207
+      },
+      "opponent": {
+        "tag": "#YRQG8C0U",
+        "name": "با مرا ما",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Ma4m12rUvN3Ok-sD90tKqO2xWWosXijTGuT1cxBNDqA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Ma4m12rUvN3Ok-sD90tKqO2xWWosXijTGuT1cxBNDqA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Ma4m12rUvN3Ok-sD90tKqO2xWWosXijTGuT1cxBNDqA.png"
+        },
+        "clanLevel": 19,
+        "stars": 41,
+        "destructionPercentage": 94.46667
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210419T204833.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 23,
+        "stars": 43,
+        "destructionPercentage": 97.4,
+        "expEarned": 197
+      },
+      "opponent": {
+        "tag": "#Q009RQCJ",
+        "name": "شاه کوروش بزرگ",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Fx8kHQbuE5jd92IldPTs1QMsIGR6AGuwS_5jFWYNkaw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Fx8kHQbuE5jd92IldPTs1QMsIGR6AGuwS_5jFWYNkaw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Fx8kHQbuE5jd92IldPTs1QMsIGR6AGuwS_5jFWYNkaw.png"
+        },
+        "clanLevel": 18,
+        "stars": 41,
+        "destructionPercentage": 91.6
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210417T185402.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 30,
+        "stars": 52,
+        "destructionPercentage": 93,
+        "expEarned": 203
+      },
+      "opponent": {
+        "tag": "#UV0VJGVY",
+        "name": "Gøłď Ñîghť",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/wHpT4OCozliVENQNEdJtn9KjnqE5OXYZIzvfYtyW2vI.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/wHpT4OCozliVENQNEdJtn9KjnqE5OXYZIzvfYtyW2vI.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/wHpT4OCozliVENQNEdJtn9KjnqE5OXYZIzvfYtyW2vI.png"
+        },
+        "clanLevel": 18,
+        "stars": 60,
+        "destructionPercentage": 100
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20210415T173735.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 35,
+        "stars": 52,
+        "destructionPercentage": 93.4,
+        "expEarned": 199
+      },
+      "opponent": {
+        "tag": "#290J2YGPV",
+        "name": "uae_2034",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ruulEyzocJaDDCuAV9qAVCrQ7_GTJec1kuHefWtXn4A.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ruulEyzocJaDDCuAV9qAVCrQ7_GTJec1kuHefWtXn4A.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ruulEyzocJaDDCuAV9qAVCrQ7_GTJec1kuHefWtXn4A.png"
+        },
+        "clanLevel": 7,
+        "stars": 58,
+        "destructionPercentage": 98
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210412T213549.000Z",
+      "teamSize": 20,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 29,
+        "stars": 58,
+        "destructionPercentage": 97.7,
+        "expEarned": 242
+      },
+      "opponent": {
+        "tag": "#PY90Q0L9",
+        "name": "Family Clan",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/T3Bn5i8GohO8djEv4rHLFM7QObHW3lmdTOPsYPG0TOk.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/T3Bn5i8GohO8djEv4rHLFM7QObHW3lmdTOPsYPG0TOk.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/T3Bn5i8GohO8djEv4rHLFM7QObHW3lmdTOPsYPG0TOk.png"
+        },
+        "clanLevel": 14,
+        "stars": 52,
+        "destructionPercentage": 90.15
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210410T171734.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 195,
+        "stars": 511,
+        "destructionPercentage": 553.8333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 355,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210330T171042.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 20,
+        "stars": 41,
+        "destructionPercentage": 97.2,
+        "expEarned": 211
+      },
+      "opponent": {
+        "tag": "#8J992JU2",
+        "name": "banjarejo war",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/XaIDSZc2iQfyv_2n9BTf43-NTMT5SmYPP3dUunLn_Ow.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/XaIDSZc2iQfyv_2n9BTf43-NTMT5SmYPP3dUunLn_Ow.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/XaIDSZc2iQfyv_2n9BTf43-NTMT5SmYPP3dUunLn_Ow.png"
+        },
+        "clanLevel": 18,
+        "stars": 0,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20210328T173322.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 2,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 23,
+        "stars": 43,
+        "destructionPercentage": 98.933334,
+        "expEarned": 207
+      },
+      "opponent": {
+        "tag": "#P908JCVP",
+        "name": "Северные люди",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/Tc2TsQ1QihlGUSHgTR0HUQhXgANo0lanqf5rMJx0nqA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/Tc2TsQ1QihlGUSHgTR0HUQhXgANo0lanqf5rMJx0nqA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/Tc2TsQ1QihlGUSHgTR0HUQhXgANo0lanqf5rMJx0nqA.png"
+        },
+        "clanLevel": 16,
+        "stars": 41,
+        "destructionPercentage": 92.4
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20210309T213342.000Z",
+      "teamSize": 30,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 177,
+        "stars": 377,
+        "destructionPercentage": 472.7,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 438,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "tie",
+      "endTime": "20210210T202521.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 58,
+        "stars": 135,
+        "destructionPercentage": 314.53333,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 202,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20210110T220739.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 88,
+        "stars": 230,
+        "destructionPercentage": 476,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 193,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": null,
+      "endTime": "20201211T055544.000Z",
+      "teamSize": 15,
+      "attacksPerMember": 1,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/ISyB5wAm2v7B_rm-LJS360ga-83IFL8MABcjxft1RkA.png"
+        },
+        "clanLevel": 18,
+        "attacks": 105,
+        "stars": 270,
+        "destructionPercentage": 551.8,
+        "expEarned": 0
+      },
+      "opponent": {
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/H39b_-WLZGtZVWQ0hqTkE-Tn2AaQnQWy_Iz4yBlvL0M.png"
+        },
+        "clanLevel": 0,
+        "stars": 131,
+        "destructionPercentage": 0
+      }
+    },
+    {
+      "result": "lose",
+      "endTime": "20200311T144142.000Z",
+      "teamSize": 5,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/yzEGPFP5T5XQ_GNFE993EMjGEJHFgE0lYrkNvWkGnrw.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/yzEGPFP5T5XQ_GNFE993EMjGEJHFgE0lYrkNvWkGnrw.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/yzEGPFP5T5XQ_GNFE993EMjGEJHFgE0lYrkNvWkGnrw.png"
+        },
+        "clanLevel": 15,
+        "attacks": 7,
+        "stars": 13,
+        "destructionPercentage": 93.8,
+        "expEarned": 0
+      },
+      "opponent": {
+        "tag": "#28UJLU9PV",
+        "name": "鬒我要來源依",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/hE8KaBa8zwA4-jls4pWx1HGM59JugW4rmKlG39W5L7c.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/hE8KaBa8zwA4-jls4pWx1HGM59JugW4rmKlG39W5L7c.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/hE8KaBa8zwA4-jls4pWx1HGM59JugW4rmKlG39W5L7c.png"
+        },
+        "clanLevel": 1,
+        "stars": 14,
+        "destructionPercentage": 99.6
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20190820T174159.000Z",
+      "teamSize": 20,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/KMoak8qV30x9ZqanmMcKfibWymtgkw3Bd53cslt6yvU.png"
+        },
+        "clanLevel": 14,
+        "attacks": 26,
+        "stars": 57,
+        "destructionPercentage": 97.05,
+        "expEarned": 0
+      },
+      "opponent": {
+        "tag": "#289V9YVL",
+        "name": "Man united 2",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/rmF1n2w4lxV8sqULGrSCsAh3zs4SEqk1YZNw56LGbj8.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/rmF1n2w4lxV8sqULGrSCsAh3zs4SEqk1YZNw56LGbj8.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/rmF1n2w4lxV8sqULGrSCsAh3zs4SEqk1YZNw56LGbj8.png"
+        },
+        "clanLevel": 9,
+        "stars": 38,
+        "destructionPercentage": 68.55
+      }
+    },
+    {
+      "result": "win",
+      "endTime": "20170104T212512.000Z",
+      "teamSize": 5,
+      "battleModifier": "none",
+      "clan": {
+        "tag": "#9228VY80",
+        "name": "RedDevilLegends",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/tWA-u6CK_97Q4sFhL8NAu7MlzhICO5xPqwCYoB6vm2Y.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/tWA-u6CK_97Q4sFhL8NAu7MlzhICO5xPqwCYoB6vm2Y.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/tWA-u6CK_97Q4sFhL8NAu7MlzhICO5xPqwCYoB6vm2Y.png"
+        },
+        "clanLevel": 11,
+        "attacks": 5,
+        "stars": 9,
+        "destructionPercentage": 68.6,
+        "expEarned": 0
+      },
+      "opponent": {
+        "tag": "#L8V8PP99",
+        "name": "کورش کبیر",
+        "badgeUrls": {
+          "small": "https://api-assets.clashofclans.com/badges/70/j4T2tnjNKwTI9yDR73492H7IHB2MsP0VgYXiTO7GEnM.png",
+          "large": "https://api-assets.clashofclans.com/badges/512/j4T2tnjNKwTI9yDR73492H7IHB2MsP0VgYXiTO7GEnM.png",
+          "medium": "https://api-assets.clashofclans.com/badges/200/j4T2tnjNKwTI9yDR73492H7IHB2MsP0VgYXiTO7GEnM.png"
+        },
+        "clanLevel": 9,
+        "stars": 2,
+        "destructionPercentage": 14
+      }
+    }
+  ],
+  "paging": {
+    "cursors": {}
+  }
+}
