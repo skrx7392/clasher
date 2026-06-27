@@ -5,23 +5,35 @@ export type LogSink = (line: string) => void;
 
 const defaultSink: LogSink = (line) => process.stdout.write(line + "\n");
 
+export interface RedactingLoggerOptions {
+  /** Where lines go (default stdout). Tests inject a capturing sink. */
+  sink?: LogSink;
+  /** Literal secrets (e.g. the official key) to scrub from EVERY string logged. */
+  secrets?: readonly string[];
+}
+
 /**
- * Structured (JSON) logger that runs every payload through {@link redactSecrets}
- * before emitting, so a `token` (or other credential) in a request/response/error
- * object can never reach a log line (NFR-11, FR-4). Implements Nest's
- * LoggerService so it is the app-wide logger.
- *
- * The sink is injectable so tests can capture emitted lines.
+ * Structured (JSON) logger that runs every payload — including string messages,
+ * error stacks, and metadata — through {@link redactSecrets} before emitting, so
+ * a token or the official key can never reach a log line (NFR-11, FR-4).
+ * Implements Nest's LoggerService so it is the app-wide logger.
  */
 export class RedactingLogger implements LoggerService {
-  constructor(private readonly sink: LogSink = defaultSink) {}
+  private readonly sink: LogSink;
+  private readonly redactOpts: { secrets: readonly string[] };
+
+  constructor(options: RedactingLoggerOptions = {}) {
+    this.sink = options.sink ?? defaultSink;
+    this.redactOpts = { secrets: options.secrets ?? [] };
+  }
 
   private emit(level: LogLevel, message: unknown, meta: unknown[]): void {
     const record: Record<string, unknown> = {
       level,
-      message: typeof message === "string" ? message : redactSecrets(message),
+      // Strings are scrubbed too — never passed through verbatim.
+      message: redactSecrets(message, this.redactOpts),
     };
-    if (meta.length > 0) record.meta = redactSecrets(meta);
+    if (meta.length > 0) record.meta = redactSecrets(meta, this.redactOpts);
     this.sink(JSON.stringify(record));
   }
 
