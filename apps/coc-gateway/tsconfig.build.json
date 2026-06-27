@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    // Production build needs no test typings.
+    "types": ["node"],
+    // Emit resolves @clasher/shared via node_modules (its built dist), NOT the
+    // source mapping used for type-checking — keeps dist flat and the shared
+    // package a real dependency at runtime.
+    "paths": {}
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "test/**/*"]
+}
