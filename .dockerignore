@@ -1,0 +1,11 @@
+# Never copy host build state into image build contexts (correctness + speed).
+**/node_modules
+**/dist
+**/build
+**/.next
+**/out
+**/coverage
+.git
+.github
+**/*.log
+.DS_Store
