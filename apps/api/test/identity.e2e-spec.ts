@@ -168,3 +168,33 @@ describe("Identity + roles (e2e, #15)", () => {
     expect(res.status).toBe(403);
   });
 });
+
+describe("Production: the M0 header seam is disabled (#15)", () => {
+  let app: INestApplication;
+  const savedNodeEnv = process.env.NODE_ENV;
+
+  beforeAll(async () => {
+    process.env.NODE_ENV = "production";
+    const repo = new FakeUsersRepository();
+    repo.seed("prod-admin", UserRole.Admin); // a real, DB-seeded admin
+    const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
+      .overrideProvider(UsersRepository)
+      .useValue(repo)
+      .compile();
+    app = configureApp(moduleRef.createNestApplication());
+    await app.init();
+  });
+
+  afterAll(async () => {
+    await app.close();
+    process.env.NODE_ENV = savedNodeEnv;
+  });
+
+  it("ignores x-clasher-google-sub so guarded routes stay default-deny (403)", async () => {
+    // Even with a real seeded admin's subject, production refuses the spoofable header.
+    const res = await request(app.getHttpServer())
+      .get("/api/identity/admin/ping")
+      .set("x-clasher-google-sub", "prod-admin");
+    expect(res.status).toBe(403);
+  });
+});
