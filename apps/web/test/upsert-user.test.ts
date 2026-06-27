@@ -7,9 +7,7 @@ describe("upsertUserViaApi (#15)", () => {
   });
 
   it("POSTs only identity fields — never a role — to the API endpoint", async () => {
-    const fetchMock = vi
-      .fn<typeof fetch>()
-      .mockResolvedValue(new Response(null, { status: 201 }));
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 201 }));
     vi.stubGlobal("fetch", fetchMock);
 
     await upsertUserViaApi(
@@ -29,9 +27,7 @@ describe("upsertUserViaApi (#15)", () => {
   });
 
   it("defaults missing email/name to null (no undefined leakage)", async () => {
-    const fetchMock = vi
-      .fn<typeof fetch>()
-      .mockResolvedValue(new Response(null, { status: 201 }));
+    const fetchMock = vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 201 }));
     vi.stubGlobal("fetch", fetchMock);
 
     await upsertUserViaApi({ googleSub: "sub-2" }, "http://api:3000");
@@ -47,8 +43,8 @@ describe("upsertUserViaApi (#15)", () => {
       "fetch",
       vi.fn<typeof fetch>().mockResolvedValue(new Response(null, { status: 500 })),
     );
-    await expect(
-      upsertUserViaApi({ googleSub: "sub-3" }, "http://api:3000"),
-    ).rejects.toThrow(/upsert failed: 500/);
+    await expect(upsertUserViaApi({ googleSub: "sub-3" }, "http://api:3000")).rejects.toThrow(
+      /upsert failed: 500/,
+    );
   });
 });

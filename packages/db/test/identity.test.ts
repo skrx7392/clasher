@@ -84,10 +84,9 @@ beforeEach(async () => {
 });
 
 it("a new user defaults to role 'none' (least privilege)", async () => {
-  const { rows } = await client.query(
-    "INSERT INTO users (google_sub) VALUES ($1) RETURNING role",
-    ["sub-1"],
-  );
+  const { rows } = await client.query("INSERT INTO users (google_sub) VALUES ($1) RETURNING role", [
+    "sub-1",
+  ]);
   expect(rows[0].role).toBe("none");
 });
 
@@ -165,10 +164,11 @@ describe("out-of-band seed", () => {
   });
 
   it("refuses (and rolls back) when an email matches more than one user", async () => {
-    await client.query(
-      "INSERT INTO users (google_sub, email) VALUES ($1, $3), ($2, $3)",
-      ["sub-dup-a", "sub-dup-b", "dup@example.com"],
-    );
+    await client.query("INSERT INTO users (google_sub, email) VALUES ($1, $3), ($2, $3)", [
+      "sub-dup-a",
+      "sub-dup-b",
+      "dup@example.com",
+    ]);
     await expect(seedAdmin(client, { email: "dup@example.com" })).rejects.toThrow(
       /refusing to promote 2/,
     );

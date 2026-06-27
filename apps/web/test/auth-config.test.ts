@@ -15,9 +15,7 @@ beforeAll(async () => {
 
 describe("auth.config (#15)", () => {
   it("uses the Google provider", () => {
-    const ids = authConfig.providers.map((p) =>
-      typeof p === "function" ? p().id : p.id,
-    );
+    const ids = authConfig.providers.map((p) => (typeof p === "function" ? p().id : p.id));
     expect(ids).toContain("google");
   });
 

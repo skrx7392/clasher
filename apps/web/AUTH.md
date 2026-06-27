@@ -7,7 +7,7 @@ What M0 ships (DESIGN §2/§5/§10, FR-1/FR-2, NFR-3, D-1) and the boundary with
 1. **Sign in** — Auth.js v5 Google provider (`openid email profile`). Routes live in
    the web app at `/api/auth/*` (`app/api/auth/[...nextauth]/route.ts`).
 2. **Upsert** — the `signIn` callback (`auth.config.ts`) POSTs `{ googleSub, email,
-   name }` to the API (`POST /api/identity/users/upsert`). It NEVER sends a role; the
+name }` to the API (`POST /api/identity/users/upsert`). It NEVER sends a role; the
    DB assigns the default `role='none'` (least privilege). The API rejects any
    `role`/unknown field with a 400. M0 hardening on this still-unauthenticated
    internal endpoint: it is **write-once** on identity (cannot overwrite an existing
