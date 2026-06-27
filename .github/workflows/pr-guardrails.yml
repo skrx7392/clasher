@@ -1,9 +1,9 @@
 name: PR Guardrails
 
-# `pull_request` (not pull_request_target): all PRs come from same-repo branches,
-# so we don't need fork-PR secrets — and we avoid the untrusted-code/secret
-# exposure of pull_request_target. No untrusted input is interpolated into any
-# run: step; the actions read the event payload internally.
+# `pull_request` (not pull_request_target): these guardrails need no write token
+# or secrets, so we avoid the untrusted-code/secret exposure of
+# pull_request_target. No untrusted input is interpolated into any run: step; the
+# actions read the event payload internally.
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
