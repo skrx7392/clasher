@@ -1,0 +1,8 @@
+# Normalize line endings to LF on checkout/commit so Prettier's
+# `endOfLine: "lf"` and a fresh-host rebuild (NFR-2) stay reproducible
+# regardless of the contributor's OS / core.autocrlf setting.
+* text=auto eol=lf
+
+# Keep the lockfile out of GitHub's language stats, but STILL diffable — lockfile
+# changes must stay reviewable for supply-chain auditing.
+pnpm-lock.yaml linguist-generated=true

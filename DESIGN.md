@@ -114,7 +114,7 @@ Key derivation rules:
 ---
 
 ## 4. Data ingestion (ingest-and-own)
-**Boundary:** all external JSON → strict zod adapter → internal schema; unexpected shape ⇒ **quarantine + fail-loud + alert** (never coerce). Raw kept per source (NFR-7). **Tag inputs validated** against `^#[0289PYLQGRJCUV]{3,}$` (canonicalize `%23`→`#`) before any outbound URL — prevents SSRF/path injection.
+**Boundary:** all external JSON → strict zod adapter → internal schema; unexpected shape ⇒ **quarantine + fail-loud + alert** (never coerce). Raw kept per source (NFR-7). **Tag inputs validated** against `^#[0289PYLQGRJCUV]{3,15}$` (length-bounded — real tags are ≤~10 chars; canonicalize `%23`→`#`) before any outbound URL — prevents SSRF/path injection and oversized-path abuse. Defined once in `@clasher/shared` (`COC_TAG_REGEX`).
 
 **Jobs (BullMQ on queue-Redis):**
 1. **Backfill-on-registration** — ClashKing `/war/{tag}/previous` (paged) + `/cwl/{tag}/{season}` per available season → `war_snapshots`/`warlog_entries`/`cwl_seasons` → derive. Set `tracking_coverage`.
