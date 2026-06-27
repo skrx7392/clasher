@@ -18,6 +18,8 @@ export function ThemeSwitcher() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      // Ignore typing and browser/OS shortcuts (Cmd/Ctrl/Alt + number).
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       const idx = Number(e.key) - 1;
       const target = THEMES[idx];
@@ -31,7 +33,7 @@ export function ThemeSwitcher() {
 
   return (
     <div className={styles.bar} role="group" aria-label="Theme">
-      {THEMES.map((t) => {
+      {THEMES.map((t, i) => {
         const active = theme === t.id;
         return (
           <button
@@ -40,10 +42,11 @@ export function ThemeSwitcher() {
             className={styles.option}
             data-active={active}
             aria-pressed={active}
-            title={`${t.description} (press ${THEMES.indexOf(t) + 1})`}
+            title={`${t.description} (press ${i + 1})`}
             onClick={() => setTheme(t.id)}
           >
-            <span className={styles.swatch} style={{ background: t.swatch }} aria-hidden="true" />
+            {/* Swatch derives its colors from that theme's tokens (data-theme scope). */}
+            <span className={styles.swatch} data-theme={t.id} aria-hidden="true" />
             <span className={styles.label}>{t.label}</span>
           </button>
         );

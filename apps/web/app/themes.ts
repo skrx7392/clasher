@@ -2,41 +2,22 @@
  * Theme registry — the single source of truth for which themes exist. Drives
  * both the next-themes provider and the switcher UI. Each `id` must match a
  * `[data-theme="<id>"]` block in app/styles/tokens.css. Add a theme in exactly
- * these two places.
+ * these two places (a test enforces they stay in sync).
+ *
+ * Colors live ONLY in tokens.css — the switcher's preview swatch is rendered in
+ * a `data-theme={id}` scope so it derives from those same tokens (no hex here).
  */
 export interface ThemeMeta {
   id: string;
   label: string;
   description: string;
-  /** Small gradient preview shown in the switcher. */
-  swatch: string;
 }
 
 export const THEMES: readonly ThemeMeta[] = [
-  {
-    id: "light",
-    label: "Light",
-    description: "Clean editorial light",
-    swatch: "linear-gradient(135deg, #f6f7f4, #ffffff 55%, #2f7d4f)",
-  },
-  {
-    id: "dark",
-    label: "Dark",
-    description: "Dark premium",
-    swatch: "linear-gradient(135deg, #0c0f17, #141925 55%, #3fae6b)",
-  },
-  {
-    id: "aurora",
-    label: "Aurora",
-    description: "Soft pastel blue",
-    swatch: "linear-gradient(135deg, #eef4fb, #d6e2f2 55%, #5b8def)",
-  },
-  {
-    id: "clash",
-    label: "Clash Gold",
-    description: "Slate & gold (on-brand)",
-    swatch: "linear-gradient(135deg, #16130e, #211c14 55%, #e8b23a)",
-  },
+  { id: "light", label: "Light", description: "Clean editorial light" },
+  { id: "dark", label: "Dark", description: "Dark premium" },
+  { id: "aurora", label: "Aurora", description: "Soft pastel blue" },
+  { id: "clash", label: "Clash Gold", description: "Slate & gold (on-brand)" },
 ];
 
 export const THEME_IDS: string[] = THEMES.map((t) => t.id);

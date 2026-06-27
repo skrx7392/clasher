@@ -10,7 +10,9 @@ ENV PNPM_HOME=/pnpm
 ENV PATH=/pnpm:$PATH
 RUN corepack enable
 WORKDIR /repo
-COPY pnpm-lock.yaml ./
+# package.json carries packageManager:pnpm@<ver> so corepack pins the exact pnpm
+# before any pnpm command runs (reproducibility, NFR-2).
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 RUN pnpm fetch
 
 # ---- builder: offline install + build shared then web ----

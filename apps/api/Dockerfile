@@ -10,10 +10,11 @@ ENV PNPM_HOME=/pnpm
 ENV PATH=/pnpm:$PATH
 RUN corepack enable
 WORKDIR /repo
-# `pnpm fetch` reads only the lockfile, so this (network-heavy) layer caches on
-# dependencies alone and is robust to new workspace packages being added later
-# (it does not need each app's package.json — fixes the per-manifest-copy trap).
-COPY pnpm-lock.yaml ./
+# Copy the lockfile + root manifest/workspace so (a) corepack pins the exact pnpm
+# from packageManager before any pnpm command (reproducibility, NFR-2) and (b)
+# `pnpm fetch` caches on dependencies, robust to new workspace packages later
+# (no per-app package.json needed — avoids the per-manifest-copy trap).
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
 RUN pnpm fetch
 
 # ---- builder: offline install + build shared then api, then prune to prod ----

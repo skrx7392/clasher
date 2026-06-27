@@ -24,16 +24,18 @@
   --shadow: 0 18px 50px -20px rgb(0 0 0 / 45%);
   --maxw: 880px;
 
-  /* Default palette == "light" (used for SSR before the theme attribute lands) */
-  --clr-bg: #f6f7f4;
-  --clr-surface: #ffffff;
-  --clr-fg: #1a1d24;
-  --clr-fg-muted: #5b6270;
-  --clr-accent: #2f7d4f;
-  --clr-accent-fg: #ffffff;
-  --clr-border: #e4e5e0;
-  --clr-link: #1f6f43;
-  color-scheme: light;
+  /* Default palette == "dark" (matches DEFAULT_THEME in themes.ts); used for SSR
+     and no-JS before the data-theme attribute is applied, so there is one
+     canonical default. */
+  --clr-bg: #0c0f17;
+  --clr-surface: #141925;
+  --clr-fg: #e7ebf2;
+  --clr-fg-muted: #97a0b3;
+  --clr-accent: #3fae6b;
+  --clr-accent-fg: #06210f;
+  --clr-border: #232a39;
+  --clr-link: #6cd29a;
+  color-scheme: dark;
 }
 
 [data-theme="light"] {
@@ -66,10 +68,11 @@
   --clr-surface: #ffffffcc;
   --clr-fg: #1d2433;
   --clr-fg-muted: #54627a;
-  --clr-accent: #5b8def;
+  /* Darkened so white-on-accent (switcher/buttons) clears WCAG AA 4.5:1. */
+  --clr-accent: #2f5fc0;
   --clr-accent-fg: #ffffff;
   --clr-border: #d6e2f2;
-  --clr-link: #3f6fd6;
+  --clr-link: #2f5fc0;
 }
 
 [data-theme="clash"] {

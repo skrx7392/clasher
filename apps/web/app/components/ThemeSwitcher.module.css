@@ -47,7 +47,9 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid rgb(0 0 0 / 15%);
+  /* Preview derived from the theme's own tokens (the span carries data-theme). */
+  background: linear-gradient(135deg, var(--clr-bg), var(--clr-surface) 55%, var(--clr-accent));
+  border: 1px solid var(--clr-border);
   flex: none;
 }
 
