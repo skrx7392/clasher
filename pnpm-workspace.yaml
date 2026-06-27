@@ -3,7 +3,8 @@ packages:
   - "packages/*"
 
 # pnpm 11 blocks dependency build (postinstall) scripts by default for
-# supply-chain safety. esbuild (pulled in by vitest) runs an install script;
-# allow only that one explicitly so `pnpm install` exits 0 on a fresh host (NFR-2).
+# supply-chain safety. Allow only the ones we vet so `pnpm install` exits 0 on a
+# fresh host (NFR-2): esbuild (via vitest), sharp (via next image optimization).
 allowBuilds:
   esbuild: true
+  sharp: true

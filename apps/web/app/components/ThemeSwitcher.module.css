@@ -1,0 +1,58 @@
+/* Floating theme switcher — styled entirely from design tokens. */
+.bar {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  max-width: 96vw;
+  overflow-x: auto;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--clr-fg-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.option:hover {
+  color: var(--clr-fg);
+}
+
+.option[data-active="true"] {
+  background: var(--clr-accent);
+  color: var(--clr-accent-fg);
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgb(0 0 0 / 15%);
+  flex: none;
+}
+
+@media (max-width: 520px) {
+  .label {
+    display: none;
+  }
+}
