@@ -1,0 +1,41 @@
+# Egress for the web app's Auth.js Google OAuth (#15, identity). The clasher-frontend
+# default-deny blocks egress; this re-opens ONLY 443 to public addresses (Google's
+# OAuth/OpenID/token/JWKS endpoints) for the WEB pod, excluding the private/cluster
+# ranges (incl. the k3s 10.42/10.43 pod & service CIDRs) so the OAuth flow cannot be
+# used to reach any in-cluster/other-tenant service. NetworkPolicy can't match a
+# hostname, so this is host-public 443; "only Google" is enforced at the Auth.js
+# application layer (the configured provider). DNS is covered by the namespace-wide
+# allow-dns-egress (#6); web→api is the separate allow-egress-web-to-api (#6).
+# Scoped to name=web — the cloudflare-ddns pod is unaffected.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-web-to-google-oauth
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+              - 169.254.0.0/16
+              - 100.64.0.0/10
+        - ipBlock:
+            cidr: ::/0
+            except:
+              - ::1/128
+              - fe80::/10
+              - fc00::/7
+      ports:
+        - protocol: TCP
+          port: 443

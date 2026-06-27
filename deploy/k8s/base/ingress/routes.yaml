@@ -44,6 +44,10 @@ spec:
           port: 3000
 ---
 # HTTPS entrypoint: serve the web app at `/`, terminating TLS with the issued cert.
+# Auth.js (#15) serves its routes under `/api/auth/*` from the WEB pod, but the
+# backend `/api` rule below (priority 100) would otherwise capture them — so an
+# explicit priority-101 rule routes `/api/auth/` to web first. All other `/api/*`
+# still falls through to the backend.
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
@@ -55,6 +59,12 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`clasher.skpodduturi.dev`) && PathPrefix(`/api/auth/`)
+      kind: Rule
+      priority: 101
+      services:
+        - name: web
+          port: 3000
     - match: Host(`clasher.skpodduturi.dev`)
       kind: Rule
       services:
