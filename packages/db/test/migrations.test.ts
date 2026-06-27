@@ -12,7 +12,7 @@ const DB = "clasher_test";
 const dataDir = mkdtempSync(join(tmpdir(), "clasher-db-"));
 const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migrations");
 
-/** Reserve an ephemeral free port so parallel test files / leaked PGs don't collide. */
+/** Pick an ephemeral free port so serial test files / leaked PGs are very unlikely to collide. */
 function freePort(): Promise<number> {
   return new Promise((resolve, reject) => {
     const srv = createServer();
@@ -79,6 +79,7 @@ beforeAll(async () => {
     direction: "up",
     migrationsTable: "pgmigrations",
     count: Infinity,
+    singleTransaction: true,
     log: () => {},
   });
   client = new Client({ connectionString: databaseUrl });
@@ -195,6 +196,7 @@ describe("migrations (DESIGN §3)", () => {
       direction: "down",
       migrationsTable: "pgmigrations",
       count: Infinity,
+      singleTransaction: true,
       log: () => {},
     });
     const names = await tableNames();
