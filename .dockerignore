@@ -9,3 +9,12 @@
 .github
 **/*.log
 .DS_Store
+
+# Secrets — keep credentials out of the build context / image layers (mirrors .gitignore).
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+**/*.kubeconfig
+**/kubeconfig

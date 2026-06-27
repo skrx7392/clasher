@@ -7,7 +7,10 @@ import { ENV } from "./config/config.module";
 import type { Env } from "./config/env.schema";
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  // abortOnError:false hands startup failures (e.g. invalid config thrown by the
+  // ENV factory) to our catch below instead of Nest's internal exit path, so a
+  // single place owns fail-loud behavior (NFR-6).
+  const app = await NestFactory.create(AppModule, { abortOnError: false });
   configureApp(app);
 
   const env = app.get<Env>(ENV);

@@ -26,8 +26,8 @@ export type Env = z.infer<typeof envSchema>;
 /**
  * Validate the process environment at startup. Throws an actionable error that
  * lists every missing/invalid variable, so the service fails loud rather than
- * booting with silent defaults (NFR-6). Returned value becomes the validated
- * config consumed via Nest's ConfigService.
+ * booting with silent defaults (NFR-6). The returned value is the validated,
+ * typed config provided under the `ENV` token (see config.module.ts).
  */
 export function validateEnv(config: Record<string, unknown>): Env {
   const result = envSchema.safeParse(config);
