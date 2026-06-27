@@ -27,7 +27,14 @@ function isProdRuntime(): boolean {
  */
 export function apiBaseUrl(): string {
   const url = process.env.API_BASE_URL;
-  if (url) return url;
+  if (url) {
+    // Validate the shape: a malformed value (e.g. host:port without a scheme) would
+    // otherwise only fail later inside the sign-in best-effort catch and be swallowed.
+    if (!/^https?:\/\//.test(url)) {
+      throw new Error(`API_BASE_URL must be an http(s) URL (got '${url}')`);
+    }
+    return url;
+  }
   if (isProdRuntime()) throw new Error("API_BASE_URL is required in production");
   // Dev fallback uses :3001 because the API and `next dev` both default to :3000.
   return "http://localhost:3001";

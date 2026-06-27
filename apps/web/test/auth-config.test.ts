@@ -47,4 +47,14 @@ describe("auth.config (#15)", () => {
       vi.unstubAllEnvs();
     }
   });
+
+  it("apiBaseUrl rejects a malformed (non-http) URL rather than swallowing it later", async () => {
+    vi.stubEnv("API_BASE_URL", "api.clasher-backend.svc.cluster.local:3000"); // no scheme
+    try {
+      const { apiBaseUrl } = await import("../env");
+      expect(() => apiBaseUrl()).toThrow(/http\(s\) URL/);
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
 });
