@@ -44,11 +44,25 @@ describe("COC_TAG_REGEX / isValidCocTag — SSRF / path-injection guard (DESIGN 
     }
   });
 
+  it("is length-bounded: accepts up to 15 chars, rejects 16+ (no oversized paths)", () => {
+    expect(isValidCocTag("#" + "P".repeat(15))).toBe(true);
+    expect(isValidCocTag("#" + "P".repeat(16))).toBe(false);
+  });
+
   it("has no catastrophic-backtracking blowup on a large input", () => {
-    const huge = "#" + "P".repeat(2_000_000) + "!";
+    const huge = "#" + "P".repeat(2_000_000);
     const start = performance.now();
     expect(isValidCocTag(huge)).toBe(false);
     expect(performance.now() - start).toBeLessThan(250);
+  });
+
+  it("is runtime-safe against non-string input (cannot be coerced past the guard)", () => {
+    // RegExp.test would coerce these to strings; the typeof guard must reject them.
+    for (const notAString of [["#PYL"], { toString: () => "#PYL" }, 123, null, undefined]) {
+      expect(isValidCocTag(notAString as unknown)).toBe(false);
+      expect(normalizeCocTag(notAString as unknown)).toBeNull();
+      expect(() => encodeCocTag(notAString as unknown)).toThrow();
+    }
   });
 });
 

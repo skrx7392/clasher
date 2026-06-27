@@ -3,5 +3,6 @@
 # regardless of the contributor's OS / core.autocrlf setting.
 * text=auto eol=lf
 
-# Generated / binary-ish files git should not try to diff or normalize.
-pnpm-lock.yaml linguist-generated=true -diff
+# Keep the lockfile out of GitHub's language stats, but STILL diffable — lockfile
+# changes must stay reviewable for supply-chain auditing.
+pnpm-lock.yaml linguist-generated=true

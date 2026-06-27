@@ -44,7 +44,7 @@ pnpm build          # build every package (tsc project refs)
 pnpm typecheck      # strict type-check across the workspace
 pnpm lint           # ESLint (flat config + typescript-eslint)
 pnpm format         # Prettier --write
-pnpm test           # run package test suites (none yet)
+pnpm test           # run package test suites (vitest; e.g. packages/shared)
 ```
 
 Everything is in-repo and rebuildable on a fresh host (NFR-2) — no external

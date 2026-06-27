@@ -64,30 +64,39 @@ export enum SnapshotSource {
 /**
  * Allowlist for Clash of Clans player/clan tags. Tags begin with `#` and use a
  * restricted uppercase alphabet (the letter `O` is intentionally excluded to
- * avoid confusion with `0`).
+ * avoid confusion with `0`). The length is bounded — real tags are ≤ ~10
+ * characters, so a generous upper bound of 15 rejects no legitimate tag while
+ * preventing oversized-path abuse (a multi-megabyte "valid" tag).
  *
  * This regex is the ONLY definition of the tag shape in the codebase; it backs
  * the SSRF / path-injection guard that must run before any tag is interpolated
  * into an upstream CoC/ClashKing API path (DESIGN §4). Do not duplicate it.
  */
-export const COC_TAG_REGEX = /^#[0289PYLQGRJCUV]{3,}$/;
+export const COC_TAG_REGEX = /^#[0289PYLQGRJCUV]{3,15}$/;
 
-/** Returns true iff `tag` is a syntactically valid CoC tag (including the leading `#`). */
-export function isValidCocTag(tag: string): boolean {
-  return COC_TAG_REGEX.test(tag);
+/**
+ * Type guard: true iff `tag` is a syntactically valid CoC tag (including the
+ * leading `#`). Accepts `unknown` and runtime-checks `typeof` so a non-string
+ * (e.g. an array from a JSON body, which `RegExp.test` would otherwise coerce)
+ * cannot slip past this security boundary.
+ */
+export function isValidCocTag(tag: unknown): tag is string {
+  return typeof tag === "string" && COC_TAG_REGEX.test(tag);
 }
 
 /**
  * Normalize a user-supplied tag to canonical form: trim surrounding whitespace,
  * uppercase, and add a single leading `#` if one is missing. Returns the
- * canonical tag, or `null` if the result is not a valid tag — malformed input
- * (including a stray extra `#`, e.g. `##PYL`) is rejected, never repaired.
+ * canonical tag, or `null` if the input is not a string or the result is not a
+ * valid tag — malformed input (including a stray extra `#`, e.g. `##PYL`) is
+ * rejected, never repaired.
  *
  * Invalid characters are rejected, never silently rewritten (e.g. a typo `O`
  * for `0` yields `null` rather than a guessed tag) — callers must surface the
  * rejection to the user.
  */
-export function normalizeCocTag(input: string): string | null {
+export function normalizeCocTag(input: unknown): string | null {
+  if (typeof input !== "string") return null;
   const trimmed = input.trim().toUpperCase();
   const withHash = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
   return COC_TAG_REGEX.test(withHash) ? withHash : null;
@@ -96,12 +105,12 @@ export function normalizeCocTag(input: string): string | null {
 /**
  * URL-encode a valid tag for use in an upstream API path (`#` -> `%23`).
  *
- * Fail-closed: throws if `tag` is not a valid CoC tag, so a malformed or
- * injection-bearing value can never reach an upstream URL even when a caller
- * forgets to validate first. This is the last line of the SSRF / path-injection
- * guard (DESIGN §4); prefer {@link normalizeCocTag} to validate user input.
+ * Fail-closed: throws if `tag` is not a valid CoC tag (or not a string), so a
+ * malformed or injection-bearing value can never reach an upstream URL even when
+ * a caller forgets to validate first. This is the last line of the SSRF /
+ * path-injection guard (DESIGN §4); prefer {@link normalizeCocTag} for input.
  */
-export function encodeCocTag(tag: string): string {
+export function encodeCocTag(tag: unknown): string {
   if (!isValidCocTag(tag)) {
     throw new Error("encodeCocTag: refusing to encode an invalid CoC tag");
   }
