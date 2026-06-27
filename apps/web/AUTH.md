@@ -18,12 +18,16 @@ name }` to the API (`POST /api/identity/users/upsert`). It NEVER sends a role; t
 
    ```sh
    DATABASE_URL=postgres://… pnpm --filter @clasher/db seed:admin -- --google-sub <sub>
-   # or, once the user has signed in at least once:
-   DATABASE_URL=postgres://… pnpm --filter @clasher/db seed:admin -- --email <email>
    ```
 
-   The API's `RolesGuard` + `@Roles()`/`@Authenticated()` read the role from the DB
-   (never from request input), default-deny.
+   Seeding is keyed **only** on `google_sub`, obtained from a trusted source (Google,
+   or the admin reading their own subject claim after signing in). Email-based
+   seeding is **disabled in M0**: the sign-in upsert is still unauthenticated, so a
+   `WHERE email = …` promotion could be hijacked by an attacker who pre-binds the
+   target email to their own `google_sub` (admin takeover). It returns in M1 once the
+   upsert caller is authenticated. The API's `RolesGuard` + `@Roles()`/
+   `@Authenticated()` read the role from the DB (never from request input),
+   default-deny.
 
 ## Cookies & CSRF (DESIGN §10)
 

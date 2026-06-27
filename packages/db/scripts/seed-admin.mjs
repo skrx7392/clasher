@@ -1,73 +1,49 @@
 // Out-of-band admin seed (DESIGN §5/§10, FR-2). This is the ONLY path that sets
 // role='admin'; it is a CLI run by an operator with DB credentials and is NOT
-// reachable via any API route. Promote by google_sub (works before or after the
-// user's first sign-in) or by email (the user must have signed in already, since
-// google_sub is required and unique).
+// reachable via any API route.
 //
 //   DATABASE_URL=postgres://... node scripts/seed-admin.mjs --google-sub <sub>
-//   DATABASE_URL=postgres://... node scripts/seed-admin.mjs --email <email>
+//   (wired as `pnpm --filter @clasher/db seed:admin -- --google-sub <sub>`)
 //
-// Wired as `pnpm --filter @clasher/db seed:admin -- --google-sub <sub>`.
+// Promotion is keyed ONLY on google_sub (the Google subject claim), which is unique
+// and must be obtained from a TRUSTED source (Google, or the admin reading their own
+// subject after signing in). Email-based seeding is intentionally DISABLED in M0:
+// the sign-in upsert (`POST /api/identity/users/upsert`) is still unauthenticated,
+// so anyone could pre-create a row binding a target email to an attacker-controlled
+// google_sub — and `UPDATE ... WHERE email = ?` would then promote the attacker
+// (admin takeover). Email seeding can return once that upsert is trusted (M1).
 import { fileURLToPath } from "node:url";
 import pg from "pg";
 
 const { Client } = pg;
 
 /**
- * Set a user's role to 'admin'. Accepts exactly one of { googleSub, email }.
+ * Set a user's role to 'admin', keyed on google_sub (created if absent, else
+ * promoted). Email-based seeding is disabled (see file header).
  * @param {import('pg').Client | import('pg').Pool} client connected pg client
- * @param {{ googleSub?: string, email?: string }} target
+ * @param {{ googleSub?: string }} target
  * @returns {Promise<{ id: string, google_sub: string, email: string | null, role: string }>}
  */
-export async function seedAdmin(client, { googleSub, email } = {}) {
-  if (Boolean(googleSub) === Boolean(email)) {
-    throw new Error("provide exactly one of --google-sub or --email");
+export async function seedAdmin(client, { googleSub } = {}) {
+  if (!googleSub) {
+    throw new Error("--google-sub is required (email-based seeding is disabled in M0)");
   }
-
-  if (googleSub) {
-    // Upsert: creates an admin row if the user hasn't signed in yet, else promotes.
-    const { rows } = await client.query(
-      `INSERT INTO users (google_sub, role) VALUES ($1, 'admin')
-       ON CONFLICT (google_sub) DO UPDATE SET role = 'admin'
-       RETURNING id, google_sub, email, role`,
-      [googleSub],
-    );
-    return rows[0];
-  }
-
-  // `email` is NOT unique (only google_sub is), so an email can match >1 row.
-  // Run in a transaction and REFUSE to commit on an ambiguous match, so the seed
-  // never silently over-promotes. --google-sub (unique) is the safe primary path.
-  await client.query("BEGIN");
-  try {
-    const { rows } = await client.query(
-      `UPDATE users SET role = 'admin' WHERE email = $1
-       RETURNING id, google_sub, email, role`,
-      [email],
-    );
-    if (rows.length === 0) {
-      throw new Error(
-        `no user with email '${email}'. Seed by --google-sub, or have them sign in first.`,
-      );
-    }
-    if (rows.length > 1) {
-      throw new Error(
-        `refusing to promote ${rows.length} users sharing email '${email}'; seed by --google-sub`,
-      );
-    }
-    await client.query("COMMIT");
-    return rows[0];
-  } catch (err) {
-    await client.query("ROLLBACK");
-    throw err;
-  }
+  // Upsert: creates an admin row if the user hasn't signed in yet, else promotes.
+  const { rows } = await client.query(
+    `INSERT INTO users (google_sub, role) VALUES ($1, 'admin')
+     ON CONFLICT (google_sub) DO UPDATE SET role = 'admin'
+     RETURNING id, google_sub, email, role`,
+    [googleSub],
+  );
+  return rows[0];
 }
 
 function parseArgs(argv) {
   const out = {};
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === "--google-sub") out.googleSub = argv[(i += 1)];
-    else if (argv[i] === "--email") out.email = argv[(i += 1)];
+    else if (argv[i] === "--email")
+      throw new Error("email seeding is disabled in M0; seed by --google-sub (see file header)");
     else throw new Error(`unknown argument: ${argv[i]}`);
   }
   return out;

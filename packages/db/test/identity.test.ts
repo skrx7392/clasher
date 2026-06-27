@@ -150,40 +150,14 @@ describe("out-of-band seed", () => {
     expect(rows[0].role).toBe("admin");
   });
 
-  it("promotes by email when the user exists", async () => {
-    await client.query("INSERT INTO users (google_sub, email) VALUES ($1, $2)", [
-      "sub-e",
-      "boss@example.com",
-    ]);
-    const user = await seedAdmin(client, { email: "boss@example.com" });
-    expect(user.role).toBe("admin");
-  });
-
-  it("refuses to seed by email when no such user exists", async () => {
-    await expect(seedAdmin(client, { email: "ghost@example.com" })).rejects.toThrow(/no user/);
-  });
-
-  it("refuses (and rolls back) when an email matches more than one user", async () => {
-    await client.query("INSERT INTO users (google_sub, email) VALUES ($1, $3), ($2, $3)", [
-      "sub-dup-a",
-      "sub-dup-b",
-      "dup@example.com",
-    ]);
-    await expect(seedAdmin(client, { email: "dup@example.com" })).rejects.toThrow(
-      /refusing to promote 2/,
-    );
-    // Rolled back: neither row was promoted.
-    const { rows } = await client.query(
-      "SELECT role FROM users WHERE email = $1 ORDER BY google_sub",
-      ["dup@example.com"],
-    );
-    expect(rows.map((r) => r.role)).toEqual(["none", "none"]);
-  });
-
-  it("requires exactly one of google_sub / email", async () => {
-    await expect(seedAdmin(client, {})).rejects.toThrow(/exactly one/);
-    await expect(seedAdmin(client, { googleSub: "a", email: "b@c.d" })).rejects.toThrow(
-      /exactly one/,
+  it("rejects seeding without --google-sub (email seeding disabled in M0)", async () => {
+    // The public unauthenticated upsert lets anyone bind a target email to an
+    // attacker-controlled google_sub, so email-keyed promotion is disabled — it
+    // would be an admin-takeover vector. Only --google-sub (from a trusted source)
+    // is accepted.
+    await expect(seedAdmin(client, {})).rejects.toThrow(/--google-sub is required/);
+    await expect(seedAdmin(client, { email: "boss@example.com" })).rejects.toThrow(
+      /--google-sub is required/,
     );
   });
 });
