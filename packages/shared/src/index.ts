@@ -79,8 +79,9 @@ export function isValidCocTag(tag: string): boolean {
 
 /**
  * Normalize a user-supplied tag to canonical form: trim surrounding whitespace,
- * uppercase, and ensure exactly one leading `#`. Returns the canonical tag, or
- * `null` if the result is not a valid tag.
+ * uppercase, and add a single leading `#` if one is missing. Returns the
+ * canonical tag, or `null` if the result is not a valid tag — malformed input
+ * (including a stray extra `#`, e.g. `##PYL`) is rejected, never repaired.
  *
  * Invalid characters are rejected, never silently rewritten (e.g. a typo `O`
  * for `0` yields `null` rather than a guessed tag) — callers must surface the
@@ -93,10 +94,16 @@ export function normalizeCocTag(input: string): string | null {
 }
 
 /**
- * URL-encode a tag for use in an upstream API path (`#` -> `%23`). The caller
- * MUST have validated the tag with {@link isValidCocTag} first; this function
- * assumes a well-formed tag and only handles encoding (DESIGN §4).
+ * URL-encode a valid tag for use in an upstream API path (`#` -> `%23`).
+ *
+ * Fail-closed: throws if `tag` is not a valid CoC tag, so a malformed or
+ * injection-bearing value can never reach an upstream URL even when a caller
+ * forgets to validate first. This is the last line of the SSRF / path-injection
+ * guard (DESIGN §4); prefer {@link normalizeCocTag} to validate user input.
  */
 export function encodeCocTag(tag: string): string {
+  if (!isValidCocTag(tag)) {
+    throw new Error("encodeCocTag: refusing to encode an invalid CoC tag");
+  }
   return encodeURIComponent(tag);
 }
