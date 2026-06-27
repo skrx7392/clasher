@@ -15,3 +15,6 @@ resources:
   - rbac/deployer-rbac.yaml
   - resource-management/limitranges.yaml
   - resource-management/resourcequotas.yaml
+  - data/postgres.yaml
+  - data/redis-queue.yaml
+  - data/redis-cache.yaml
