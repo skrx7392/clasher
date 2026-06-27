@@ -4,27 +4,31 @@
 # pnpm workspace and packages/shared are available:
 #   docker build -f apps/api/Dockerfile -t clasher-api .
 
-# ---- builder ----
-FROM node:24-slim AS builder
+# ---- deps: fetch the whole workspace's deps from the lockfile only ----
+FROM node:24-slim AS deps
 ENV PNPM_HOME=/pnpm
 ENV PATH=/pnpm:$PATH
 RUN corepack enable
 WORKDIR /repo
+# `pnpm fetch` reads only the lockfile, so this (network-heavy) layer caches on
+# dependencies alone and is robust to new workspace packages being added later
+# (it does not need each app's package.json — fixes the per-manifest-copy trap).
+COPY pnpm-lock.yaml ./
+RUN pnpm fetch
 
-# Manifests first for better layer caching.
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json tsconfig.base.json ./
-COPY packages/shared/package.json packages/shared/
-COPY apps/api/package.json apps/api/
-RUN pnpm install --frozen-lockfile
-
-# Sources, then build shared before the api.
-COPY packages/shared packages/shared
-COPY apps/api apps/api
+# ---- builder: offline install + build shared then api, then prune to prod ----
+FROM deps AS builder
+WORKDIR /repo
+COPY . .
+# Offline install from the fetched store; pnpm-workspace.yaml (now copied) carries
+# allowBuilds so esbuild's script is permitted instead of erroring.
+RUN pnpm install --frozen-lockfile --offline
 RUN pnpm --filter @clasher/shared build \
  && pnpm --filter @clasher/api build
-
-# Produce a self-contained production deployment (prod deps + built dist only).
-RUN pnpm --filter @clasher/api --prod deploy /app
+# Self-contained prod deployment: prod deps + the api's dist, with the workspace
+# dependency (@clasher/shared) hard-copied in. `--legacy` is required since pnpm
+# v10 refuses to deploy non-injected workspaces by default.
+RUN pnpm --filter @clasher/api --prod --legacy deploy /app
 
 # ---- runner ----
 FROM node:24-slim AS runner

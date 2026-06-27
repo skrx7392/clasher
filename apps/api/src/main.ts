@@ -1,20 +1,23 @@
 import "reflect-metadata";
 import { NestFactory } from "@nestjs/core";
-import { ConfigService } from "@nestjs/config";
 import { Logger } from "@nestjs/common";
 import { AppModule } from "./app.module";
+import { configureApp } from "./app.setup";
+import { ENV } from "./config/config.module";
 import type { Env } from "./config/env.schema";
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
-  // Whole REST surface lives under /api (DESIGN §8).
-  app.setGlobalPrefix("api");
+  configureApp(app);
 
-  const config = app.get<ConfigService<Env, true>>(ConfigService);
-  const port = config.get("PORT", { infer: true });
-
-  await app.listen(port);
-  Logger.log(`Clasher API listening on :${port} (prefix /api)`, "Bootstrap");
+  const env = app.get<Env>(ENV);
+  await app.listen(env.PORT);
+  Logger.log(`Clasher API listening on :${env.PORT} (prefix /api)`, "Bootstrap");
 }
 
-void bootstrap();
+// Fail loud: any startup error (e.g. invalid config) exits non-zero regardless
+// of Node's unhandled-rejection mode, so a misconfigured pod never looks healthy.
+bootstrap().catch((err: unknown) => {
+  Logger.error(err instanceof Error ? (err.stack ?? err.message) : String(err), "Bootstrap");
+  process.exit(1);
+});

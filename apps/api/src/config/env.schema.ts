@@ -4,12 +4,21 @@ import { z } from "zod";
  * Environment contract for the API. Every variable the service genuinely needs
  * is required here so misconfiguration is caught at startup, not at first use.
  */
+const postgresUrl = z
+  .string()
+  .url()
+  .refine((u) => /^postgres(ql)?:\/\//.test(u), "must be a postgres:// URL");
+const redisUrl = z
+  .string()
+  .url()
+  .refine((u) => /^rediss?:\/\//.test(u), "must be a redis:// URL");
+
 export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().max(65535).default(3000),
-  DATABASE_URL: z.string().url(),
-  REDIS_QUEUE_URL: z.string().url(),
-  REDIS_CACHE_URL: z.string().url(),
+  DATABASE_URL: postgresUrl,
+  REDIS_QUEUE_URL: redisUrl,
+  REDIS_CACHE_URL: redisUrl,
 });
 
 export type Env = z.infer<typeof envSchema>;

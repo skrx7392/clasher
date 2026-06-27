@@ -21,4 +21,11 @@ describe("validateEnv (NFR-6 fail-loud config)", () => {
   it("rejects an invalid URL", () => {
     expect(() => validateEnv({ ...valid, DATABASE_URL: "not-a-url" })).toThrow(/DATABASE_URL/);
   });
+
+  it("rejects a valid URL with the wrong scheme (caught misconfig)", () => {
+    // A redis URL accidentally placed in DATABASE_URL is still a valid URL but wrong.
+    expect(() => validateEnv({ ...valid, DATABASE_URL: "redis://localhost:6379" })).toThrow(
+      /DATABASE_URL/,
+    );
+  });
 });
