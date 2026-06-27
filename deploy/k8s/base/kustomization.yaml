@@ -13,6 +13,7 @@ resources:
   - networkpolicies/database.yaml
   - networkpolicies/traefik.yaml
   - networkpolicies/ddns.yaml
+  - networkpolicies/backup.yaml
   - rbac/serviceaccounts.yaml
   - rbac/deployer-rbac.yaml
   - resource-management/limitranges.yaml
@@ -24,3 +25,13 @@ resources:
   - ingress/certificate.yaml
   - ingress/routes.yaml
   - dns/ddns-cronjob.yaml
+  - backup/pg-backup-cronjob.yaml
+
+# The in-cluster backup script is generated from its source file so there is one source of truth
+# (the same file is exercised by deploy/backup/restore-drill.sh integration tests). The CronJob's
+# `pg-backup-script` ConfigMap reference is rewritten to the hashed name automatically.
+configMapGenerator:
+  - name: pg-backup-script
+    namespace: clasher-backend
+    files:
+      - backup/backup.sh

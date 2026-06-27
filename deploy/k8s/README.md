@@ -13,6 +13,7 @@ deploy/k8s/
       database.yaml
       traefik.yaml              # ingress-controller -> web/api (#8)
       ddns.yaml                 # DDNS CronJob -> Cloudflare 443 (#9)
+      backup.yaml               # pg-backup -> off-box SSH 22 (#10)
     rbac/
       serviceaccounts.yaml      # per-workload SAs, token automount disabled
       deployer-rbac.yaml        # scoped deploy SA + namespaced Roles/RoleBindings
@@ -29,8 +30,11 @@ deploy/k8s/
       routes.yaml               # Traefik IngressRoutes (/ -> web, /api -> api) + redirect
     dns/                        # DDNS (#9)
       ddns-cronjob.yaml         # Cloudflare DDNS CronJob (own token, only clasher record)
+    backup/                     # off-box encrypted backup (#10)
+      backup.sh                 # in-cluster: pg_dump -> CMS-encrypt -> rsync off-box (ConfigMap src)
+      pg-backup-cronjob.yaml    # nightly CronJob (see deploy/backup/ for restore drill + runbook)
   overlays/
-    quasar/                     # production overlay (workloads land here in #9–#10, #13)
+    quasar/                     # production overlay (CD/workload patches land here, #13)
 ```
 
 Build (renders without a cluster):
@@ -46,16 +50,18 @@ NetworkPolicies are additive allow-lists. Each namespace has a `default-deny-all
 (ingress **and** egress); every other policy re-opens exactly one path. The only allowed
 flows are:
 
-| From                                        | To                                            | Port       | Why                       |
-| ------------------------------------------- | --------------------------------------------- | ---------- | ------------------------- |
-| `clasher-frontend` (web)                    | `clasher-backend` (api)                       | 3000/tcp   | SSR → API                 |
-| `clasher-backend` (api/worker)              | `clasher-database` (postgres)                 | 5432/tcp   | DB access                 |
-| `clasher-backend` (api/worker)              | `clasher-database` (redis-queue, redis-cache) | 6379/tcp   | queue + cache             |
-| `clasher-backend` (coc-gateway)             | public internet (excl. private/cluster CIDRs) | 443/tcp    | RoyaleAPI proxy **only**  |
-| Traefik (`kube-system`)                     | `clasher-frontend` (web)                      | 3000/tcp   | ingress `/` → web (#8)    |
-| Traefik (`kube-system`)                     | `clasher-backend` (api)                       | 3000/tcp   | ingress `/api` → api (#8) |
-| `clasher-frontend` (cloudflare-ddns)        | public internet (excl. private/cluster CIDRs) | 443/tcp    | Cloudflare DDNS (#9)      |
-| `clasher-frontend` + `clasher-backend` pods | `kube-system` CoreDNS                         | 53/udp+tcp | DNS                       |
+| From                                        | To                                            | Port       | Why                            |
+| ------------------------------------------- | --------------------------------------------- | ---------- | ------------------------------ |
+| `clasher-frontend` (web)                    | `clasher-backend` (api)                       | 3000/tcp   | SSR → API                      |
+| `clasher-backend` (api/worker)              | `clasher-database` (postgres)                 | 5432/tcp   | DB access                      |
+| `clasher-backend` (api/worker)              | `clasher-database` (redis-queue, redis-cache) | 6379/tcp   | queue + cache                  |
+| `clasher-backend` (coc-gateway)             | public internet (excl. private/cluster CIDRs) | 443/tcp    | RoyaleAPI proxy **only**       |
+| Traefik (`kube-system`)                     | `clasher-frontend` (web)                      | 3000/tcp   | ingress `/` → web (#8)         |
+| Traefik (`kube-system`)                     | `clasher-backend` (api)                       | 3000/tcp   | ingress `/api` → api (#8)      |
+| `clasher-frontend` (cloudflare-ddns)        | public internet (excl. private/cluster CIDRs) | 443/tcp    | Cloudflare DDNS (#9)           |
+| `clasher-backend` (pg-backup)               | `clasher-database` (postgres)                 | 5432/tcp   | backup dump source (#10)       |
+| `clasher-backend` (pg-backup)               | off-box host `/32` (operator-set)             | 22/tcp     | encrypted backup off-box (#10) |
+| `clasher-frontend` + `clasher-backend` pods | `kube-system` CoreDNS                         | 53/udp+tcp | DNS                            |
 
 - The **coc-gateway** is the _only_ pod with any external egress, restricted to 443
   (DESIGN §10 official-key isolation). It has no other egress besides DNS.
@@ -86,7 +92,8 @@ flows are:
 
 Intentionally **deferred** to keep the base minimal and the allow-list reviewable
 (added by the issue that needs them): api → coc-gateway intra-namespace (M2), api →
-`api.clashk.ing` egress (M2), web → Google OAuth egress (#15), database backup egress (#10).
+`api.clashk.ing` egress (M2), web → Google OAuth egress (#15). (The #10 backup egresses from
+clasher-backend, so the database tier stays egress-free.)
 
 ## RBAC
 
@@ -214,6 +221,21 @@ address equals the **inbound** (port-forwarded) address — the updater publishe
 egress IPv4 (from `cdn-cgi/trace`, forced to IPv4) as the A record, so DNS-only reachability
 breaks behind CGNAT or asymmetric NAT. The operator (or a one-time run) seeds the initial record;
 the script then upserts it and refuses to act if more than one A record exists for the name.
+
+## Backups (#10)
+
+Nightly off-box **encrypted** `pg_dump` of the irreplaceable first-party data + a restore drill
+(DESIGN §9/§10, NFR-7, D-5). A CronJob (`pg-backup`, clasher-backend) streams `pg_dump -Fc` into
+`openssl cms -encrypt` (recipient public cert; private key off-box only) and rsyncs the ciphertext
+off-box over SSH, pruning by `RETENTION_DAYS`. Full setup, the pre-migration hook, and the restore
+drill (`restore-drill.sh`) are documented in [`deploy/backup/README.md`](../backup/README.md).
+
+**Required (out-of-band, #11)**: ConfigMap `backup-recipient-cert` (key `recipient.crt`), Secret
+`backup-ssh` (keys `id`, `known_hosts`), a **clasher-backend** Secret
+`backup-postgres-credentials` (keys `username`/`password`/`dbname` — Secrets are namespace-local,
+so the #7 `postgres-credentials` in clasher-database cannot be reused here), the `BACKUP_*` env +
+the off-box `/32` in `backup.yaml`, and the backup image `ghcr.io/skrx7392/clasher-backup` (CI
+builds it from `deploy/backup/Dockerfile`).
 
 ## Validation
 

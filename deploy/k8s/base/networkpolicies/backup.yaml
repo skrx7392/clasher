@@ -1,0 +1,43 @@
+# Egress for the pg-backup CronJob (#10). The pod is component=backup (NOT backend), so it does
+# NOT inherit the broad backend->postgres / backend->redis egress — this policy grants it exactly
+# two paths and nothing else: (1) Postgres for the dump, (2) the off-box host on :22 for the push.
+# DNS is covered by the namespace-wide allow-dns-egress (#6). Postgres ingress for this pod is
+# added in networkpolicies/database.yaml.
+#
+# The off-box target is operator-specific (e.g. the MacBook's Tailscale 100.x or LAN IP). The
+# CIDR below is a TEST-NET-1 placeholder — the operator MUST replace it with the real target /32
+# before apply, and BACKUP_TARGET's host must resolve to (or be) that IP. It is deliberately a /32
+# to keep the egress tight; the standard policies `except` 100.64.0.0/10 and RFC1918, so a
+# Tailscale or LAN target is reachable ONLY via this explicit allow.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-pg-backup
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: pg-backup
+  policyTypes:
+    - Egress
+  egress:
+    # (1) the dump source — Postgres in clasher-database.
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-database
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+    # (2) the off-box backup host over SSH.
+    - to:
+        - ipBlock:
+            cidr: 192.0.2.10/32 # REPLACE_ME: off-box backup host (e.g. MacBook Tailscale IP)/32
+      ports:
+        - protocol: TCP
+          port: 22

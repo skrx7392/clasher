@@ -1,0 +1,139 @@
+# Off-box encrypted Postgres backup (DESIGN §9/§10, NFR-7, D-5). Nightly CronJob in
+# clasher-backend (component=backup; its Postgres + off-box access is granted EXPLICITLY by
+# networkpolicies/backup.yaml egress + database.yaml ingress, not the broad backend policies) that
+# streams pg_dump -Fc into openssl CMS encryption and rsyncs the ciphertext off-box. The decryption
+# PRIVATE key lives ONLY off-box, so this pod cannot read its own backups.
+#
+# Operator-provided (out-of-band, #11): Secret `backup-ssh` (keys: id [SSH private key],
+# known_hosts), ConfigMap `backup-recipient-cert` (key recipient.crt = the CMS recipient public
+# cert; private key kept off-box), and the BACKUP_* env below. The image
+# ghcr.io/skrx7392/clasher-backup is built by CI (#13) from deploy/backup/Dockerfile.
+# The script comes from the `pg-backup-script` ConfigMap (generated from this dir's backup.sh,
+# i.e. deploy/k8s/base/backup/backup.sh).
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clasher-backup
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: pg-backup
+automountServiceAccountToken: false
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pg-backup
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: pg-backup
+    app.kubernetes.io/component: backup
+spec:
+  # 03:17 UTC nightly (RPO ~24h is acceptable per D-5).
+  schedule: "17 3 * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 300
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 1800
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/part-of: clasher
+            app.kubernetes.io/name: pg-backup
+            # Dedicated component=backup (NOT backend) so it does not inherit the broad
+            # backend->redis egress; its DB + off-box access is granted explicitly in backup.yaml.
+            app.kubernetes.io/component: backup
+        spec:
+          serviceAccountName: clasher-backup
+          automountServiceAccountToken: false
+          restartPolicy: OnFailure
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 70
+            runAsGroup: 70
+            fsGroup: 70
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: backup
+              image: ghcr.io/skrx7392/clasher-backup:latest
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/sh", "/scripts/backup.sh"]
+              env:
+                - name: PGHOST
+                  value: postgres.clasher-database.svc.cluster.local
+                - name: PGUSER
+                  valueFrom:
+                    secretKeyRef:
+                      name: backup-postgres-credentials
+                      key: username
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: backup-postgres-credentials
+                      key: password
+                - name: PGDATABASE
+                  valueFrom:
+                    secretKeyRef:
+                      name: backup-postgres-credentials
+                      key: dbname # from backup-postgres-credentials (clasher-backend)
+                # Off-box target + retention (operator sets these to real values before apply).
+                - name: BACKUP_TARGET
+                  value: REPLACE_ME_USER@REPLACE_ME_HOST:/srv/clasher-backups
+                - name: BACKUP_SSH_HOST
+                  value: REPLACE_ME_USER@REPLACE_ME_HOST
+                - name: BACKUP_REMOTE_DIR
+                  value: /srv/clasher-backups
+                - name: RETENTION_DAYS
+                  value: "14"
+                # readOnlyRootFilesystem is on; point HOME at the writable emptyDir so any
+                # incidental ssh/rsync home write does not hit the read-only root.
+                - name: HOME
+                  value: /work
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+                  readOnly: true
+                - name: certs
+                  mountPath: /certs
+                  readOnly: true
+                - name: ssh
+                  mountPath: /ssh
+                  readOnly: true
+                - name: work
+                  mountPath: /work
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                  ephemeral-storage: 256Mi
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                  ephemeral-storage: 1Gi
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop:
+                    - ALL
+          volumes:
+            - name: script
+              configMap:
+                name: pg-backup-script
+            - name: certs
+              configMap:
+                name: backup-recipient-cert
+            - name: ssh
+              secret:
+                secretName: backup-ssh
+                defaultMode: 0440
+            - name: work
+              emptyDir:
+                sizeLimit: 1Gi

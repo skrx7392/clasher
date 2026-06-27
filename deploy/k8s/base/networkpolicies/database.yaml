@@ -1,10 +1,8 @@
 # clasher-database NetworkPolicies (DESIGN §9: "Postgres reachable only from backend").
 # The data tier never initiates outbound connections, so it gets NO egress allow at all
-# (not even DNS) — the default-deny egress stands. Postgres and Redis accept ingress
-# only from backend pods.
-#
-# Deferred to its own issue:
-#   - egress for the pg_dump backup CronJob to the off-box target -> #10 (backups)
+# (not even DNS) — the default-deny egress stands, even for backups: the #10 pg_dump CronJob
+# runs in clasher-backend and connects IN to Postgres, so the database tier stays egress-free.
+# Postgres and Redis accept ingress only from backend pods (+ the backup job, below).
 ---
 # Deny ALL ingress and egress for every pod in clasher-database.
 apiVersion: networking.k8s.io/v1
@@ -36,12 +34,20 @@ spec:
     - Ingress
   ingress:
     - from:
+        # api + worker (component=backend) ...
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: clasher-backend
           podSelector:
             matchLabels:
               app.kubernetes.io/component: backend
+        # ... and the #10 backup job (component=backup), which dumps the DB.
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-backend
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: pg-backup
       ports:
         - protocol: TCP
           port: 5432
