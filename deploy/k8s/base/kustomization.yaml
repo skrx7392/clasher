@@ -1,0 +1,17 @@
+# Clasher k8s base (DESIGN §9/§10). The substrate every other infra manifest extends:
+# scoped namespaces, default-deny NetworkPolicies + explicit allows, scoped RBAC, and
+# the resource requests/limits convention. No label transformer is used on purpose —
+# labels are hand-written on each object so NetworkPolicy/RBAC selectors are never
+# mutated implicitly (important for a security base).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespaces.yaml
+  - networkpolicies/frontend.yaml
+  - networkpolicies/backend.yaml
+  - networkpolicies/database.yaml
+  - rbac/serviceaccounts.yaml
+  - rbac/deployer-rbac.yaml
+  - resource-management/limitranges.yaml
+  - resource-management/resourcequotas.yaml

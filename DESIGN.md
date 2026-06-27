@@ -199,7 +199,7 @@ ADMIN /api/admin/persons*                account↔person linking (admin only)
 ---
 
 ## 9. Deployment (quasar k3s)
-- **Namespaces:** `clasher-frontend|backend|database`, `app.kubernetes.io/part-of: clasher`. **Requests+limits on every pod**; **default-deny NetworkPolicies** (Postgres reachable only from backend; only `coc-gateway` egresses to the proxy IP; deny cross-namespace ingress) — protects co-tenants (Aarogya do-not-touch). **RBAC/ServiceAccounts scoped to `clasher-*`**; enable k3s **secrets encryption-at-rest**.
+- **Namespaces:** `clasher-frontend|backend|database`, `app.kubernetes.io/part-of: clasher`. **Requests+limits on every pod**; **default-deny NetworkPolicies** (Postgres reachable only from backend; only `coc-gateway` has external egress, restricted to 443 toward the Cloudflare-fronted RoyaleAPI proxy `cocproxy.royaleapi.dev` — note `45.79.218.79` is the *key-allowlist* IP for the CoC portal, not the connect target; deny cross-namespace ingress) — protects co-tenants (Aarogya do-not-touch). **RBAC/ServiceAccounts scoped to `clasher-*`**; enable k3s **secrets encryption-at-rest**.
 - **Ingress:** Traefik, host `clasher.skpodduturi.dev` (frontend `/`, API `/api`), HTTPS-redirect middleware.
 - **DNS (no shared edits):** Clasher runs its **own scoped DDNS updater** (CronJob/external-dns in a clasher namespace, own Cloudflare-token Secret) maintaining only `clasher.skpodduturi.dev`. **Does not touch the shared `cloudflare-ddns` configmap** (NFR-4).
 - **TLS:** cert-manager `letsencrypt-cloudflare` (DNS-01), secret `clasher-skpodduturi-dev-tls`.

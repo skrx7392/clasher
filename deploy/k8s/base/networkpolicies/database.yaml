@@ -1,0 +1,77 @@
+# clasher-database NetworkPolicies (DESIGN §9: "Postgres reachable only from backend").
+# The data tier never initiates outbound connections, so it gets NO egress allow at all
+# (not even DNS) — the default-deny egress stands. Postgres and Redis accept ingress
+# only from backend pods.
+#
+# Deferred to its own issue:
+#   - egress for the pg_dump backup CronJob to the off-box target -> #10 (backups)
+---
+# Deny ALL ingress and egress for every pod in clasher-database.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# backend -> database (Postgres): Postgres accepts ingress from backend pods on :5432.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-postgres-from-backend
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: postgres
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-backend
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: backend
+      ports:
+        - protocol: TCP
+          port: 5432
+---
+# backend -> redis: both Redis instances accept ingress from backend pods on :6379.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-redis-from-backend
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  podSelector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - redis-queue
+          - redis-cache
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: clasher-backend
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/component: backend
+      ports:
+        - protocol: TCP
+          port: 6379

@@ -1,0 +1,145 @@
+# Scoped deploy identity for CD (#13) — DESIGN §9: "deploy ServiceAccount scoped to
+# clasher-* (not cluster-admin)". This proves the #6 acceptance criterion that NO
+# cluster-scoped RBAC exists: there are only namespaced Roles + RoleBindings here, one
+# per clasher namespace. There is intentionally NO ClusterRole / ClusterRoleBinding.
+#
+# Bootstrap vs deploy split (DESIGN §9; runbook in #11):
+#   - Security/foundation objects — Namespaces (cluster-scoped), NetworkPolicies, RBAC,
+#     Secrets, LimitRanges/ResourceQuotas, Ingress/TLS — are applied ONCE out-of-band by
+#     an admin during bootstrap. They are deliberately OUTSIDE this Role.
+#   - Per-release objects — Deployments, StatefulSets, Services, ConfigMaps, PVCs, Jobs,
+#     CronJobs — are what CD rolls, so the Role grants exactly those. Notably it grants
+#     NO access to Secrets (managed out-of-band) and cannot touch cluster-scoped or
+#     other-tenant resources.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: clasher-deployer
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: deployer
+automountServiceAccountToken: false
+---
+# --- clasher-frontend -------------------------------------------------------
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: clasher-deployer
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+rules:
+  - apiGroups: [""]
+    resources: [services, configmaps, persistentvolumeclaims]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [""]
+    resources: [pods, pods/log]
+    verbs: [get, list, watch]
+  - apiGroups: [apps]
+    resources: [deployments, statefulsets]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [apps]
+    resources: [deployments/scale, statefulsets/scale, replicasets]
+    verbs: [get, list, watch, update, patch]
+  - apiGroups: [batch]
+    resources: [jobs, cronjobs]
+    verbs: [get, list, watch, create, update, patch, delete]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: clasher-deployer
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: clasher-deployer
+subjects:
+  - kind: ServiceAccount
+    name: clasher-deployer
+    namespace: clasher-backend
+---
+# --- clasher-backend --------------------------------------------------------
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: clasher-deployer
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+rules:
+  - apiGroups: [""]
+    resources: [services, configmaps, persistentvolumeclaims]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [""]
+    resources: [pods, pods/log]
+    verbs: [get, list, watch]
+  - apiGroups: [apps]
+    resources: [deployments, statefulsets]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [apps]
+    resources: [deployments/scale, statefulsets/scale, replicasets]
+    verbs: [get, list, watch, update, patch]
+  - apiGroups: [batch]
+    resources: [jobs, cronjobs]
+    verbs: [get, list, watch, create, update, patch, delete]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: clasher-deployer
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: clasher-deployer
+subjects:
+  - kind: ServiceAccount
+    name: clasher-deployer
+    namespace: clasher-backend
+---
+# --- clasher-database -------------------------------------------------------
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: clasher-deployer
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+rules:
+  - apiGroups: [""]
+    resources: [services, configmaps, persistentvolumeclaims]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [""]
+    resources: [pods, pods/log]
+    verbs: [get, list, watch]
+  - apiGroups: [apps]
+    resources: [deployments, statefulsets]
+    verbs: [get, list, watch, create, update, patch, delete]
+  - apiGroups: [apps]
+    resources: [deployments/scale, statefulsets/scale, replicasets]
+    verbs: [get, list, watch, update, patch]
+  - apiGroups: [batch]
+    resources: [jobs, cronjobs]
+    verbs: [get, list, watch, create, update, patch, delete]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: clasher-deployer
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: clasher-deployer
+subjects:
+  - kind: ServiceAccount
+    name: clasher-deployer
+    namespace: clasher-backend

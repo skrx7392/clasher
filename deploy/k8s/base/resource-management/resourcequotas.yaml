@@ -1,0 +1,65 @@
+# ResourceQuota per namespace (NFR-4 blast-radius: Clasher cannot starve co-tenants).
+# Each quota caps the namespace's total requested/limited CPU + memory, pod count, AND disk
+# (ephemeral-storage + persistent storage). Disk is a real co-tenant vector on shared
+# quasar: node DiskPressure eviction is node-wide, so an oversized PVC or runaway scratch
+# could take down do-not-touch co-tenants (Aarogya). CPU/mem/disk are all fenced here.
+# Because the quota constrains requests.{cpu,memory,ephemeral-storage} and the matching
+# limits, every pod must declare all of them — the LimitRange defaults guarantee that.
+# Stateless tiers forbid PersistentVolumeClaims outright (persistentvolumeclaims: "0");
+# persistent storage lives only in clasher-database, where #7 sizes its PVCs within the cap.
+# Sizes are pilot-scale and revisited as real load is measured.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: clasher-quota
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  hard:
+    requests.cpu: "2"
+    requests.memory: 2Gi
+    limits.cpu: "4"
+    limits.memory: 4Gi
+    requests.ephemeral-storage: 1Gi
+    limits.ephemeral-storage: 4Gi
+    persistentvolumeclaims: "0"
+    pods: "15"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: clasher-quota
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 4Gi
+    limits.cpu: "8"
+    limits.memory: 8Gi
+    requests.ephemeral-storage: 2Gi
+    limits.ephemeral-storage: 8Gi
+    persistentvolumeclaims: "0"
+    pods: "20"
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: clasher-quota
+  namespace: clasher-database
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 6Gi
+    limits.cpu: "8"
+    limits.memory: 12Gi
+    requests.ephemeral-storage: 2Gi
+    limits.ephemeral-storage: 8Gi
+    # Persistent storage lives only here (Postgres + split Redis, sized in #7).
+    requests.storage: 30Gi
+    persistentvolumeclaims: "5"
+    pods: "10"

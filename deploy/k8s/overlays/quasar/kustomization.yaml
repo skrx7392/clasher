@@ -1,0 +1,12 @@
+# quasar overlay — the production k3s cluster. Currently a thin pass-through over the
+# base; subsequent infra issues layer their workloads/patches here:
+#   #7  Postgres StatefulSet + PVC and split Redis (queue + cache)
+#   #8  Traefik ingress + cert-manager DNS-01 TLS for clasher.skpodduturi.dev
+#   #9  Clasher-scoped Cloudflare DDNS updater
+#   #10 off-box encrypted pg_dump CronJob + restore drill
+# Build with: kubectl kustomize deploy/k8s/overlays/quasar
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
