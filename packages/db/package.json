@@ -1,0 +1,28 @@
+{
+  "name": "@clasher/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Clasher database: node-pg-migrate migrations for the DESIGN §3 schema (system of record).",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "migrate": "node-pg-migrate up --migrations-dir migrations",
+    "migrate:down": "node-pg-migrate down --migrations-dir migrations",
+    "migrate:create": "node-pg-migrate create --migrations-dir migrations --",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "node-pg-migrate": "^8.0.4",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.20.0",
+    "embedded-postgres": "18.4.0-beta.17",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

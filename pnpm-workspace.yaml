@@ -4,7 +4,13 @@ packages:
 
 # pnpm 11 blocks dependency build (postinstall) scripts by default for
 # supply-chain safety. Allow only the ones we vet so `pnpm install` exits 0 on a
-# fresh host (NFR-2): esbuild (via vitest), sharp (via next image optimization).
+# fresh host (NFR-2): esbuild (via vitest), sharp (via next image optimization),
+# and the embedded-postgres platform binaries (via @clasher/db migration tests —
+# only the current platform's package is actually installed/built).
 allowBuilds:
   esbuild: true
   sharp: true
+  "@embedded-postgres/darwin-arm64": true
+  "@embedded-postgres/darwin-x64": true
+  "@embedded-postgres/linux-x64": true
+  "@embedded-postgres/linux-arm64": true
