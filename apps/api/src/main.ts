@@ -12,6 +12,9 @@ async function bootstrap(): Promise<void> {
   // single place owns fail-loud behavior (NFR-6).
   const app = await NestFactory.create(AppModule, { abortOnError: false });
   configureApp(app);
+  // Fire lifecycle hooks (onModuleDestroy) on SIGTERM/SIGINT — what k8s sends —
+  // so the Postgres pool drains cleanly on shutdown (DatabaseModule).
+  app.enableShutdownHooks();
 
   const env = app.get<Env>(ENV);
   await app.listen(env.PORT);

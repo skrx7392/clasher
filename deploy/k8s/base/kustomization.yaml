@@ -9,6 +9,7 @@ kind: Kustomization
 resources:
   - namespaces.yaml
   - networkpolicies/frontend.yaml
+  - networkpolicies/frontend-google-egress.yaml
   - networkpolicies/backend.yaml
   - networkpolicies/database.yaml
   - networkpolicies/traefik.yaml

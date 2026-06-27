@@ -2,6 +2,7 @@
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import prettier from "eslint-config-prettier";
+import globals from "globals";
 
 export default tseslint.config(
   {
@@ -23,10 +24,12 @@ export default tseslint.config(
   // the apps with real tsconfigs land (#2/#3/#4).
   ...tseslint.configs.recommended,
   {
-    // Config / tooling files run in Node and are not part of the typed build.
+    // Config / tooling files and standalone Node scripts (e.g. the db seed) run in
+    // Node and are not part of the typed build.
     files: ["**/*.{js,mjs,cjs}"],
     languageOptions: {
       sourceType: "module",
+      globals: globals.node,
     },
   },
   // Keep ESLint out of Prettier's lane (formatting is owned by Prettier).
