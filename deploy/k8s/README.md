@@ -108,9 +108,12 @@ clasher-backend, so the database tier stays egress-free.)
 ## Bootstrap vs deploy
 
 Security/foundation objects are applied **once, out-of-band, by an admin** during
-bootstrap (runbook in #11): Namespaces (cluster-scoped), NetworkPolicies, RBAC, Secrets,
+bootstrap: Namespaces (cluster-scoped), NetworkPolicies, RBAC, Secrets,
 LimitRanges/ResourceQuotas, and later Ingress/TLS. CD (`clasher-deployer`) only rolls the
 per-release workloads. This is why the deploy Role excludes those foundation resources.
+The full secret inventory, provisioning order, and the no-leak injection flow are in
+[`SECRETS.md`](SECRETS.md); the [`scripts/make-secrets.sh`](scripts/make-secrets.sh) helper
+creates each Secret from a local env-file without leaking values on argv.
 
 ## Data tier (#7)
 
