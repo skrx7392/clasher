@@ -16,6 +16,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       themes={THEME_IDS}
       defaultTheme={DEFAULT_THEME}
       enableSystem={false}
+      // tokens.css owns `color-scheme` per [data-theme]; don't let next-themes
+      // write a conflicting inline color-scheme for the custom themes.
+      enableColorScheme={false}
       disableTransitionOnChange
     >
       {children}

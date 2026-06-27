@@ -9,6 +9,17 @@ function colorTokensIn(block: string): Set<string> {
   return new Set(block.match(/--clr-[a-z-]+/g) ?? []);
 }
 
+/** Parse `--name: value;` and `color-scheme: value;` declarations from a block. */
+function declarationsIn(block: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const m of block.matchAll(/(--clr-[a-z-]+|color-scheme)\s*:\s*([^;]+);/g)) {
+    const key = m[1];
+    const value = m[2];
+    if (key && value) out[key] = value.trim();
+  }
+  return out;
+}
+
 /** Extract the body of a `selector { … }` block from the CSS source. */
 function blockBody(css: string, selector: string): string | null {
   const start = css.indexOf(selector + " {");
@@ -49,6 +60,16 @@ describe("theme registry (single source of truth)", () => {
       expect(colorTokensIn(body ?? ""), `theme "${id}" is missing color tokens`).toEqual(
         rootTokens,
       );
+    }
+  });
+
+  it(":root palette equals the DEFAULT_THEME (one canonical SSR/no-JS default)", () => {
+    const root = declarationsIn(blockBody(tokensCss, ":root") ?? "");
+    const def = declarationsIn(blockBody(tokensCss, `[data-theme="${DEFAULT_THEME}"]`) ?? "");
+    // Compare only the keys present in the default theme block (color tokens +
+    // color-scheme); :root additionally holds shared non-color tokens.
+    for (const [key, value] of Object.entries(def)) {
+      expect(root[key], `:root.${key} should match the ${DEFAULT_THEME} theme`).toBe(value);
     }
   });
 });

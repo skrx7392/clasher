@@ -20,7 +20,15 @@ export function ThemeSwitcher() {
     const onKey = (e: KeyboardEvent) => {
       // Ignore typing and browser/OS shortcuts (Cmd/Ctrl/Alt + number).
       if (e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      const el = e.target;
+      if (
+        el instanceof HTMLInputElement ||
+        el instanceof HTMLTextAreaElement ||
+        el instanceof HTMLSelectElement ||
+        (el instanceof HTMLElement && el.isContentEditable)
+      ) {
+        return;
+      }
       const idx = Number(e.key) - 1;
       const target = THEMES[idx];
       if (target) setTheme(target.id);
@@ -42,6 +50,8 @@ export function ThemeSwitcher() {
             className={styles.option}
             data-active={active}
             aria-pressed={active}
+            aria-label={`${t.label} theme — ${t.description}`}
+            aria-keyshortcuts={String(i + 1)}
             title={`${t.description} (press ${i + 1})`}
             onClick={() => setTheme(t.id)}
           >
