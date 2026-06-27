@@ -1,0 +1,26 @@
+# TLS certificate for clasher.skpodduturi.dev (DESIGN §9). cert-manager fulfils this via the
+# namespaced letsencrypt-cloudflare Issuer (DNS-01) and writes the keypair to the Secret
+# `clasher-skpodduturi-dev-tls` in clasher-frontend. The frontend IngressRoute references that
+# Secret; the backend (/api) IngressRoute serves the same host over TLS via Traefik's SNI
+# certificate store (so the Secret need not be duplicated into clasher-backend).
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: clasher-skpodduturi-dev
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  secretName: clasher-skpodduturi-dev-tls
+  dnsNames:
+    - clasher.skpodduturi.dev
+  issuerRef:
+    name: letsencrypt-cloudflare
+    kind: Issuer
+    group: cert-manager.io
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+    rotationPolicy: Always
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d before expiry

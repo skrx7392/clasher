@@ -11,6 +11,7 @@ resources:
   - networkpolicies/frontend.yaml
   - networkpolicies/backend.yaml
   - networkpolicies/database.yaml
+  - networkpolicies/traefik.yaml
   - rbac/serviceaccounts.yaml
   - rbac/deployer-rbac.yaml
   - resource-management/limitranges.yaml
@@ -18,3 +19,6 @@ resources:
   - data/postgres.yaml
   - data/redis-queue.yaml
   - data/redis-cache.yaml
+  - ingress/issuer.yaml
+  - ingress/certificate.yaml
+  - ingress/routes.yaml

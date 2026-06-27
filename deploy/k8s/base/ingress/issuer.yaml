@@ -1,0 +1,39 @@
+# cert-manager DNS-01 issuer for clasher.skpodduturi.dev (DESIGN §9).
+#
+# NAMESPACED Issuer (not a cluster-scoped ClusterIssuer) so it is Clasher-scoped and touches
+# no shared/cluster resource (NFR-4) — consistent with the #6 "no cluster-scoped object"
+# posture. It lives in clasher-frontend alongside the Certificate that references it.
+#
+# DNS-01 via Cloudflare using CLASHER'S OWN scoped API token (Secret `cloudflare-api-token`,
+# key `api-token`, bootstrapped out-of-band per #11) — it does NOT reuse or modify any shared
+# issuer or the shared cloudflare-ddns resources. The token needs BOTH Zone:DNS:Edit (to write
+# the _acme-challenge TXT record) AND Zone:Zone:Read (cert-manager lists zones to resolve the
+# zone ID), scoped to the skpodduturi.dev zone — a DNS:Edit-only token fails zone lookup and
+# issuance never completes. #9's DDNS updater has its own separate token Secret.
+#
+# Prerequisite: cert-manager is installed on quasar (an admin-managed shared component);
+# Clasher only adds its own namespaced Issuer/Certificate, never a shared ClusterIssuer.
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-cloudflare
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # ACME contact (operator may change). Avoids embedding a personal address.
+    email: admin@skpodduturi.dev
+    # cert-manager creates/stores the ACME account private key here.
+    privateKeySecretRef:
+      name: letsencrypt-cloudflare-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
+        selector:
+          dnsNames:
+            - clasher.skpodduturi.dev
