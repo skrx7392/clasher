@@ -129,12 +129,47 @@ These are **GitHub Actions / Environment** secrets used by the deploy job itself
 **not** k8s Secrets and are **not** provisioned with `make-secrets.sh`; set them under the
 repo's `production` Environment (with a required reviewer).
 
-| GitHub secret                                           | Used for                                        | Notes                                                                                                                                                     |
-| ------------------------------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TAILSCALE_AUTHKEY` (or TS OAuth client)                | join the runner to the tailnet to reach quasar  | **ephemeral, ACL-tagged** key (DESIGN §9)                                                                                                                 |
-| `KUBECONFIG` (or `clasher-deployer` SA token + API URL) | scoped `kubectl` as `clasher-deployer`          | **namespaced** Role only — never cluster-admin                                                                                                            |
-| `DATABASE_URL`                                          | the migration-gate job (runs before image roll) | same Postgres connection string as `api-credentials`                                                                                                      |
-| GHCR push                                               | `GITHUB_TOKEN` (built-in) pushes images         | the separate `read:packages` PAT for the in-cluster `ghcr-pull` Secret is provisioned per [§3a](#3a-in-cluster-k8s-secrets-admin-provisioned-out-of-band) |
+| GitHub secret                            | Used for                                       | Notes                                                                                                                                                     |
+| ---------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TAILSCALE_AUTHKEY` (or TS OAuth client) | join the runner to the tailnet to reach quasar | **ephemeral, ACL-tagged** key (DESIGN §9)                                                                                                                 |
+| `KUBECONFIG`                             | scoped `kubectl` as `clasher-deployer`         | **base64** of a kubeconfig with a **namespaced** Role only — never cluster-admin; CD asserts this at runtime (`kubectl auth can-i '*' '*' -A` ⇒ `no`)     |
+| GHCR push                                | `GITHUB_TOKEN` (built-in) pushes images        | the separate `read:packages` PAT for the in-cluster `ghcr-pull` Secret is provisioned per [§3a](#3a-in-cluster-k8s-secrets-admin-provisioned-out-of-band) |
+
+> **No GitHub-side `DATABASE_URL`.** The migration gate runs **in-cluster** as a k8s Job
+> (`deploy/k8s/migrate`, namespace `clasher-backend`, `component=backend`) that reads
+> `DATABASE_URL` from the in-cluster `api-credentials` Secret. The DB creds never leave the
+> cluster and the `backend → Postgres`-only NetworkPolicy isolation holds — the runner never
+> needs Postgres reachability. `clasher-deployer` (no Secret access) only _creates_ the Job;
+> the kubelet mounts the Secret.
+
+### Assembling the `KUBECONFIG` secret (out-of-band)
+
+Mint a rotatable token for the scoped SA and embed it with the cluster CA + the tailnet-reachable
+API URL, then base64 the whole file into the `production` Environment secret. Example (admin, on
+quasar). Note: `set-credentials --token=…` places the token on this shell's argv — acceptable for
+a one-time, freshly-minted, rotatable token on the operator's own host; do not run it where the
+process table is shared or logged.
+
+> **Prerequisite for the first CD run.** The migration-gate Job runs as the `clasher-migrate`
+> ServiceAccount, added to `base/rbac/serviceaccounts.yaml` in #13. Re-apply the RBAC base
+> (`kubectl apply -k deploy/k8s/base`, admin/out-of-band) so that SA exists **before** the next
+> deploy — otherwise the Job's pods are rejected by ServiceAccount admission and the gate times out.
+
+```sh
+SERVER=https://quasar:6443   # the tailnet-reachable API endpoint (MagicDNS or tailnet IP)
+kubectl -n clasher-backend create token clasher-deployer --duration=8760h > /tmp/deployer.token
+kubectl config view --raw --minify -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' > /tmp/ca.b64
+kubectl config set-cluster quasar --server="$SERVER" \
+  --certificate-authority=<(base64 -d /tmp/ca.b64) --embed-certs=true --kubeconfig=/tmp/deployer.kubeconfig
+kubectl config set-credentials clasher-deployer --token="$(cat /tmp/deployer.token)" --kubeconfig=/tmp/deployer.kubeconfig
+kubectl config set-context quasar --cluster=quasar --user=clasher-deployer \
+  --namespace=clasher-backend --kubeconfig=/tmp/deployer.kubeconfig
+kubectl config use-context quasar --kubeconfig=/tmp/deployer.kubeconfig
+base64 < /tmp/deployer.kubeconfig    # paste into the KUBECONFIG Environment secret; then shred the temp files
+```
+
+Rotate by re-minting the token (the SA's namespaced Role is unchanged). The token grants only the
+`clasher-deployer` Role in the three clasher namespaces — no Secret access, nothing cluster-scoped.
 
 ## 6. The make-secrets helper
 

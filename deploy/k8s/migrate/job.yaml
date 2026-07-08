@@ -1,0 +1,77 @@
+# Migration gate (#13, DESIGN §9). CD applies this Job and BLOCKS on its completion BEFORE
+# rolling the new app images — so the schema is always migrated ahead of the code that needs
+# it (expand/contract: migrations only add, so the currently-running old pods stay compatible
+# during the window). The image runs `node-pg-migrate up` (packages/db/Dockerfile) and is
+# idempotent, so a retried gate is safe.
+#
+# It runs in clasher-backend with component=backend, which is exactly what the NetworkPolicies
+# require to reach Postgres (backend egress -> Postgres:5432; Postgres admits component=backend).
+# DATABASE_URL is read from the in-cluster `api-credentials` Secret — the DB creds never leave
+# the cluster and the clasher-deployer SA (which has NO Secret access) only creates the Job; the
+# kubelet mounts the Secret. CD stamps the image tag to the commit SHA and appends a
+# `nameSuffix: -<shortSha>` so each deploy gets a fresh, immutable Job (Jobs are not patchable);
+# ttlSecondsAfterFinished reaps it.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: clasher-migrate
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: migrate
+    app.kubernetes.io/component: backend
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 300
+  ttlSecondsAfterFinished: 600
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: clasher
+        app.kubernetes.io/name: migrate
+        app.kubernetes.io/component: backend
+    spec:
+      restartPolicy: Never
+      serviceAccountName: clasher-migrate
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: ghcr-pull
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: migrate
+          # Tag is overridden per-deploy by CD (kustomize set image) to the commit SHA.
+          image: ghcr.io/skrx7392/clasher-migrate:latest
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: api-credentials
+                  key: DATABASE_URL
+          volumeMounts:
+            # readOnlyRootFilesystem is on; node-pg-migrate needs no disk, but give it /tmp.
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 192Mi
+              ephemeral-storage: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+              ephemeral-storage: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 32Mi

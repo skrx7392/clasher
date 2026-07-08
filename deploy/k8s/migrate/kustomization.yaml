@@ -1,0 +1,9 @@
+# The CD migration gate (#13). CD appends, immediately before `kubectl apply -k`:
+#   nameSuffix: -<shortSha>      # a fresh, immutable Job per deploy (Jobs are not patchable)
+#   images: [{name: ghcr.io/skrx7392/clasher-migrate, newTag: <commitSha>}]
+# then waits for the Job to complete and fails the deploy if it does not (see cd.yml).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - job.yaml
