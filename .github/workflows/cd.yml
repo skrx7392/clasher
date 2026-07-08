@@ -16,9 +16,10 @@ permissions:
   contents: read
 
 concurrency:
-  # One deploy per ref at a time, and NEVER cancel an in-flight roll — a half-applied rollout
-  # is worse than a queued one.
-  group: cd-${{ github.ref }}
+  # Serialize ALL delivery to the single production cluster (NOT per-ref) and NEVER cancel an
+  # in-flight roll — a half-applied rollout is worse than a queued one. Two runs (e.g. a
+  # push-to-main and a manual dispatch) must never interleave migrate/apply/rollout.
+  group: cd-production
   cancel-in-progress: false
 
 env:
@@ -77,6 +78,9 @@ jobs:
   deploy:
     name: deploy
     needs: build
+    # Only ever roll main to production — a manual dispatch from a feature branch may build
+    # images (harmless) but must never deploy them to the cluster.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     # Required-reviewer gate (DESIGN §9). The reviewer + the CD secrets (TAILSCALE_AUTHKEY,
     # KUBECONFIG) live on this Environment, configured out-of-band (SECRETS.md §5).
@@ -119,12 +123,17 @@ jobs:
             echo "::error::deploy identity has cluster-admin; refusing to proceed (NFR-4)"
             exit 1
           fi
-          # And that it has NO Secret access — workloads only *reference* Secrets; the deployer
-          # must never read/write them (NFR-4 / SECRETS.md "no Secret access by design").
-          if [ "$(kubectl auth can-i get secrets -n clasher-backend 2>/dev/null || true)" = "yes" ]; then
-            echo "::error::deploy identity can read Secrets; refusing to proceed (NFR-4)"
-            exit 1
-          fi
+          # And that it has NO Secret access in ANY clasher namespace — workloads only
+          # *reference* Secrets; the deployer must never read them (NFR-4 / SECRETS.md
+          # "no Secret access by design").
+          for ns in clasher-backend clasher-frontend clasher-database; do
+            for v in get list watch; do
+              if [ "$(kubectl auth can-i "$v" secrets -n "$ns" 2>/dev/null || true)" = "yes" ]; then
+                echo "::error::deploy identity can $v secrets in $ns; refusing to proceed (NFR-4)"
+                exit 1
+              fi
+            done
+          done
           # And confirm it can do exactly what the roll needs, in the clasher namespaces.
           kubectl auth can-i create jobs -n clasher-backend
           kubectl auth can-i create deployments -n clasher-backend
