@@ -1,0 +1,190 @@
+name: CD
+
+# Continuous delivery (DESIGN §9): build the Clasher images to GHCR, reach quasar over an
+# ephemeral tailnet, run the DB migration gate, then roll the SHA-pinned images via a kubectl
+# scoped to a namespaced clasher-deployer ServiceAccount (never cluster-admin — NFR-4). Runs
+# only on merge to main (post-CI) and manual dispatch; PRs are linted by manifests.yml. The
+# deploy job sits behind the `production` GitHub Environment (required reviewer, configured in
+# repo settings out-of-band). All actions are pinned to commit SHAs; permissions are minimal.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Least privilege at the workflow scope; the build job additively requests packages:write.
+permissions:
+  contents: read
+
+concurrency:
+  # One deploy per ref at a time, and NEVER cancel an in-flight roll — a half-applied rollout
+  # is worse than a queued one.
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  # ghcr.io/skrx7392/clasher-<app>:<sha> (private; pulled in-cluster via the ghcr-pull Secret).
+  IMAGE_PREFIX: ghcr.io/skrx7392/clasher
+
+jobs:
+  build:
+    name: build (${{ matrix.app }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: api
+            dockerfile: apps/api/Dockerfile
+          - app: web
+            dockerfile: apps/web/Dockerfile
+          - app: coc-gateway
+            dockerfile: apps/coc-gateway/Dockerfile
+          # The migration runner (node-pg-migrate up) used by the deploy gate below.
+          - app: migrate
+            dockerfile: packages/db/Dockerfile
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+
+      - uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0 # v4.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        with:
+          # Context is the repo root so the pnpm workspace + packages/shared are present
+          # (every Clasher Dockerfile requires this).
+          context: .
+          file: ${{ matrix.dockerfile }}
+          push: true
+          # quasar is linux/amd64 (confirmed). If a future node is arm64, add linux/arm64 here
+          # (and a docker/setup-qemu-action step) — the images then become a manifest list.
+          platforms: linux/amd64
+          # Immutable, SHA-pinned tag — this exact digest is what the rollout pins to.
+          tags: ${{ env.IMAGE_PREFIX }}-${{ matrix.app }}:${{ github.sha }}
+          # A single-manifest image (no provenance attestation) pulls cleanly under k8s
+          # imagePullSecrets without stray unknown/unknown platform entries.
+          provenance: false
+          cache-from: type=gha,scope=${{ matrix.app }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.app }}
+
+  deploy:
+    name: deploy
+    needs: build
+    runs-on: ubuntu-latest
+    # Required-reviewer gate (DESIGN §9). The reviewer + the CD secrets (TAILSCALE_AUTHKEY,
+    # KUBECONFIG) live on this Environment, configured out-of-band (SECRETS.md §5).
+    environment: production
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@829323503d1be3d00ca8346e5391ca0b07a9ab0d # v5.1.0
+
+      - name: Connect to the tailnet (ephemeral, ACL-tagged)
+        uses: tailscale/github-action@780049a30b6ff5c378a9e7b389d15ece7a204888 # v4.1.3
+        with:
+          # An ephemeral + ACL-tagged auth key (created in the Tailscale admin console per
+          # DESIGN §9); the node is torn down when the job ends.
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          hostname: gha-clasher-cd
+
+      - name: Configure the scoped kubeconfig (clasher-deployer)
+        env:
+          # base64 of the clasher-deployer kubeconfig (namespaced Role only). Base64 so a
+          # multi-line file survives the secret store; the value is masked in logs.
+          KUBECONFIG_B64: ${{ secrets.KUBECONFIG }}
+        run: |
+          set -euo pipefail
+          umask 077
+          mkdir -p "$RUNNER_TEMP/.kube"
+          printf '%s' "$KUBECONFIG_B64" | base64 -d > "$RUNNER_TEMP/.kube/config"
+          echo "KUBECONFIG=$RUNNER_TEMP/.kube/config" >> "$GITHUB_ENV"
+
+      - name: Assert the deploy identity is namespace-scoped and Secret-blind
+        run: |
+          set -euo pipefail
+          # Fail loud if the kubeconfig is over-privileged — CD must never be cluster-admin
+          # (NFR-4 blast radius). A namespaced SA answers "no" here (|| true so the expected
+          # non-zero "no" exit doesn't trip set -e before we inspect it).
+          if [ "$(kubectl auth can-i '*' '*' --all-namespaces 2>/dev/null || true)" = "yes" ]; then
+            echo "::error::deploy identity has cluster-admin; refusing to proceed (NFR-4)"
+            exit 1
+          fi
+          # And that it has NO Secret access — workloads only *reference* Secrets; the deployer
+          # must never read/write them (NFR-4 / SECRETS.md "no Secret access by design").
+          if [ "$(kubectl auth can-i get secrets -n clasher-backend 2>/dev/null || true)" = "yes" ]; then
+            echo "::error::deploy identity can read Secrets; refusing to proceed (NFR-4)"
+            exit 1
+          fi
+          # And confirm it can do exactly what the roll needs, in the clasher namespaces.
+          kubectl auth can-i create jobs -n clasher-backend
+          kubectl auth can-i create deployments -n clasher-backend
+          kubectl auth can-i create deployments -n clasher-frontend
+
+      - name: Migration gate — node-pg-migrate up (blocks the roll)
+        run: |
+          set -euo pipefail
+          SHORT_SHA="${GITHUB_SHA::12}"
+          JOB="clasher-migrate-${SHORT_SHA}"
+          cd "$GITHUB_WORKSPACE/deploy/k8s/migrate"
+          # Stamp the built image + a per-deploy Job name (Jobs are immutable, so each roll
+          # needs a fresh name); ttlSecondsAfterFinished reaps it.
+          cat >> kustomization.yaml <<EOF
+          nameSuffix: -${SHORT_SHA}
+          images:
+            - name: ${IMAGE_PREFIX}-migrate
+              newTag: ${GITHUB_SHA}
+          EOF
+          # Jobs are immutable; a same-SHA re-run within the TTL window would collide, so clear
+          # any prior instance of this exact Job BEFORE validating/applying (concurrency:false
+          # means no two deploys run at once, so this can only ever be a stale same-SHA Job).
+          kubectl -n clasher-backend delete job "$JOB" --ignore-not-found
+          kubectl apply --dry-run=server -k .
+          kubectl apply -k .
+          echo "waiting for job/${JOB} to complete…"
+          # Poll: succeed on Complete, fail fast on Failed. The Job's own activeDeadlineSeconds
+          # + this loop bound the wait either way.
+          for _ in $(seq 1 60); do
+            complete="$(kubectl -n clasher-backend get job "$JOB" -o jsonpath='{.status.conditions[?(@.type=="Complete")].status}' 2>/dev/null || true)"
+            failed="$(kubectl -n clasher-backend get job "$JOB" -o jsonpath='{.status.conditions[?(@.type=="Failed")].status}' 2>/dev/null || true)"
+            if [ "$complete" = "True" ]; then echo "migrations complete"; exit 0; fi
+            if [ "$failed" = "True" ]; then
+              echo "::error::migrations failed"
+              kubectl -n clasher-backend logs "job/$JOB" --tail=200 || true
+              exit 1
+            fi
+            sleep 5
+          done
+          echo "::error::migration gate timed out"
+          kubectl -n clasher-backend logs "job/$JOB" --tail=200 || true
+          exit 1
+
+      - name: Roll the SHA-pinned images
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE/deploy/k8s/workloads"
+          cat >> kustomization.yaml <<EOF
+          images:
+            - name: ${IMAGE_PREFIX}-api
+              newTag: ${GITHUB_SHA}
+            - name: ${IMAGE_PREFIX}-web
+              newTag: ${GITHUB_SHA}
+            - name: ${IMAGE_PREFIX}-coc-gateway
+              newTag: ${GITHUB_SHA}
+          EOF
+          # Server-side dry-run as the scoped SA (catches quota/policy/schema issues) before
+          # mutating anything.
+          kubectl apply --dry-run=server -k .
+          kubectl apply -k .
+          kubectl -n clasher-backend rollout status deploy/api --timeout=180s
+          kubectl -n clasher-backend rollout status deploy/coc-gateway --timeout=180s
+          kubectl -n clasher-frontend rollout status deploy/web --timeout=180s

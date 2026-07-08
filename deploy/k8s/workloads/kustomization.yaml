@@ -1,0 +1,15 @@
+# Per-release workloads rolled by CD (#13) — the clasher-deployer SA's Role grants exactly
+# these kinds (Deployments/Services). This kustomization is DELIBERATELY separate from the
+# admin-applied bootstrap base (namespaces/RBAC/NetworkPolicies/Secrets): CD owns and rolls
+# these, bootstrap is applied once out-of-band (see README → Bootstrap vs deploy).
+#
+# The image tags below stay at :latest in-repo; CD appends an `images:` block pinning each to
+# the built commit SHA immediately before `kubectl apply -k` (see .github/workflows/cd.yml).
+# Do NOT `kubectl apply -k` this directory by hand — it would roll the floating :latest tag.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - api.yaml
+  - web.yaml
+  - coc-gateway.yaml

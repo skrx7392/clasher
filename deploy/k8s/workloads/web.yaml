@@ -1,0 +1,123 @@
+# @clasher/web — Next.js frontend (DESIGN §8/§9). Per-release workload rolled by CD (#13),
+# not part of the admin-applied bootstrap base. Tag stamped to the commit SHA at deploy time.
+#
+# name=web is load-bearing: the frontend NetworkPolicies admit Traefik->web:3000 and grant web
+# its egress (->api:3000, ->Google OAuth 443, ->DNS). Probes are `exec` over loopback so the
+# default-deny never blocks them; they GET `/` (force-dynamic home renders without the API or a
+# session, so it is a true liveness/readiness signal).
+#
+# env.ts fails closed at runtime: production REQUIRES an https AUTH_URL (Secure cookies) and an
+# absolute API_BASE_URL. AUTH_SECRET + Google client come from the out-of-band `web-auth` Secret;
+# API_BASE_URL is the in-cluster Service DNS (upsert-user appends /api/identity/...). Next writes
+# a runtime fetch/ISR cache under .next/cache, so this pod keeps a writable root fs (the pure-API
+# pods run readOnlyRootFilesystem).
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: web
+    app.kubernetes.io/component: frontend
+spec:
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: clasher-frontend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: web
+    app.kubernetes.io/component: frontend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: clasher
+        app.kubernetes.io/name: web
+        app.kubernetes.io/component: frontend
+    spec:
+      serviceAccountName: clasher-web
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: ghcr-pull
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: web
+          # Tag is overridden per-deploy by CD (kustomize set image) to the commit SHA.
+          image: ghcr.io/skrx7392/clasher-web:latest
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: production
+            # Drives Auth.js Secure/__Secure- cookies; must be the public https origin.
+            - name: AUTH_URL
+              value: https://clasher.skpodduturi.dev
+            # Server-side base for the sign-in upsert; reached over the web->api NetworkPolicy.
+            - name: API_BASE_URL
+              value: http://api.clasher-backend.svc.cluster.local:3000
+          # AUTH_SECRET + GOOGLE_CLIENT_ID + GOOGLE_CLIENT_SECRET (keys match; read by Auth.js).
+          envFrom:
+            - secretRef:
+                name: web-auth
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+              ephemeral-storage: 64Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+              ephemeral-storage: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          startupProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3000/",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3000/",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3000/",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3

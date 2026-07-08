@@ -34,7 +34,15 @@ deploy/k8s/
       backup.sh                 # in-cluster: pg_dump -> CMS-encrypt -> rsync off-box (ConfigMap src)
       pg-backup-cronjob.yaml    # nightly CronJob (see deploy/backup/ for restore drill + runbook)
   overlays/
-    quasar/                     # production overlay (CD/workload patches land here, #13)
+    quasar/                     # production overlay (bootstrap: base, admin-applied)
+  workloads/                    # per-release apps rolled by CD (#13) — NOT bootstrap
+    api.yaml                    # api Deployment + Service (clasher-backend)
+    web.yaml                    # web Deployment + Service (clasher-frontend)
+    coc-gateway.yaml            # coc-gateway Deployment + Service (clasher-backend)
+    kustomization.yaml          # CD appends `images:` (newTag = commit SHA) before apply
+  migrate/                      # the CD migration gate (#13)
+    job.yaml                    # node-pg-migrate up as a one-shot Job (clasher-backend)
+    kustomization.yaml          # CD appends nameSuffix + `images:` before apply
 ```
 
 Build (renders without a cluster):
@@ -42,6 +50,8 @@ Build (renders without a cluster):
 ```sh
 kubectl kustomize deploy/k8s/base
 kubectl kustomize deploy/k8s/overlays/quasar
+kubectl kustomize deploy/k8s/workloads
+kubectl kustomize deploy/k8s/migrate
 ```
 
 ## Network model (default-deny)
@@ -114,6 +124,34 @@ per-release workloads. This is why the deploy Role excludes those foundation res
 The full secret inventory, provisioning order, and the no-leak injection flow are in
 [`SECRETS.md`](SECRETS.md); the [`scripts/make-secrets.sh`](scripts/make-secrets.sh) helper
 creates each Secret from a local env-file without leaking values on argv.
+
+## Continuous delivery (#13)
+
+[`.github/workflows/cd.yml`](../../.github/workflows/cd.yml) delivers on merge to `main`
+(and manual dispatch); the deploy job sits behind the **`production` GitHub Environment**
+(required reviewer) and every action is commit-SHA pinned with minimal `permissions:`
+(DESIGN §9). The flow:
+
+1. **Build** (matrix) → `ghcr.io/skrx7392/clasher-{api,web,coc-gateway,migrate}:<sha>`
+   (private; pulled in-cluster via the `ghcr-pull` Secret). `migrate` is the
+   [`packages/db`](../../packages/db/Dockerfile) `node-pg-migrate` runner.
+2. **Connect** to the tailnet with an **ephemeral, ACL-tagged** key, then load the
+   **`clasher-deployer`** kubeconfig — the job first asserts it is _not_ cluster-admin
+   (NFR-4) before touching anything.
+3. **Migration gate** — apply `deploy/k8s/migrate` (image + `nameSuffix` stamped to the SHA)
+   and **block** on the Job's completion. The roll only proceeds if migrations succeed
+   (expand/contract, so the currently-running pods stay compatible during the window).
+4. **Roll** — apply `deploy/k8s/workloads` with each image pinned to the built SHA
+   (`kubectl apply --dry-run=server` first, as the scoped SA), then `kubectl rollout status`.
+
+CD never applies the bootstrap base — only these two per-release kustomizations, exactly the
+kinds the `clasher-deployer` Role grants. **First-run prerequisite:** the migration Job runs as
+the `clasher-migrate` SA added in #13, so re-apply the RBAC base (`kubectl apply -k deploy/k8s/base`,
+admin/out-of-band) to create it before the next deploy, or the gate times out (see
+[`SECRETS.md` §5](SECRETS.md)). Manifests are schema-validated **pre-merge** by
+[`.github/workflows/manifests.yml`](../../.github/workflows/manifests.yml) (render +
+kubeconform), since CD itself only runs after merge. The GitHub-side CD secrets (Tailscale
+key, scoped kubeconfig) are listed in [`SECRETS.md` §5](SECRETS.md).
 
 ## Data tier (#7)
 
@@ -242,7 +280,17 @@ builds it from `deploy/backup/Dockerfile`).
 
 ## Validation
 
-CRD-aware (cert-manager + Traefik) validation uses the CRDs-catalog schema location:
+The CD-owned `workloads/` + `migrate/` kustomizations are core-only, so plain kubeconform
+validates them (this is what [`manifests.yml`](../../.github/workflows/manifests.yml) runs on
+every PR that touches `deploy/k8s/**`):
+
+```sh
+kubectl kustomize deploy/k8s/workloads | kubeconform -strict -summary -
+kubectl kustomize deploy/k8s/migrate   | kubeconform -strict -summary -
+```
+
+The bootstrap base carries cert-manager + Traefik CRDs, so validate it with the CRDs-catalog
+schema location (or `-ignore-missing-schemas`, as the CI job does across the whole tree):
 
 ```sh
 kubectl kustomize deploy/k8s/base | kubeconform -strict -summary \
@@ -250,5 +298,7 @@ kubectl kustomize deploy/k8s/base | kubeconform -strict -summary \
   -schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
 ```
 
-`kubectl apply` to quasar is an **operator step** (Tailscale + scoped kubectl) — not done
-from CI. Populated across M0 infra issues **#6–#10** and CD **#13**.
+The **bootstrap** apply to quasar (namespaces/RBAC/NetworkPolicies/Secrets/data tier/ingress)
+is an **operator step** (Tailscale + admin kubectl), populated across M0 infra issues
+**#6–#10**. The **per-release** apply (workloads + migration gate) is automated by CD **#13**
+as the scoped `clasher-deployer` — see [Continuous delivery](#continuous-delivery-13).

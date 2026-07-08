@@ -1,0 +1,131 @@
+# @clasher/coc-gateway — the SOLE holder of the official Clash of Clans key (DESIGN §9/§10,
+# NFR-11). Per-release workload rolled by CD (#13). Tag stamped to the commit SHA at deploy time.
+#
+# Pod labels name=coc-gateway + component=gateway are exactly what the egress NetworkPolicy
+# selects to grant this pod (and only this pod) external 443 to the RoyaleAPI proxy; component
+# is deliberately NOT `backend`, so it gets no Postgres/Redis egress. COC_API_KEY comes from the
+# `coc-gateway-secret` Secret which exists only in clasher-backend (key isolation). Probes are
+# `exec` over loopback (GET /health, no key required), so the default-deny never blocks them.
+#
+# The Service has no ingress route and no NetworkPolicy admits traffic to it yet — the gateway is
+# outbound-only in the pilot; the api->gateway path is opened in M2. It is defined here so the
+# stable DNS name exists for that wiring.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coc-gateway
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: coc-gateway
+    app.kubernetes.io/component: gateway
+spec:
+  selector:
+    app.kubernetes.io/name: coc-gateway
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3100
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coc-gateway
+  namespace: clasher-backend
+  labels:
+    app.kubernetes.io/part-of: clasher
+    app.kubernetes.io/name: coc-gateway
+    app.kubernetes.io/component: gateway
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: coc-gateway
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: clasher
+        app.kubernetes.io/name: coc-gateway
+        app.kubernetes.io/component: gateway
+    spec:
+      serviceAccountName: clasher-coc-gateway
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: ghcr-pull
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: coc-gateway
+          # Tag is overridden per-deploy by CD (kustomize set image) to the commit SHA.
+          image: ghcr.io/skrx7392/clasher-coc-gateway:latest
+          ports:
+            - name: http
+              containerPort: 3100
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3100"
+            # All CoC traffic egresses via the RoyaleAPI proxy (allowlist 45.79.218.79),
+            # never api.clashofclans.com directly (ANALYSIS §1.1).
+            - name: COC_PROXY_BASE_URL
+              value: https://cocproxy.royaleapi.dev/v1
+          # COC_API_KEY (key matches the env contract) — the isolated official key.
+          envFrom:
+            - secretRef:
+                name: coc-gateway-secret
+          volumeMounts:
+            # readOnlyRootFilesystem is on; give the process a small writable /tmp.
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 192Mi
+              ephemeral-storage: 64Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+              ephemeral-storage: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          startupProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3100/health",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3100/health",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - require("http").get("http://127.0.0.1:3100/health",(r)=>process.exit(r.statusCode===200?0:1)).on("error",()=>process.exit(1))
+            periodSeconds: 15
+            timeoutSeconds: 3
+            failureThreshold: 3
+      volumes:
+        - name: tmp
+          emptyDir:
+            sizeLimit: 64Mi
