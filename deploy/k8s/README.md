@@ -151,7 +151,7 @@ admin/out-of-band) to create it before the next deploy, or the gate times out (s
 [`SECRETS.md` §5](SECRETS.md)). Manifests are schema-validated **pre-merge** by
 [`.github/workflows/manifests.yml`](../../.github/workflows/manifests.yml) (render +
 kubeconform), since CD itself only runs after merge. The GitHub-side CD secrets (Tailscale
-key, scoped kubeconfig) are listed in [`SECRETS.md` §5](SECRETS.md).
+OAuth client, scoped kubeconfig) are listed in [`SECRETS.md` §5](SECRETS.md).
 
 ## Data tier (#7)
 
