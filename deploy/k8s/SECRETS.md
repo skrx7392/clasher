@@ -129,11 +129,11 @@ These are **GitHub Actions / Environment** secrets used by the deploy job itself
 **not** k8s Secrets and are **not** provisioned with `make-secrets.sh`; set them under the
 repo's `production` Environment (with a required reviewer).
 
-| GitHub secret                            | Used for                                       | Notes                                                                                                                                                     |
-| ---------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TAILSCALE_AUTHKEY` (or TS OAuth client) | join the runner to the tailnet to reach quasar | **ephemeral, ACL-tagged** key (DESIGN §9)                                                                                                                 |
-| `KUBECONFIG`                             | scoped `kubectl` as `clasher-deployer`         | **base64** of a kubeconfig with a **namespaced** Role only — never cluster-admin; CD asserts this at runtime (`kubectl auth can-i '*' '*' -A` ⇒ `no`)     |
-| GHCR push                                | `GITHUB_TOKEN` (built-in) pushes images        | the separate `read:packages` PAT for the in-cluster `ghcr-pull` Secret is provisioned per [§3a](#3a-in-cluster-k8s-secrets-admin-provisioned-out-of-band) |
+| GitHub secret                                          | Used for                                       | Notes                                                                                                                                                                                                 |
+| ------------------------------------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TAILSCALE_OAUTH_CLIENT_ID` / `TAILSCALE_OAUTH_SECRET` | join the runner to the tailnet to reach quasar | **non-expiring OAuth client** (scope `auth_keys`, tag `tag:ci`) that mints an **ephemeral, pre-approved, ACL-tagged** key per run (DESIGN §9) — no rotation reminder needed, unlike a 90-day auth key |
+| `KUBECONFIG`                                           | scoped `kubectl` as `clasher-deployer`         | **base64** of a kubeconfig with a **namespaced** Role only — never cluster-admin; CD asserts this at runtime (`kubectl auth can-i '*' '*' -A` ⇒ `no`)                                                 |
+| GHCR push                                              | `GITHUB_TOKEN` (built-in) pushes images        | the separate `read:packages` PAT for the in-cluster `ghcr-pull` Secret is provisioned per [§3a](#3a-in-cluster-k8s-secrets-admin-provisioned-out-of-band)                                             |
 
 > **No GitHub-side `DATABASE_URL`.** The migration gate runs **in-cluster** as a k8s Job
 > (`deploy/k8s/migrate`, namespace `clasher-backend`, `component=backend`) that reads
